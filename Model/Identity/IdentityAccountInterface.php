@@ -19,14 +19,14 @@ interface IdentityAccountInterface
 {
 	/**
 	 * Get the account username
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getUsername();
-	
+
 	/**
 	 * Get Account e-mail
-	 * 
+	 *
 	 * @return string
 	 */
 	public function getEmail();
