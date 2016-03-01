@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+	http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+	
+	<entity name="ASF\ContactBundle\Entity\Identity" inheritance-type="JOINED" table="asf_contact_identity">
+
+		<discriminator-column name="discr" type="string" />
+	    <discriminator-map>
+	    	<discriminator-mapping value="identity" class="Identity" />
+	    	<discriminator-mapping value="person" class="Person" />
+	    	<discriminator-mapping value="organization" class="Organization" />
+	    </discriminator-map>
+	    
+	    <id name="id" type="integer" column="id">
+	    	<generator strategy="AUTO" />
+	    </id>
+	    
+		<field name="name" type="string" length="255" nullable="false" />
+	    
+	    <field name="state" type="string" length="255" nullable="false" />
+	    
+	    <field name="createdAt" type="datetime" nullable="false" />
+	    
+	    <field name="updatedAt" type="datetime" nullable="false" />
+	    
+	    <field name="type" type="string" nullable="false" />
+	    
+	    <field name="emailCanonical" type="string" nullable="true" />
+
+	    <one-to-one field="account" target-entity="ASF\UserBundle\Entity\User">
+        	<join-column name="account_id" referenced-column-name="id" />
+        	<cascade>
+        		<cascade-persist />
+        		<cascade-remove />
+        	</cascade>
+        </one-to-one>
+	    
+	    <one-to-many field="organizations" target-entity="IdentityOrganization" mapped-by="member">
+	    	<join-column name="member_id" referenced-column-name="id" />
+	    	<cascade>
+	    		<cascade-persist/>
+                <cascade-remove />
+	    	</cascade>
+		</one-to-many>
+	    
+	    <lifecycle-callbacks>
+	    	<lifecycle-callback type="preUpdate" method="onPreUpdate" />
+	    	<lifecycle-callback type="prePersist" method="onPrePersist" />
+	    </lifecycle-callbacks>
+
+	</entity>
+	
+</doctrine-mapping>

@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+    	<!-- Identity Manager -->
+		<parameter key="asf_contact.identity.manager.class">ASF\ContactBundle\Entity\Manager\IdentityManager</parameter>
+		<parameter key="asf_contact.identity.manager.entity.class">ASF\ContactBundle\Entity\Identity</parameter>
+		
+		<!-- Organization Manager -->
+		<parameter key="asf_contact.organization.manager.class">ASF\ContactBundle\Entity\Manager\OrganizationManager</parameter>
+		<parameter key="asf_contact.organization.manager.entity.class">ASF\ContactBundle\Entity\Organization</parameter>
+		
+		<!-- Person Manager -->
+		<parameter key="asf_contact.person.manager.class">ASF\ContactBundle\Entity\Manager\PersonManager</parameter>
+		<parameter key="asf_contact.person.manager.entity.class">ASF\ContactBundle\Entity\Person</parameter>
+		
+		<!-- Identity Organization Manager -->
+		<parameter key="asf_contact.identity_organization.manager.class">ASF\ContactBundle\Entity\Manager\IdentityOrganizationManager</parameter>
+		<parameter key="asf_contact.identity_organization.manager.entity.class">ASF\ContactBundle\Entity\IdentityOrganization</parameter>
+		
+		<!-- Subscribers and Listeners -->
+		<parameter key="asf_contact.menu.subscriber.class">ASF\ContactBundle\Event\MenuSubscriber</parameter>
+		
+		<!-- Forms -->
+		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityFormType</parameter>
+		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationFormType</parameter>
+    </parameters>
+
+    <services>
+        <!-- Identity Entity Manager -->
+        <service id="asf_contact.identity.manager" class="%asf_contact.identity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.identity.manager.entity.class%" />
+        </service>
+        
+        <!-- Organization Entity Manager -->
+        <service id="asf_contact.organization.manager" class="%asf_contact.organization.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.organization.manager.entity.class%" />
+        </service>
+        
+        <!-- Person Entity Manager -->
+        <service id="asf_contact.person.manager" class="%asf_contact.person.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.person.manager.entity.class%" />
+        </service>
+        
+        <!-- Identity Organization Entity Manager -->
+        <service id="asf_contact.identity_organization.manager" class="%asf_contact.identity_organization.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.identity_organization.manager.entity.class%" />
+        </service>
+        
+        <!-- Subscribers and Listeners -->
+        <service id="asf_contact.menu.subscriber" class="%asf_contact.menu.subscriber.class%">
+        	<argument type="service" id="request_stack" />
+        	<tag name="kernel.event_subscriber" />
+        </service>
+        
+        <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
+        	<argument type="service" id="asf_contact.identity.manager" />
+			<tag name="form.type" alias="identity_form_type" />
+		</service>
+		
+		<service id="asf_contact.form.type.identity_organization" class="%asf_contact.form.type.identity_organization.class%">
+        	<argument type="service" id="asf_contact.identity_organization.manager" />
+			<tag name="form.type" alias="identity_organization_form_type" />
+		</service>
+        
+    </services>
+    
+</container>

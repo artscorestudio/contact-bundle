@@ -1,0 +1,7 @@
+asf_contact_homepage:
+    path: /admin/contact
+    defaults: { _controller: "ASFContactBundle:Default:index" }
+    
+asf_contact_identity:
+    prefix: /admin/contact/identity
+    resource: "@ASFContactBundle/Resources/config/routing/identity.yml"

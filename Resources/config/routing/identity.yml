@@ -1,0 +1,25 @@
+asf_contact_identity_list:
+    path: /list
+    defaults: { _controller: "ASFContactBundle:Identity:list" }
+    
+asf_contact_identity_add:
+    path: /list/add/{type}
+    defaults: { _controller: "ASFContactBundle:Identity:add" }
+        
+asf_contact_identity_edit:
+    path: /list/edit/{id}
+    defaults: { _controller: "ASFContactBundle:Identity:edit" }
+    requirements:
+        id: \d+
+    
+asf_contact_identity_delete:
+    path: /delete/{id}
+    defaults: { _controller: "ASFContactBundle:Identity:delete" }
+    requirements:
+        id: \d+
+        
+asf_contact_ajax_request_for_organization:
+    pattern: /ajax/request/organization
+    defaults: { _controller: 'ASFContactBundle:Identity:ajaxRequestOrganization' }
+    options:
+        expose: true
