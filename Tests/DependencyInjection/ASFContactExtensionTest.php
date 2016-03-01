@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var \ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension
+	 * @var \ASF\ContactBundle\DependencyInjection\ASFContactExtension
 	 */
 	protected $extension;
 	
