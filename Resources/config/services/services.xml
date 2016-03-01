@@ -20,10 +20,7 @@
 		<!-- Identity Organization Manager -->
 		<parameter key="asf_contact.identity_organization.manager.class">ASF\ContactBundle\Entity\Manager\IdentityOrganizationManager</parameter>
 		<parameter key="asf_contact.identity_organization.manager.entity.class">ASF\ContactBundle\Entity\IdentityOrganization</parameter>
-		
-		<!-- Subscribers and Listeners -->
-		<parameter key="asf_contact.menu.subscriber.class">ASF\ContactBundle\Event\MenuSubscriber</parameter>
-		
+
 		<!-- Forms -->
 		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityFormType</parameter>
 		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationFormType</parameter>
@@ -48,12 +45,6 @@
         <!-- Identity Organization Entity Manager -->
         <service id="asf_contact.identity_organization.manager" class="%asf_contact.identity_organization.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.identity_organization.manager.entity.class%" />
-        </service>
-        
-        <!-- Subscribers and Listeners -->
-        <service id="asf_contact.menu.subscriber" class="%asf_contact.menu.subscriber.class%">
-        	<argument type="service" id="request_stack" />
-        	<tag name="kernel.event_subscriber" />
         </service>
         
         <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
