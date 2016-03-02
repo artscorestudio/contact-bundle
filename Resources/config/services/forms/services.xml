@@ -6,12 +6,15 @@
 
 	<parameters>
 
-		<!-- Forms -->
+		<!-- Form Types -->
 		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityType</parameter>
 		<parameter key="asf_contact.form.type.person.class">ASF\ContactBundle\Form\Type\PersonType</parameter>
 		<parameter key="asf_contact.form.type.organization.class">ASF\ContactBundle\Form\Type\OrganizationType</parameter>
 		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationType</parameter>
 		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
+		
+		<!-- Form Handlers -->
+		<parameter key="asf_contact.form.handler.identity.class">ASF\ContactBundle\Form\Handler\IdentityFormHandler</parameter>
 		
 		<!-- Subscribers and Listeners -->
 		<parameter key="asf_contact.form.identity.subscriber.class">ASF\ContactBundle\Event\IdentityFormSubscriber</parameter>
@@ -55,6 +58,20 @@
         	<tag name="kernel.event_subscriber" />
         </service>
 
+        <!-- Form Handlers -->
+        <service id="asf_contact.form.handler.identity" class="%asf_contact.form.handler.identity.class%">
+        	<argument type="service" id="asf_contact.form.type.identity" />
+        	<argument type="service" id="asf_contact.identity.manager" />
+        	<argument type="service" id="asf_contact.person.manager" />
+        	<argument type="service" id="asf_contact.organization.manager" />
+        	<argument type="service" id="asf_contact.identity_organization.manager" />
+        	<argument type="service" id="asf_contact.address.manager" />
+            <argument type="service" id="asf_contact.identity_address.manager" />
+            <argument type="service" id="asf_contact.identity_contact_device.manager" />
+            <argument type="service" id="asf_contact.contact_device.manager" />
+            <tag name="form_handler.factory" />
+        </service>
+        
     </services>
     
 </container>

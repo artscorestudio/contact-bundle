@@ -17,7 +17,7 @@
        	<field name="isMain" type="boolean" nullable="false" />
        		
 		<many-to-one field="identity" target-entity="Identity" inversed-by="contactDevices">
-			<join-column name="identity_id" ullable="false" />
+			<join-column name="identity_id" nullable="false" />
 		</many-to-one>
 		
 		<many-to-one field="contactDevice" target-entity="ContactDevice" inversed-by="identities">

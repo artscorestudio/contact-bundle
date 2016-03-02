@@ -20,7 +20,7 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  *
  * @GRID\Source(columns="name,emailCanonical,state,type,id,updatedAt,createdAt")
  */
-abstract class IdentityModel
+abstract class IdentityModel implements IdentityInterface
 {
 	/**
 	 * Type of Identity for Doctrine discriminator

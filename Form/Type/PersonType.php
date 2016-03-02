@@ -17,6 +17,7 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Person Form Type
@@ -32,9 +33,14 @@ class PersonType extends AbstractType
     protected $personManager;
     
     /**
+     * @var EventSubscriberInterface
+     */
+    protected $subscriber;
+    
+    /**
      * @param ASFContactEntityManagerInterface $person_manager
      */
-    public function __construct(ASFContactEntityManagerInterface $person_manager, $subscriber)
+    public function __construct(ASFContactEntityManagerInterface $person_manager, EventSubscriberInterface $subscriber)
     {
         $this->personManager = $person_manager;
         $this->subscriber = $subscriber;

@@ -133,6 +133,7 @@ class IdentityController extends Controller
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'person'));
 			
 			$form = $this->createForm(PersonType::class, $contact);
+			$formHandler = $this->get('asf_contact.form.handler.person');
 			
 		} elseif ('organisation' === $type) {
 			$contact = $this->get('asf_contact.organization.manager')->createInstance();
@@ -140,15 +141,28 @@ class IdentityController extends Controller
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'organisation'));
 			
 			$form = $this->createForm(OrganizationType::class, $contact);
+			$formHandler = $this->get('asf_contact.form.handler.person');
 		}
 		
-		$form->handleRequest($request);
+		$form_is_valid = $formHandler->process();
 		
-		if ($form->isSubmitted() && $form->isValid()) {
-		    if ( $this->has('asf_layout.flash_message') ) {
-                $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
+		if ($form_is_valid) {
+		    try {
+		        $this->get('asf_contact.identity.manager')->validateForm($contact);
+		        $this->get('asf_contact.identity.manager')->getEntityManager()->persist($contact);
+		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
+		        
+		        if ( $this->has('asf_layout.flash_message') ) {
+		            $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
+		        }
+		        
+		        return $this->redirect($this->generateUrl('asf_contact_identity_edit', array('id' => $contact->getId())));
+		        
+		    } catch (\Exception $e) {
+		        if ( $this->has('asf_layout.flash_message') ) {
+		            $this->get('asf_layout.flash_message')->danger(sprintf('An error occurs when creating contact : %s', $e->getMessage()));
+		        }
 		    }
-			return $this->redirect($this->generateUrl('asf_contact_identity_edit', array('id' => $contact->getId())));
 		}
 		
 		$view_options['form'] = $form->createView();
@@ -172,16 +186,25 @@ class IdentityController extends Controller
 		$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_edit', array('id' => $identity->getId()));
 		
 		if ( $identity instanceof $personClassName ) {
-			$form = $this->createForm(PersonType::class, $contact);
+			$form = $this->createForm(PersonType::class, $identity);
 		} else {
-			$form = $this->createForm(OrganizationType::class, $contact);
+			$form = $this->createForm(OrganizationType::class, $identity);
 		}
 		
 		$form->handleRequest($request);
 		
 		if ( $form->isSubmitted() && $form->isValid() ) {
-		    if ( $this->has('asf_layout.flash_message') ) {
-                $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been updated', array(), 'asf_contact'));
+		    try {
+		        $this->get('asf_contact.identity.manager')->handleForm($contact);
+		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
+		        if ( $this->has('asf_layout.flash_message') ) {
+		            $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been updated', array(), 'asf_contact'));
+		        }
+		        
+		    } catch (\Exception $e) {
+		        if ( $this->has('asf_layout.flash_message') ) {
+		            $this->get('asf_layout.flash_message')->danger(sprintf('An error occurs when creating contact : %s', $e->getMessage()));
+		        }
 		    }
 		}
 		

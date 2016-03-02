@@ -17,6 +17,7 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Organization Form Type
@@ -32,11 +33,17 @@ class OrganizationType extends AbstractType
     protected $organizationManager;
     
     /**
+     * @var EventSubscriberInterface
+     */
+    protected $subscriber;
+    
+    /**
      * @param ASFContactEntityManagerInterface $person_manager
      */
-    public function __construct(ASFContactEntityManagerInterface $organization_manager)
+    public function __construct(ASFContactEntityManagerInterface $organization_manager, EventSubscriberInterface $subscriber)
     {
         $this->organizationManager = $organization_manager;
+        $this->subscriber = $subscriber;
     }
     
 	/**
@@ -45,10 +52,12 @@ class OrganizationType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('identity', IdentityType::class)
-			->add('name', TextType::class, array(
-				'label' => 'Name',
-			));
+        $builder->add('identity', IdentityType::class)
+            ->add('name', TextType::class, array(
+                'label' => 'Name',
+            ));
+			
+        $builder->addEventSubscriber($this->subscriber);
 	}
 
 	/**

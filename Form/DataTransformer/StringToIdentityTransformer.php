@@ -59,8 +59,8 @@ class StringToIdentityTransformer implements DataTransformerInterface
 	public function reverseTransform($string)
 	{
 	    $criterias = array('name' => $string);
-	    if ( !is_null($type) ) {
-	        $criterias['type'] = $type;
+	    if ( !is_null($this->type) ) {
+	        $criterias['type'] = $this->type;
 	    }
 	    
 		$identity = $this->identityManager->getRepository()->findOneBy($criterias);
