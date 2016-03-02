@@ -18,7 +18,7 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * Identity Organization Form Type
@@ -34,11 +34,17 @@ class IdentityOrganizationType extends AbstractType
 	protected $identityOrganizationManager;
 	
 	/**
+	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 */
+	protected $identityManager;
+	
+	/**
 	 * @param ASFContactEntityManagerInterface $organization_identity_manager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $identity_organization_manager)
+	public function __construct(ASFContactEntityManagerInterface $identity_organization_manager, ASFContactEntityManagerInterface $identity_manager)
 	{
 		$this->identityOrganizationManager = $identity_organization_manager;
+		$this->identityManager = $identity_manager;
 	}
 	
 	/**
@@ -52,7 +58,7 @@ class IdentityOrganizationType extends AbstractType
 		));
 		
 		$identity_transformer = new StringToIdentityTransformer($this->identityManager);
-		$builder->add($builder->create('member', 'hidden')->addModelTransformer($identity_transformer));
+		$builder->add($builder->create('member', HiddenType::class)->addModelTransformer($identity_transformer));
 	}
 	
 	/**

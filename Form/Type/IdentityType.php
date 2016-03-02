@@ -17,6 +17,8 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 
 /**
  * Identity Form Type
@@ -45,7 +47,7 @@ class IdentityType extends AbstractType
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('state', 'choice', array(
+		$builder->add('state', ChoiceType::class, array(
 			'label' => 'State',
 			'required' => true,
 			'choices' => array(
@@ -53,8 +55,8 @@ class IdentityType extends AbstractType
 				IdentityModel::STATE_DISABLED => 'Deactivated'
 			)
 		))
-		->add('organizations', 'base_collection', array(
-			'type' => IdentityOrganizationType::class,
+		->add('organizations', BaseCollectionType::class, array(
+			'entry_type' => IdentityOrganizationType::class,
 			'label' => 'List of organizations',
 			'allow_add' => true,
 			'allow_delete' => true,

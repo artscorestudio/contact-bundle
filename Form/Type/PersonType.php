@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Person Form Type
@@ -45,11 +46,11 @@ class PersonType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('identity', IdentityType::class)
-			->add('firstName', 'text', array(
+			->add('firstName', TextType::class, array(
 				'label' => 'First Name',
 				'required' => true
 			))
-			->add('lastName', 'text', array(
+			->add('lastName', TextType::class, array(
 				'label' => 'Last Name',
 				'required' => true
 			));

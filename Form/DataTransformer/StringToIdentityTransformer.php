@@ -12,7 +12,6 @@ namespace ASF\ContactBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
-use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
  * Transform a string to an identity entity
@@ -35,7 +34,7 @@ class StringToIdentityTransformer implements DataTransformerInterface
 	/**
 	 * @param ASFContactEntityManagerInterface $identity_manager
 	 */
-	public function __construct(ASFEntityManagerInterface $identity_manager, $type = null)
+	public function __construct(ASFContactEntityManagerInterface $identity_manager, $type = null)
 	{
 		$this->identityManager = $identity_manager;
 		$this->type = $type;

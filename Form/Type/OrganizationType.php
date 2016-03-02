@@ -16,6 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 /**
  * Organization Form Type
@@ -45,7 +46,7 @@ class OrganizationType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder->add('identity', IdentityType::class)
-			->add('name', 'text', array(
+			->add('name', TextType::class, array(
 				'label' => 'Name',
 			));
 	}
