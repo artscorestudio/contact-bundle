@@ -30,6 +30,18 @@ class Configuration implements ConfigurationInterface
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
+        $rootNode
+            ->children()
+                ->booleanNode('enable_core_support')
+                    ->defaultFalse()
+                ->end()
+                ->booleanNode('enable_select2_support')
+                    ->defaultFalse()
+                ->end()
+                ->scalarNode('form_theme')
+                    ->defaultValue('ASFContactBundle:Form:fields.html.twig')
+                ->end()
+            ->end();
         
         return $treeBuilder;
     }

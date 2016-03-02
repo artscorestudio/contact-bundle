@@ -38,11 +38,19 @@ class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 	}
 	
 	/**
-	 * @covers ASF\LayoutBundle\DependencyInjection\ASFLayoutExtension::load
+	 * @covers ASF\ContactBundle\DependencyInjection\ASFContactExtension::load
 	 */
 	public function testLoadExtension()
 	{
 		$this->extension->load(array(), $this->getContainer());
+	}
+	
+	/**
+	 * @covers ASF\ContactBundle\DependencyInjection\ASFContactExtension::prepend
+	 */
+	public function testPrependExtension()
+	{
+	    $this->extension->prepend($this->getContainer());
 	}
 	
 	/**
