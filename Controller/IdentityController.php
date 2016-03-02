@@ -25,6 +25,7 @@ use Doctrine\ORM\QueryBuilder;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\ContactBundle\Form\Type\PersonType;
 use ASF\ContactBundle\Form\Type\OrganizationType;
+use ASF\ContactBundle\Form\Handler\IdentityFormHandler;
 
 /**
  * Identity Controller
@@ -133,7 +134,6 @@ class IdentityController extends Controller
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'person'));
 			
 			$form = $this->createForm(PersonType::class, $contact);
-			$formHandler = $this->get('asf_contact.form.handler.person');
 			
 		} elseif ('organisation' === $type) {
 			$contact = $this->get('asf_contact.organization.manager')->createInstance();
@@ -141,12 +141,11 @@ class IdentityController extends Controller
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'organisation'));
 			
 			$form = $this->createForm(OrganizationType::class, $contact);
-			$formHandler = $this->get('asf_contact.form.handler.person');
 		}
 		
-		$form_is_valid = $formHandler->process();
+		$formHandler = new IdentityFormHandler($form, $this->get('container'));
 		
-		if ($form_is_valid) {
+		if (true === $formHandler->process()) {
 		    try {
 		        $this->get('asf_contact.identity.manager')->validateForm($contact);
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->persist($contact);
@@ -191,7 +190,7 @@ class IdentityController extends Controller
 			$form = $this->createForm(OrganizationType::class, $identity);
 		}
 		
-		$form->handleRequest($request);
+		$formHandler = new IdentityFormHandler($form, $this->get('container'));
 		
 		if ( $form->isSubmitted() && $form->isValid() ) {
 		    try {

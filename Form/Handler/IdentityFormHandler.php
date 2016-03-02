@@ -12,20 +12,7 @@ namespace ASF\ContactBundle\Form\Handler;
 use ASF\CoreBundle\Form\Handler\FormHandlerModel;
 
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
-
-use Doctrine\Common\Collections\ArrayCollection;
-
-use Asf\Bundle\ContactBundle\Entity\Manager\IdentityManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\PersonManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\OrganizationManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\IdentityOrganizationManager;
-use Asf\Bundle\ContactBundle\Model\Identity\IdentityInterface;
-use Asf\Bundle\ContactBundle\Entity\Manager\AddressManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\IdentityAddressManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\IdentityContactDeviceManager;
-use Asf\Bundle\ContactBundle\Entity\Manager\ContactDeviceManager;
-use Asf\Bundle\ContactBundle\Model\ContactDevice\ContactDeviceModel;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Identity Form Handler
@@ -36,68 +23,18 @@ use Asf\Bundle\ContactBundle\Model\ContactDevice\ContactDeviceModel;
 class IdentityFormHandler extends FormHandlerModel
 {
 	/**
-	 * @var IdentityManager
+	 * @var ContainerInterface
 	 */
-	protected $identityManager;
+	protected $container;
 	
 	/**
-	 * @var PersonManager
+	 * @param FormInterface      $form
+	 * @param ContainerInterface $container
 	 */
-	protected $personManager;
-	
-	/**
-	 * @var OrganizationManager
-	 */
-	protected $organizationManager;
-	
-	/**
-	 * @var IdentityOrganizationManager
-	 */
-	protected $identityOrganizationManager;
-
-	/**
-	 * @var AddressManager
-	 */
-	protected $addressManager;
-	
-	/**
-	 * @var IdentityAddressManager
-	 */
-	protected $identityAddressManager;
-	
-	/**
-	 * @var IdentityContactDeviceManager
-	 */
-	protected $identityContactDeviceManager;
-	
-	/**
-	 * @var ContactDeviceManager
-	 */
-	protected $contactDeviceManager;
-	
-	/**
-	 * @param FormInterface                $form
-	 * @param IdentityManager              $identity_manager
-	 * @param PersonManager                $person_manager
-	 * @param OrganizationManager          $organization_manager
-	 * @param IdentityOrganizationManager  $identity_organization_manager
-	 * @param AddressManager               $address_manager
-	 * @param IdentityAddressManager       $identity_address_manager
-	 * @param IdentityContactDeviceManager $identity_contact_device_manager
-	 * @param ContactDeviceManager         $contact_device_manager
-	 */
-	public function __construct(FormInterface $form, $identity_manager, $person_manager, $organization_manager, $identity_organization_manager, $address_manager, $identity_address_manager, $identity_contact_device_manager, $contact_device_manager)
+	public function __construct(FormInterface $form, ContainerInterface $container)
 	{
 		parent::__construct($form);
-		
-		$this->identityManager = $identity_manager;
-		$this->personManager = $person_manager;
-		$this->organizationManager = $organization_manager;
-		$this->identityOrganizationManager = $identity_organization_manager;
-		$this->addressManager = $address_manager;
-		$this->identityAddressManager = $identity_address_manager;
-		$this->identityContactDeviceManager = $identity_contact_device_manager;
-		$this->contactDeviceManager = $contact_device_manager;
+		$this->container = $container;
 	}
 	
 	/**
@@ -109,7 +46,7 @@ class IdentityFormHandler extends FormHandlerModel
 	{
 		try {
 			if ( is_null($model->getId()) ) {
-				$isIdentityExist = $this->identityManager->getRepository()->findOneBy(array('name' => $model->getName()));
+				$isIdentityExist = $this->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('name' => $model->getName()));
 				if ( !is_null($isIdentityExist) ) {
 					$this->flashMessage->danger($this->translator->trans('A contact with that name already exists', array(), 'AsfContact'));
 					return false;
@@ -123,9 +60,6 @@ class IdentityFormHandler extends FormHandlerModel
 			$this->updateIdentityOrganizationsRelations($model);
 			$this->updateIdentityAddressRelations($model);
 			$this->updateIdentityContactDeviceRelations($model);
-
-			$this->identityManager->getEntityManager()->persist($model);
-			$this->identityManager->getEntityManager()->flush();
 			
 			return true;
 			
@@ -152,7 +86,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detecte relations removed
-		$relations = $this->identityOrganizationManager->getRepository()->findBy(array('member' => $model->getId()));
+		$relations = $this->get('asf_contact.identity_organization.manager')->getRepository()->findBy(array('member' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getOrganizations() as $identity_organization) {
@@ -161,7 +95,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->identityManager->getEntityManager()->remove($relation);
+				$this->get('asf_contact.identity_organization.manager')->getEntityManager()->remove($relation);
 			}
 		}
 	
@@ -175,7 +109,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_organization->setMember($model);
-				$this->identityManager->getEntityManager()->persist($identity_organization);
+				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_organization);
 			}
 		}
 	}
@@ -197,7 +131,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detect relations removed
-		$relations = $this->identityAddressManager->getRepository()->findBy(array('identity' => $model->getId()));
+		$relations = $this->get('asf_contact.identity_address.manager')->getRepository()->findBy(array('identity' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getAddresses() as $identity_address) {
@@ -206,7 +140,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->identityManager->getEntityManager()->remove($relation);
+				$this->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
 			}
 		}
 		
@@ -220,7 +154,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_address->setIdentity($model);
-				$this->identityManager->getEntityManager()->persist($identity_address);
+				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_address);
 			}
 		}
 	}
@@ -234,7 +168,7 @@ class IdentityFormHandler extends FormHandlerModel
 	{
 		foreach($model->getContactDevices() as $identity_contact_device) {
 			if ( is_null($identity_contact_device->getId()) ) {
-				$contact_device = $this->contactDeviceManager->createTypedInstance($identity_contact_device->getContactDevice()->getType());
+				$contact_device = $this->get('asf_contact.contact_device.manager')->createTypedInstance($identity_contact_device->getContactDevice()->getType());
 				$contact_device->setType($identity_contact_device->getContactDevice()->getType())
 					->setLabel($identity_contact_device->getContactDevice()->getLabel())
 					->setValue($identity_contact_device->getContactDevice()->getValue());
@@ -251,7 +185,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detecte relations removed
-		$relations = $this->identityContactDeviceManager->getRepository()->findBy(array('identity' => $model->getId()));
+		$relations = $this->get('asf_contact.identity_contact_device.manager')->getRepository()->findBy(array('identity' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getContactDevices() as $identity_contact_device) {
@@ -260,7 +194,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->identityManager->getEntityManager()->remove($relation);
+				$this->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
 			}
 		}
 		
@@ -274,7 +208,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_contact_devices->setIdentity($model);
-				$this->identityManager->getEntityManager()->persist($identity_contact_devices);
+				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_contact_devices);
 			}
 		}
 	}
