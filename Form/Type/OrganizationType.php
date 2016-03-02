@@ -7,12 +7,15 @@
  * This source file is subject to the MIT Licence that is bundled
  * with this source code in the file LICENSE.
  */
-namespace CD31\ContactBundle\Form\Type;
+namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
+
+use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 
 /**
  * Organization Form Type
@@ -20,28 +23,28 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class OrganizationFormType extends AbstractType
+class OrganizationType extends AbstractType
 {
-	/**
-	 * @var ASFEntityManagerInterface
-	 */
-	protected $organizationManager;
-	
-	/**
-	 * @param unknown $organization_manager
-	 */
-	public function __construct(ASFEntityManagerInterface $organization_manager)
-	{
-		$this->organizationManager = $organization_manager;
-	}
-	
+    /**
+     * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+     */
+    protected $organizationManager;
+    
+    /**
+     * @param ASFContactEntityManagerInterface $person_manager
+     */
+    public function __construct(ASFContactEntityManagerInterface $organization_manager)
+    {
+        $this->organizationManager = $organization_manager;
+    }
+    
 	/**
 	 * @param FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('identity', 'identity_form_type')
+		$builder->add('identity', IdentityType::class)
 			->add('name', 'text', array(
 				'label' => 'Name',
 			));
@@ -66,6 +69,6 @@ class OrganizationFormType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'organization_form_type';
+		return 'organization_type';
 	}
 }

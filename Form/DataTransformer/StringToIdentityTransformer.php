@@ -7,10 +7,12 @@
  * This source file is subject to the MIT Licence that is bundled
  * with this source code in the file LICENSE.
  */
-namespace CD31\ContactBundle\Form\DataTransformer;
+namespace ASF\ContactBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
+
+use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
  * Transform a string to an identity entity
@@ -21,16 +23,22 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 class StringToIdentityTransformer implements DataTransformerInterface
 {
 	/**
-	 * @var ASFEntityManagerInterface
+	 * @var ASFContactEntityManagerInterface
 	 */
-	private $identityManager;
+	protected $identityManager;
 	
 	/**
-	 * @param ASFEntityManagerInterface $identity_manager
+	 * @var string
 	 */
-	public function __construct(ASFEntityManagerInterface $identity_manager)
+	protected $type;
+	
+	/**
+	 * @param ASFContactEntityManagerInterface $identity_manager
+	 */
+	public function __construct(ASFEntityManagerInterface $identity_manager, $type = null)
 	{
 		$this->identityManager = $identity_manager;
+		$this->type = $type;
 	}
 	
 	/**
@@ -51,7 +59,12 @@ class StringToIdentityTransformer implements DataTransformerInterface
 	 */
 	public function reverseTransform($string)
 	{
-		$identity = $this->identityManager->getRepository()->findOneBy(array('name' => $string));
+	    $criterias = array('name' => $string);
+	    if ( !is_null($type) ) {
+	        $criterias['type'] = $type;
+	    }
+	    
+		$identity = $this->identityManager->getRepository()->findOneBy($criterias);
 		if ( is_null($identity) ) {
 			$identity = $this->identityManager->createInstance();
 			$identity->setName($string);

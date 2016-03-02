@@ -7,11 +7,15 @@
  * This source file is subject to the MIT Licence that is bundled
  * with this source code in the file LICENSE.
  */
-namespace CD31\ContactBundle\Form\Type;
+namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+
+use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
+
+use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 
 /**
  * Person Form Type
@@ -19,15 +23,28 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class PersonFormType extends AbstractType
+class PersonType extends AbstractType
 {
+    /**
+     * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+     */
+    protected $personManager;
+    
+    /**
+     * @param ASFContactEntityManagerInterface $person_manager
+     */
+    public function __construct(ASFContactEntityManagerInterface $person_manager)
+    {
+        $this->personManager = $person_manager;
+    }
+    
 	/**
 	 * @param FormBuilderInterface $builder
 	 * @param array $options
 	 */
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$builder->add('identity', 'identity_form_type')
+		$builder->add('identity', IdentityType::class)
 			->add('firstName', 'text', array(
 				'label' => 'First Name',
 				'required' => true
@@ -46,8 +63,8 @@ class PersonFormType extends AbstractType
 	{
 		$resolver->setDefaults(array(
 			'inherit_data' => true,
-			'data_class' => 'CD31\ContactBundle\Entity\Person',
-			'translation_domain' => 'cd31_contact',
+			'data_class' => $this->personManager->getClassName(),
+			'translation_domain' => 'asf_contact',
 			'is_new' => false
 		));
 	}
@@ -57,6 +74,6 @@ class PersonFormType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'person_form_type';
+		return 'person_type';
 	}
 }

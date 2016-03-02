@@ -13,9 +13,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Form\Type\IdentityOrganizationFormType;
+
+use ASF\ContactBundle\Model\Identity\IdentityModel;
+use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 
 /**
  * Identity Form Type
@@ -23,17 +24,17 @@ use ASF\ContactBundle\Form\Type\IdentityOrganizationFormType;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class IdentityFormType extends AbstractType
+class IdentityType extends AbstractType
 {
 	/**
-	 * @var ASFEntityManagerInterface
+	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
 	 */
 	protected $identityManager;
 	
 	/**
-	 * @param ASFEntityManagerInterface $identity_manager
+	 * @param ASFContactEntityManagerInterface $identity_manager
 	 */
-	public function __construct(ASFEntityManagerInterface $identity_manager)
+	public function __construct(ASFContactEntityManagerInterface $identity_manager)
 	{
 		$this->identityManager = $identity_manager;
 	}
@@ -53,7 +54,7 @@ class IdentityFormType extends AbstractType
 			)
 		))
 		->add('organizations', 'base_collection', array(
-			'type' => IdentityOrganizationFormType::class,
+			'type' => IdentityOrganizationType::class,
 			'label' => 'List of organizations',
 			'allow_add' => true,
 			'allow_delete' => true,
@@ -81,6 +82,6 @@ class IdentityFormType extends AbstractType
 	 */
 	public function getName()
 	{
-		return 'identity_form_type';
+		return 'identity_type';
 	}
 }
