@@ -22,8 +22,11 @@
 		<parameter key="asf_contact.identity_organization.manager.entity.class">ASF\ContactBundle\Entity\IdentityOrganization</parameter>
 
 		<!-- Forms -->
-		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityFormType</parameter>
-		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationFormType</parameter>
+		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityType</parameter>
+		<parameter key="asf_contact.form.type.person.class">ASF\ContactBundle\Form\Type\PersonType</parameter>
+		<parameter key="asf_contact.form.type.organization.class">ASF\ContactBundle\Form\Type\OrganizationType</parameter>
+		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationType</parameter>
+		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
     </parameters>
 
     <services>
@@ -49,13 +52,28 @@
         
         <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
         	<argument type="service" id="asf_contact.identity.manager" />
-			<tag name="form.type" alias="identity_form_type" />
+			<tag name="form.type" alias="identity_type" />
+		</service>
+		
+		<service id="asf_contact.form.type.person" class="%asf_contact.form.type.person.class%">
+        	<argument type="service" id="asf_contact.person.manager" />
+			<tag name="form.type" alias="person_type" />
+		</service>
+		
+		<service id="asf_contact.form.type.organization" class="%asf_contact.form.type.organization.class%">
+        	<argument type="service" id="asf_contact.organization.manager" />
+			<tag name="form.type" alias="organization_type" />
 		</service>
 		
 		<service id="asf_contact.form.type.identity_organization" class="%asf_contact.form.type.identity_organization.class%">
         	<argument type="service" id="asf_contact.identity_organization.manager" />
-			<tag name="form.type" alias="identity_organization_form_type" />
+			<tag name="form.type" alias="identity_organization_type" />
 		</service>
+		
+		<service id="asf_contact.form.type.search_identity" class="%asf_contact.form.type.search_identity.class%">
+        	<argument type="service" id="asf_contact.identity.manager" />
+            <tag name="form.type" alias="search_identity" />
+        </service>
         
     </services>
     
