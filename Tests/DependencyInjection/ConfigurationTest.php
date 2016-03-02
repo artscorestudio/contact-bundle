@@ -43,6 +43,26 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers ASF\ContactBundle\DependencyInjection\Configuration
      */
+    public function testEnableAddressParameterInDefaultConfiguration()
+    {
+        $processor = new Processor();
+        $config = $processor->processConfiguration(new Configuration(), array());
+        $this->assertFalse($config['enable_address']);
+    }
+    
+    /**
+     * @covers ASF\ContactBundle\DependencyInjection\Configuration
+     */
+    public function testEnableContactDeviceParameterInDefaultConfiguration()
+    {
+        $processor = new Processor();
+        $config = $processor->processConfiguration(new Configuration(), array());
+        $this->assertFalse($config['enable_contact_device']);
+    }
+    
+    /**
+     * @covers ASF\ContactBundle\DependencyInjection\Configuration
+     */
     public function testTwigFormThemeParameterInDefaultConfiguration()
     {
         $processor = new Processor();
