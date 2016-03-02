@@ -32,10 +32,26 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
 	    $config = $this->processConfiguration($configuration, $configs);
 	    
 	    $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-	    $loader->load('services/services.xml');
+	    $loader->load('services/forms/services.xml');
 
 	    if ( isset($config['enable_core_support']) && $config['enable_core_support'] === true ) {
-	        $loader->load('services/asf_core_enabled.xml');
+	        $loader->load('services/asf_core_enabled/services.xml');
+	        
+	        if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
+	            $loader->load('services/asf_core_enabled/Address.xml');
+	        }
+	         
+	        if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
+	            $loader->load('services/asf_core_enabled/ContactDevice.xml');
+	        }
+	    }
+	    
+	    if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
+	        $loader->load('services/forms/Address.xml');
+	    }
+	    
+	    if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
+	        $loader->load('services/forms/ContactDevice.xml');
 	    }
     }
     
