@@ -23,3 +23,9 @@ asf_contact_ajax_request_for_organization:
     defaults: { _controller: 'ASFContactBundle:Identity:ajaxRequestOrganization' }
     options:
         expose: true
+        
+asf_contact_ajax_request_identity_by_name:
+    path: /ajax/request/search/by/name
+    defaults: { _controller: "ASFContactBundle:Identity:ajaxRequestByName" }
+    options:
+        expose: true
