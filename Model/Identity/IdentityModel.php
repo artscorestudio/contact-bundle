@@ -11,6 +11,7 @@ namespace ASF\ContactBundle\Model\Identity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
+use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
 
 /**
  * Identity Model
@@ -71,6 +72,16 @@ abstract class IdentityModel
 	protected $organizations;
 	
 	/**
+	 * @var ArrayCollection
+	 */
+	protected $addresses;
+	
+	/**
+	 * @var ArrayCollection
+	 */
+	protected $contactDevices;
+	
+	/**
 	 * @var \DateTime
 	 */
 	protected $createdAt;
@@ -96,6 +107,8 @@ abstract class IdentityModel
 		$this->updatedAt = new \DateTime();
 		
 		$this->organizations = new ArrayCollection();
+		$this->addresses = new ArrayCollection();
+		$this->contactDevices = new ArrayCollection();
 	}
 	
 	/**
@@ -216,6 +229,68 @@ abstract class IdentityModel
 	
 	/**
 	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::getAddresses()
+	 */
+	public function getAddresses()
+	{
+	    return $this->addresses;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::addAddress()
+	 */
+	public function addAddress($address)
+	{
+	    if ( !$this->addresses->contains($address) )
+	        $this->addresses->add($address);
+	        return $this;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::removeAddress()
+	 */
+	public function removeAddress($address)
+	{
+	    if ( $this->addresses->contains($address) )
+	        $this->addresses->removeElement($address);
+	        return $this;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::getContactDevices()
+	 */
+	public function getContactDevices()
+	{
+	    return $this->contactDevices;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::addContactDevice()
+	 */
+	public function addContactDevice($contact_device)
+	{
+	    if ( !$this->contactDevices->contains($contact_device) )
+	        $this->contactDevices->add($contact_device);
+	        return $this;
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::removeContactDevice()
+	 */
+	public function removeContactDevice($contact_device)
+	{
+	    if ( $this->contactDevices->contains($contact_device) )
+	        $this->contactDevices->removeElement($contact_device);
+	        return $this;
+	}
+	
+	/**
+	 * (non-PHPdoc)
 	 * @see \ASF\ContactBundle\Model\Identity\IdentityInterface::getCreatedAt()
 	 */
 	public function getCreatedAt()
@@ -295,6 +370,11 @@ abstract class IdentityModel
 	public function onPrePersist()
 	{
 		$this->createdAt = new \DateTime();
+		foreach($this->contactDevices as $contact_device) {
+		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
+		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
+		    }
+		}
 	}
 	
 	/**
@@ -303,6 +383,11 @@ abstract class IdentityModel
 	public function onPreUpdate()
 	{
 		$this->updatedAt = new \DateTime();
+		foreach($this->contactDevices as $contact_device) {
+		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
+		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
+		    }
+		}
 	}
 
 	/**

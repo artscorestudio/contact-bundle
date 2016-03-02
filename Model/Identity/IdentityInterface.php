@@ -90,6 +90,52 @@ interface IdentityInterface
 	public function removeOrganization($organization);
 	
 	/**
+	 * Return identity's addresses
+	 *
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getAddresses();
+	
+	/**
+	 * Add address to the identity's addresses list
+	 *
+	 * @param mixed $address
+	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
+	 */
+	public function addAddress($address);
+	
+	/**
+	 * Remove address to the identity's addresses list
+	 *
+	 * @param mixed $address
+	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
+	 */
+	public function removeAddress($address);
+	
+	/**
+	 * Return identity's contact devices
+	 *
+	 * @return \Doctrine\Common\Collections\ArrayCollection
+	 */
+	public function getContactDevices();
+	
+	/**
+	 * Add contact device to the identity's contact devices list
+	 *
+	 * @param mixed $contact_device
+	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
+	 */
+	public function addContactDevice($contact_device);
+	
+	/**
+	 * Remove contact device to the identity's contact devices list
+	 *
+	 * @param mixed $contact_device
+	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
+	 */
+	public function removeContactDevice($contact_device);
+	
+	/**
 	 * @return DateTime
 	 */
 	public function getCreatedAt();
