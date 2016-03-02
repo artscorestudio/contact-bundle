@@ -19,7 +19,7 @@ asf_contact_identity_delete:
         id: \d+
         
 asf_contact_ajax_request_for_organization:
-    pattern: /ajax/request/organization
+    path: /ajax/request/organization
     defaults: { _controller: 'ASFContactBundle:Identity:ajaxRequestOrganization' }
     options:
         expose: true
