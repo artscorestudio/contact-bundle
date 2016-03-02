@@ -1,0 +1,72 @@
+ASF\ContactBundle\Entity\Address:
+    properties:
+        line1:
+            - NotBlank: ~
+        zipCode:
+            - NotBlank: ~
+            - Type: numeric
+        city:
+            - NotBlank: ~
+            
+ASF\ContactBundle\Entity\Identity:
+    properties:
+        state:
+            - NotBlank: ~
+            - Choice: { callback: getStates }
+        createdAt:
+            - NotBlank: ~
+            - DateTime: ~
+        updatedAt:
+            - NotBlank: ~
+            - DateTime: ~
+        type:
+            - NotBlank: ~
+            - Choice: { callback: getTypes }
+        addresses:
+            - Valid: ~
+            - ASF\ContactBundle\Validator\Constraints\NotTwoMainAddresses: ~
+        organizations:
+            - Valid: ~
+            - ASF\ContactBundle\Validator\Constraints\NotTwoSuchOrganizations: ~
+        contactDevices:
+            - Valid: ~
+            - ASF\ContactBundle\Validator\Constraints\NotTwoMainContactDevices: ~
+            
+ASF\ContactBundle\Entity\Person:
+    properties:
+        lastName:
+            - NotBlank: ~
+        firstName:
+            - NotBlank: ~
+        birthday:
+            - Date: ~
+ASF\ContactBundle\Entity\Organization:
+    properties:
+        name:
+            - NotBlank: ~
+
+ASF\ContactBundle\Entity\IdentityAddress:
+    properties:
+        identity:
+            - Valid: ~
+        address:
+            - Valid: ~
+        isMain:
+            - Type: bool
+            
+ASF\ContactBundle\Entity\IdentityOrganization:
+    properties:
+        member:
+            - Valid: ~
+        organization:
+            - NotBlank: ~
+            - Valid: ~
+            
+ASF\ContactBundle\Entity\IdentityContactDevice:
+    properties:
+        identity:
+            - Valid: ~
+        contactDevice:
+            - Valid: ~
+        isMain:
+            - Type: bool
