@@ -12,9 +12,9 @@ namespace ASF\ContactBundle\Entity\Manager;
 use ASF\CoreBundle\Entity\Manager\ASFEntityManager;
 
 /**
- * Person Entity Manager
+ * Generic Entity Manager for this bundle
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class PersonManager extends ASFEntityManager implements ASFContactEntityManagerInterface {}
+class ASFContactEntityManager extends ASFEntityManager implements ASFContactEntityManagerInterface {}
