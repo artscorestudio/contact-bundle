@@ -23,8 +23,8 @@ use APY\DataGridBundle\Grid\Row;
 use Doctrine\ORM\QueryBuilder;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-use ASF\ContactBundle\Form\Type\PersonFormType;
-use ASF\ContactBundle\Form\Type\OrganizationFormType;
+use ASF\ContactBundle\Form\Type\PersonType;
+use ASF\ContactBundle\Form\Type\OrganizationType;
 
 /**
  * Identity Controller
@@ -132,14 +132,14 @@ class IdentityController extends Controller
 			$view_options['view_title'] = $this->get('translator')->trans('Add a person', array(), 'asf_contact');
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'person'));
 			
-			$form = $this->createForm(PersonFormType::class, $contact);
+			$form = $this->createForm(PersonType::class, $contact);
 			
 		} elseif ('organisation' === $type) {
 			$contact = $this->get('asf_contact.organization.manager')->createInstance();
 			$view_options['view_title'] = $this->get('translator')->trans('Add an organization', array(), 'asf_contact');
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'organisation'));
 			
-			$form = $this->createForm(OrganizationFormType::class, $contact);
+			$form = $this->createForm(OrganizationType::class, $contact);
 		}
 		
 		$form->handleRequest($request);
@@ -172,9 +172,9 @@ class IdentityController extends Controller
 		$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_edit', array('id' => $identity->getId()));
 		
 		if ( $identity instanceof $personClassName ) {
-			$form = $this->createForm(PersonFormType::class, $contact);
+			$form = $this->createForm(PersonType::class, $contact);
 		} else {
-			$form = $this->createForm(OrganizationFormType::class, $contact);
+			$form = $this->createForm(OrganizationType::class, $contact);
 		}
 		
 		$form->handleRequest($request);
