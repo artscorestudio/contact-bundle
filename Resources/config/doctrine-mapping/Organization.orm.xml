@@ -14,8 +14,6 @@
 	    	</cascade>
 		</one-to-many>
 
-		<field name="subdivision" type="string" length="255" nullable="true" />
-
 	</entity>
 	
 </doctrine-mapping>
