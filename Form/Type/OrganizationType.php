@@ -11,7 +11,7 @@ namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
@@ -52,13 +52,12 @@ class OrganizationType extends AbstractType
 	}
 
 	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\AbstractType::setDefaultOptions()
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
+	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'inherit_data' => true,
 			'data_class' => $this->organizationManager->getClassName(),
 			'translation_domain' => 'cd31_contact',
 			'is_new' => false

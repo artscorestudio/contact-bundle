@@ -204,33 +204,6 @@
 {% endblock %}
 
 {# --------------------------------- Identity Form Type --------------------------------- #}
-{% block asf_contact_identity_commons %}
-{% spaceless %}
-
-	<div class="row">
-		<div class="col-xs-6">
-			{{ form_row(form.identity.contactDevices) }}
-		</div>
-		<div class="col-xs-6">
-			{{ form_row(form.identity.organizations) }}
-		</div>
-	</div>
-	
-	<div class="row">
-		<div class="col-xs-12">
-			{{ form_row(form.identity.addresses) }}
-		</div>
-	</div>
-	
-	{#
-	{% if form.identity.vars.isAccountActivated == true and form.identity.vars.isAsfUserSupport == true  %}
-		{{ form_row(form.identity.account) }}
-	{% endif %}
-	#}
-	
-{% endspaceless %}
-{% endblock %}
-
 {% block _person_errors %}
 {% spaceless %}
 	{{ block('form_errors')  }}
@@ -254,7 +227,24 @@
 		</div>
 	</div>
 	
-	{{ block('asf_contact_identity_commons') }}
+	<div class="row">
+		{% if form.contactDevices is defined %}
+		<div class="col-xs-6">
+			{{ form_row(form.contactDevices) }}
+		</div>
+		{% endif %}
+		<div class="col-xs-6">
+			{{ form_row(form.identity.organizations) }}
+		</div>
+	</div>
+	
+	{% if form.addresses is defined %}
+	<div class="row">
+		<div class="col-xs-12">
+			{{ form_row(form.addresses) }}
+		</div>
+	</div>
+	{% endif %}
 
 	<input type="submit" class="btn btn-primary" alue="Save" />
 {% endspaceless %}
@@ -272,18 +262,26 @@
 			{{ form_row(form.identity.state) }}
 		</div>
 	</div>
-	
+
 	<div class="row">
-		<div class="col-xs-4">
-			{{ form_row(form.siret) }}
+		{% if form.contactDevices is defined %}
+		<div class="col-xs-6">
+			{{ form_row(form.contactDevices) }}
 		</div>
-		<div class="col-xs-4">
-			{{ form_row(form.siren) }}
+		{% endif %}
+		<div class="col-xs-6">
+			{{ form_row(form.identity.organizations) }}
 		</div>
 	</div>
 	
-	{{ block('asf_contact_identity_commons') }}
-	
+	{% if form.addresses is defined %}
+	<div class="row">
+		<div class="col-xs-12">
+			{{ form_row(form.addresses) }}
+		</div>
+	</div>
+	{% endif %}
+
 	<input type="submit" class="btn btn-primary" value="Save" />
 {% endspaceless %}
 {% endblock %}

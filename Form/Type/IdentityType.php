@@ -63,33 +63,6 @@ class IdentityType extends AbstractType
 			'prototype' => true,
 			'containerId' => 'organizations-collection'
 		));
-		
-		$builder->add('addresses', BaseCollectionType::class, array(
-		    'entry_type' => IdentityAddressType::class,
-		    'label' => 'Addresses list',
-		    'allow_add' => true,
-		    'allow_delete' => true,
-		    'prototype' => true,
-		    'containerId' => 'addresses-collection'
-		));
-		
-		$builder->add('contactDevices', BaseCollectionType::class, array(
-		    'entry_type' => IdentityContactDeviceType::class,
-		    'label' => 'Contact device list',
-		    'allow_add' => true,
-		    'allow_delete' => true,
-		    'prototype' => true,
-		    'mapped' => true,
-		    'containerId' => 'contact-devices-collection'
-		));
-		
-		/*if ( true === $this->isAccountActivated && true == $this->isAsfUserSupport ) {
-		    if ( true === $options['is_new'] ) {
-		        $builder->add('account', 'asf_user_registration');
-		    } else {
-		        $builder->add('account', 'asf_user_profile');
-		    }
-		}*/
 	}
 	
 	/**

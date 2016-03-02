@@ -13,6 +13,9 @@
 		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationType</parameter>
 		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
 		
+		<!-- Subscribers and Listeners -->
+		<parameter key="asf_contact.form.identity.subscriber.class">ASF\ContactBundle\Event\IdentityFormSubscriber</parameter>
+		
     </parameters>
 
     <services>
@@ -24,11 +27,13 @@
 		
 		<service id="asf_contact.form.type.person" class="%asf_contact.form.type.person.class%">
         	<argument type="service" id="asf_contact.person.manager" />
+        	<argument type="service" id="asf_contact.form.identity.subscriber" />
 			<tag name="form.type" alias="person_type" />
 		</service>
 		
 		<service id="asf_contact.form.type.organization" class="%asf_contact.form.type.organization.class%">
         	<argument type="service" id="asf_contact.organization.manager" />
+        	<argument type="service" id="asf_contact.form.identity.subscriber" />
 			<tag name="form.type" alias="organization_type" />
 		</service>
 		
@@ -43,6 +48,13 @@
             <tag name="form.type" alias="search_identity" />
         </service>
         
+        <!-- Subscribers and Listeners -->
+        <service id="asf_contact.form.identity.subscriber" class="%asf_contact.form.identity.subscriber.class%">
+        	<argument>%asf_contact.enable_address%</argument>
+        	<argument>%asf_contact.enable_contact_device%</argument>
+        	<tag name="kernel.event_subscriber" />
+        </service>
+
     </services>
     
 </container>

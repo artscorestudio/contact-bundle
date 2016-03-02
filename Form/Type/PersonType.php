@@ -11,7 +11,7 @@ namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
@@ -34,9 +34,10 @@ class PersonType extends AbstractType
     /**
      * @param ASFContactEntityManagerInterface $person_manager
      */
-    public function __construct(ASFContactEntityManagerInterface $person_manager)
+    public function __construct(ASFContactEntityManagerInterface $person_manager, $subscriber)
     {
         $this->personManager = $person_manager;
+        $this->subscriber = $subscriber;
     }
     
 	/**
@@ -54,16 +55,17 @@ class PersonType extends AbstractType
 				'label' => 'Last Name',
 				'required' => true
 			));
+			
+		$builder->addEventSubscriber($this->subscriber);
 	}
 
 	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\AbstractType::setDefaultOptions()
+	 * {@inheritDoc}
+	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
 	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
+	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'inherit_data' => true,
 			'data_class' => $this->personManager->getClassName(),
 			'translation_domain' => 'asf_contact',
 			'is_new' => false
