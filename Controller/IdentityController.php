@@ -123,7 +123,7 @@ class IdentityController extends Controller
 	 * 
 	 * @param string $type Type of Contact
 	 */
-	public function addAction($type)
+	public function addAction(Request $request, $type)
 	{
 		$view_options = array();
 		
@@ -161,7 +161,7 @@ class IdentityController extends Controller
 	 * Edit a contact
 	 * @param integer $id Contact ID
 	 */
-	public function editAction($id)
+	public function editAction(Request $request, $id)
 	{
 		$view_options = array();
 		
@@ -244,5 +244,34 @@ class IdentityController extends Controller
 		$response->setContent(json_encode($search));
 		 
 		return $response;
+	}
+
+	/**
+	 * Return list of identities according to the search by name
+	 *
+	 * @param Request $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function ajaxRequestByNameAction(Request $request)
+	{
+	    $term = $request->get('name');
+	    $identities = $this->get('asf_contact.identity.manager')->getRepository()->findByNameContains($term);
+	    $search = array();
+	
+	    foreach($identities as $identity) {
+	        $search[] = array(
+	            'id' => $identity->getId(),
+	            'username' => $identity->getName(),
+	            'email' => $identity->getEmailCanonical()
+	        );
+	    }
+	     
+	    $response = new Response();
+	    $response->setContent(json_encode(array(
+	        'total_count' => count($search),
+	        'items' => $search
+	    )));
+	
+	    return $response;
 	}
 }
