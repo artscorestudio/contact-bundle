@@ -12,7 +12,6 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\HttpFoundation\Request;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
@@ -33,17 +32,11 @@ class AddressType extends AbstractType
 	protected $addressManager;
 	
 	/**
-	 * @var Request
-	 */
-	protected $request;
-	
-	/**
 	 * @param ASFContactEntityManagerInterface  $address_manager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $address_manager, Request $request)
+	public function __construct(ASFContactEntityManagerInterface $address_manager)
 	{
 		$this->addressManager = $address_manager;
-		$this->request = $request;
 	}
 
 	/**

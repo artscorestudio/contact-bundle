@@ -15,6 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 /**
  * Identity Contact Device Form Type
@@ -53,9 +56,9 @@ class IdentityContactDeviceType extends AbstractType
 		$builder->add('contactDevice', ContactDeviceType::class);
 		
 		$identityTransformer = new StringToIdentityTransformer($this->identityManager);
-		$builder->add($builder->create('identity', 'hidden')->addModelTransformer($identityTransformer));
+		$builder->add($builder->create('identity', HiddenType::class)->addModelTransformer($identityTransformer));
 		
-		$builder->add('isMain', 'checkbox', array(
+		$builder->add('isMain', CheckboxType::class, array(
 			'label' => 'Main',
 			'required' => false
 		));

@@ -222,20 +222,22 @@
 		</div>
 	</div>
 	
+	{#
 	{% if form.identity.vars.isAccountActivated == true and form.identity.vars.isAsfUserSupport == true  %}
 		{{ form_row(form.identity.account) }}
 	{% endif %}
+	#}
 	
 {% endspaceless %}
 {% endblock %}
 
-{% block _person_type_errors %}
+{% block _person_errors %}
 {% spaceless %}
 	{{ block('form_errors')  }}
 {% endspaceless %}
 {% endblock %}
 
-{% block _person_type_widget %}
+{% block _person_widget %}
 {% spaceless %}
 
 	{{ form_errors(form) }}
@@ -248,20 +250,17 @@
 			{{ form_row(form.lastName) }}
 		</div>
 		<div class="col-xs-2">
-			{{ form_row(form.birthday) }}
-		</div>
-		<div class="col-xs-2">
 			{{ form_row(form.identity.state) }}
 		</div>
 	</div>
 	
 	{{ block('asf_contact_identity_commons') }}
 
-	{{ form_row(form.identity.save) }}
+	<input type="submit" class="btn btn-primary" alue="Save" />
 {% endspaceless %}
 {% endblock %}
 
-{% block _organization_type_widget %}
+{% block _organization_widget %}
 {% spaceless %}
 
 	<div class="row">
@@ -285,14 +284,14 @@
 	
 	{{ block('asf_contact_identity_commons') }}
 	
-	{{ form_row(form.identity.save) }}
+	<input type="submit" class="btn btn-primary" value="Save" />
 {% endspaceless %}
 {% endblock %}
 
 
 
 {# --------------------------------- Address Form Type --------------------------------- #}
-{% block address_type_row %}
+{% block address_row %}
 {% spaceless %}
 {# <script type="text/javascript">
 $(document).ready(function(){
@@ -337,7 +336,7 @@ $(document).ready(function(){
 {% endblock %}
 
 {# --------------------------------- Contact Device Form Type --------------------------------- #}
-{% block contact_device_type_row %}
+{% block contact_device_row %}
 {% spaceless %}
 <script type="text/javascript">
 $(document).ready(function(){
@@ -359,7 +358,7 @@ $(document).ready(function(){
 {% endblock %}
 
 {# --------------------------------- Identity Organization Form Type --------------------------------- #}
-{% block identity_organization_type_row %}
+{% block identity_organization_row %}
 {% spaceless %}
 	<div class="form-group">
 		{{ form_row(form.organization) }}
@@ -369,7 +368,7 @@ $(document).ready(function(){
 {% endblock %}
 
 {# --------------------------------- Identity Address Form Type --------------------------------- #}
-{% block identity_address_type_row %}
+{% block identity_address_row %}
 {% spaceless %}
 	<div class="form-group">
 		<div class="row">
@@ -384,7 +383,7 @@ $(document).ready(function(){
 {% endblock %}
 
 {# --------------------------------- Identity Contact Device Form Type --------------------------------- #}
-{% block identity_contact_device_type_row %}
+{% block identity_contact_device_row %}
 {% spaceless %}
 	<div class="form-group">
 		<div class="row">

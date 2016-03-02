@@ -17,6 +17,8 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
  * Identity Address Form Type
@@ -55,7 +57,7 @@ class IdentityAddressType extends AbstractType
 		$builder->add('address', AddressType::class);
 		
 		$identity_transformer = new StringToIdentityTransformer($this->identityManager);
-		$builder->add($builder->create('identity', 'hidden')->addModelTransformer($identity_transformer));
+		$builder->add($builder->create('identity', HiddenType::class)->addModelTransformer($identity_transformer));
 		
 		$builder->add('isMain', CheckboxType::class, array(
 			'label' => 'Check this box if you want to make this address your principal address',
