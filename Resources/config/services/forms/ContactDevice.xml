@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		
+		<!-- ContactDevice -->
+    	<parameter key="asf_contact.form.type.contact_device.class">ASF\ContactBundle\Form\Type\ContactDeviceType</parameter>
+    	<parameter key="asf_contact.form.type.identity_contact_device.class">ASF\ContactBundle\Form\Type\IdentityContactDeviceType</parameter>
+    	
+    	<!-- EmailAddress -->
+    	<parameter key="asf_contact.form.type.email_address.class">ASF\ContactBundle\Form\Type\EmailAddressType</parameter>
+    	
+    	<!-- WebsiteAddress -->
+    	<parameter key="asf_contact.form.type.website_address.class">ASF\ContactBundle\Form\Type\WebsiteAddressType</parameter>
+    	
+    	<!-- PhoneNumber -->
+    	<parameter key="asf_contact.form.type.phone_number.class">ASF\ContactBundle\Form\Type\PhoneNumberType</parameter>
+    	
+    </parameters>
+
+    <services>
+        
+        <!-- ContactDevice -->
+        <service id="asf_contact.form.type.contact_device" class="%asf_contact.form.type.contact_device.class%">
+        	<argument type="service" id="asf_contact.contact_device.manager" />
+			<tag name="form.type" alias="contact_device_type" />
+		</service>
+		
+		<service id="asf_contact.form.type.identity_contact_device" class="%asf_contact.form.type.identity_contact_device.class%">
+        	<argument type="service" id="asf_contact.identity_contact_device.manager" />
+        	<argument type="service" id="asf_contact.identity.manager" />
+			<tag name="form.type" alias="identity_contact_device_type" />
+		</service>
+		
+		<!-- EmailAddress -->
+		<service id="asf_contact.form.type.email_address" class="%asf_contact.form.type.email_address.class%">
+        	<argument type="service" id="asf_contact.email_address.manager" />
+			<tag name="form.type" alias="email_address_type" />
+		</service>
+		
+		<!-- WebsiteAddress -->
+		<service id="asf_contact.form.type.website_address" class="%asf_contact.form.type.website_address.class%">
+        	<argument type="service" id="asf_contact.website_address.manager" />
+			<tag name="form.type" alias="website_address_type" />
+		</service>
+		
+		<!-- PhoneNumber -->
+		<service id="asf_contact.form.type.phone_number" class="%asf_contact.form.type.phone_number.class%">
+        	<argument type="service" id="asf_contact.phone_number.manager" />
+			<tag name="form.type" alias="phone_number_type" />
+		</service>
+
+    </services>
+    
+</container>

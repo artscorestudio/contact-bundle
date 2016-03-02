@@ -5,21 +5,6 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 	<parameters>
-    	<!-- Identity Manager -->
-		<parameter key="asf_contact.identity.manager.class">ASF\ContactBundle\Entity\Manager\IdentityManager</parameter>
-		<parameter key="asf_contact.identity.manager.entity.class">ASF\ContactBundle\Entity\Identity</parameter>
-		
-		<!-- Organization Manager -->
-		<parameter key="asf_contact.organization.manager.class">ASF\ContactBundle\Entity\Manager\OrganizationManager</parameter>
-		<parameter key="asf_contact.organization.manager.entity.class">ASF\ContactBundle\Entity\Organization</parameter>
-		
-		<!-- Person Manager -->
-		<parameter key="asf_contact.person.manager.class">ASF\ContactBundle\Entity\Manager\PersonManager</parameter>
-		<parameter key="asf_contact.person.manager.entity.class">ASF\ContactBundle\Entity\Person</parameter>
-		
-		<!-- Identity Organization Manager -->
-		<parameter key="asf_contact.identity_organization.manager.class">ASF\ContactBundle\Entity\Manager\IdentityOrganizationManager</parameter>
-		<parameter key="asf_contact.identity_organization.manager.entity.class">ASF\ContactBundle\Entity\IdentityOrganization</parameter>
 
 		<!-- Forms -->
 		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityType</parameter>
@@ -27,29 +12,11 @@
 		<parameter key="asf_contact.form.type.organization.class">ASF\ContactBundle\Form\Type\OrganizationType</parameter>
 		<parameter key="asf_contact.form.type.identity_organization.class">ASF\ContactBundle\Form\Type\IdentityOrganizationType</parameter>
 		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
+		
     </parameters>
 
     <services>
-        <!-- Identity Entity Manager -->
-        <service id="asf_contact.identity.manager" class="%asf_contact.identity.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.identity.manager.entity.class%" />
-        </service>
-        
-        <!-- Organization Entity Manager -->
-        <service id="asf_contact.organization.manager" class="%asf_contact.organization.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.organization.manager.entity.class%" />
-        </service>
-        
-        <!-- Person Entity Manager -->
-        <service id="asf_contact.person.manager" class="%asf_contact.person.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.person.manager.entity.class%" />
-        </service>
-        
-        <!-- Identity Organization Entity Manager -->
-        <service id="asf_contact.identity_organization.manager" class="%asf_contact.identity_organization.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.identity_organization.manager.entity.class%" />
-        </service>
-        
+    
         <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
         	<argument type="service" id="asf_contact.identity.manager" />
 			<tag name="form.type" alias="identity_type" />
@@ -67,6 +34,7 @@
 		
 		<service id="asf_contact.form.type.identity_organization" class="%asf_contact.form.type.identity_organization.class%">
         	<argument type="service" id="asf_contact.identity_organization.manager" />
+        	<argument type="service" id="asf_contact.identity.manager" />
 			<tag name="form.type" alias="identity_organization_type" />
 		</service>
 		

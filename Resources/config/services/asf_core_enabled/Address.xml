@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+	
+    	<!-- Address Manager -->
+		<parameter key="asf_contact.address.entity.class">ASF\ContactBundle\Entity\Address</parameter>
+		
+		<!-- Province Manager -->
+		<parameter key="asf_contact.province.entity.class">ASF\ContactBundle\Entity\Province</parameter>
+		
+		<!-- Region Manager -->
+		<parameter key="asf_contact.region.entity.class">ASF\ContactBundle\Entity\Region</parameter>
+		
+		<!-- Identity Address Manager -->
+		<parameter key="asf_contact.identity_address.entity.class">ASF\ContactBundle\Entity\IdentityAddress</parameter>
+    	
+    </parameters>
+
+    <services>
+        
+        <!-- Address Entity Manager -->
+        <service id="asf_contact.address.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.address.entity.class%" />
+        </service>
+        
+        <!-- Province Manager -->
+		<service id="asf_contact.province.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.province.entity.class%" />
+        </service>
+		
+		<!-- Region Manager -->
+		<service id="asf_contact.region.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.region.entity.class%" />
+        </service>
+		
+		<!-- Identity Address Manager -->
+		<service id="asf_contact.identity_address.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.identity_address.entity.class%" />
+        </service>
+
+    </services>
+    
+</container>
