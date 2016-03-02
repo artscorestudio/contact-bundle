@@ -1,0 +1,646 @@
+Asf\Bundle\ContactBundle\Entity\Province:
+    ain:
+        code: "01"
+        name: "Ain"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    aisne:
+        code: "02"
+        name: "Aisne"
+        region: @nord_picardie
+        country: "FR"
+        
+    allier:
+        code: "03"
+        name: "Allier"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    alpes_haute_provence:
+        code: "04"
+        name: "Alpes-de-Haute-Provence"
+        region: @paca
+        country: "FR"
+        
+    hautes_alpes:
+        code: "05"
+        name: "Hautes-Alpes"
+        region: @paca
+        country: "FR"
+    
+    alpes_maritimes:
+        code: "06"
+        name: "Alpes-Maritimes"
+        region: @paca
+        country: "FR"
+        
+    ardeche:
+        code: "07"
+        name: "Ardèche"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    ardennes:
+        code: "08"
+        name: "Ardennes"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    ariege:
+        code: "09"
+        name: "Ariège"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    aube:
+        code: "10"
+        name: "Aube"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    aude:
+        code: "11"
+        name: "Aude"
+        region: @languedoc_rou_mp
+        country: "FR"
+    
+    aveyron:
+        code: "12"
+        name: "Aveyron"
+        region: @languedoc_rou_mp
+        country: "FR"
+    
+    bouches_du_rhone:
+        code: "13"
+        name: "Bouches-du-Rhône"
+        region: @paca
+        country: "FR"
+         
+    calvados:
+        code: "14"
+        name: "Calvados"
+        region: @normandie
+        country: "FR"
+        
+    cantal:
+        code: "15"
+        name: "Cantal"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    charente:
+        code: "16"
+        name: "Charente"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    charente_maritime:
+        code: "17"
+        name: "Charente-Maritime"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    cher:
+        code: "18"
+        name: "Cher"
+        region: @centre_val_loire
+        country: "FR"
+        
+    correze:
+        code: "19"
+        name: "Corrèze"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    corse_du_sud:
+        code: "2A"
+        name: "Corse-du-Sud"
+        region: @corse
+        country: "FR"
+        
+    corse_du_nord:
+        code: "2B"
+        name: "Corse-du-Nord"
+        region: @corse
+        country: "FR"
+        
+    cote_or:
+        code: "21"
+        name: "Côte-d'Or"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    cote_armor:
+        code: "22"
+        name: "Côtes-d'Armor"
+        region: @bretagne
+        country: "FR"
+        
+    creuse:
+        code: "23"
+        name: "Creuse"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    dordogne:
+        code: "24"
+        name: "Dordogne"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    doubs:
+        code: "25"
+        name: "Doubs"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    drome:
+        code: "26"
+        name: "Drôme"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    eure:
+        code: "27"
+        name: "Eure"
+        region: @normandie
+        country: "FR"
+        
+    eure_et_loir:
+        code: "28"
+        name: "Eure-et-Loir"
+        region: @centre_val_loire
+        country: "FR"
+        
+    finistere:
+        code: "29"
+        name: "Finistère"
+        region: @bretagne
+        country: "FR"
+        
+    gard:
+        code: "30"
+        name: "Gard"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    haute_garonne:
+        code: "31"
+        name: "Haute-Garonne"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    gers:
+        code: "32"
+        name: "Gers"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    gironde:
+        code: "33"
+        name: "Gironde"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    herautl:
+        code: "34"
+        name: "Hérault"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    ille_et_vilaine:
+        code: "35"
+        name: "Ille-et-Vilaine"
+        region: @bretagne
+        country: "FR"
+        
+    indre:
+        code: "36"
+        name: "Indre"
+        region: @centre_val_loire
+        country: "FR"
+        
+    indre_et_loire:
+        code: "37"
+        name: "Indre-et-loire"
+        region: @centre_val_loire
+        country: "FR"
+        
+    isere:
+        code: "38"
+        name: "Isère"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    jura:
+        code: "39"
+        name: "Jura"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    landes:
+        code: "40"
+        name: "Landes"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    loir_et_cher:
+        code: "41"
+        name: "Loir-et-Cher"
+        region: @centre_val_loire
+        country: "FR"
+        
+    loire:
+        code: "42"
+        name: "Loire"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    haute_loire:
+        code: "43"
+        name: "Haute-Loire"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    loire_atlantique:
+        code: "44"
+        name: "Loire Atlantique"
+        region: @pays_de_loire
+        country: "FR"
+        
+    loiret:
+        code: "45"
+        name: "Loiret"
+        region: @centre_val_loire
+        country: "FR"
+        
+    lot:
+        code: "46"
+        name: "Lot"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    lot_et_garonne:
+        code: "47"
+        name: "Lot-et-Garonne"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    lozere:
+        code: "48"
+        name: "Jura"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    maine_et_loire:
+        code: "49"
+        name: "Maine-et-Loire"
+        region: @pays_de_loire
+        country: "FR"
+        
+    manche:
+        code: "50"
+        name: "Manche"
+        region: @normandie
+        country: "FR"
+        
+    marne:
+        code: "51"
+        name: "Marne"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    haute_marne:
+        code: "52"
+        name: "Haute-Marne"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    mayenne:
+        code: "53"
+        name: "Mayenne"
+        region: @pays_de_loire
+        country: "FR"
+        
+    meurthe-et-mozelle:
+        code: "54"
+        name: "Meurthe-et-Mozelle"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    meuse:
+        code: "55"
+        name: "Meuse"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    morbihan:
+        code: "56"
+        name: "Morbihan"
+        region: @bretagne
+        country: "FR"
+        
+    moselle:
+        code: "57"
+        name: "Mozelle"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    nievre:
+        code: "58"
+        name: "Nièvre"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    nord:
+        code: "59"
+        name: "Nord"
+        region: @nord_picardie
+        country: "FR"
+        
+    oise:
+        code: "60"
+        name: "Oise"
+        region: @nord_picardie
+        country: "FR"
+        
+    orne:
+        code: "61"
+        name: "Orne"
+        region: @normandie
+        country: "FR"
+        
+    pas_de_calais:
+        code: "62"
+        name: "Pas-de-Calais"
+        region: @nord_picardie
+        country: "FR"
+        
+    puy_de_dome:
+        code: "63"
+        name: "Puy-de-Dôme"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    pyrenees_atlantiques:
+        code: "64"
+        name: "Pyrénées-Atlantiques"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    hautes_pyrenees:
+        code: "65"
+        name: "Hautes-Pyrénées"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    pyrenees_orientales:
+        code: "66"
+        name: "Pyrénées-Orientales"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    bas_rhin:
+        code: "67"
+        name: "Bas-Rhin"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    haut_rhin:
+        code: "68"
+        name: "Haute-Rhin"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    lyon:
+        code: "69"
+        name: "Lyon"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    haute_saone:
+        code: "70"
+        name: "Haute-Saône"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    saone_et_loire:
+        code: "71"
+        name: "Saône-et-Loire"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    sarthe:
+        code: "72"
+        name: "Sarthe"
+        region: @pays_de_loire
+        country: "FR"
+        
+    savoie:
+        code: "73"
+        name: "Savoie"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    haute_savoie:
+        code: "74"
+        name: "Haute-Savoie"
+        region: @auvergne_rhone_alpes
+        country: "FR"
+        
+    paris:
+        code: "75"
+        name: "Paris"
+        region: @ile_de_france
+        country: "FR"
+    
+    seine_maritime:
+        code: "76"
+        name: "Seine-Maritime"
+        region: @normandie
+        country: "FR"
+            
+    seine_et_marne:
+        code: "77"
+        name: "Seine-et-Marne"
+        region: @ile_de_france
+        country: "FR"
+        
+    yvelines:
+        code: "78"
+        name: "Yvelines"
+        region: @ile_de_france
+        country: "FR"
+        
+    deux_sevres:
+        code: "79"
+        name: "Deux-Sèvres"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    somme:
+        code: "80"
+        name: "Somme"
+        region: @nord_picardie
+        country: "FR"
+        
+    tarn:
+        code: "81"
+        name: "Tarn"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    tarn_et_garonne:
+        code: "82"
+        name: "Tarn-et-Garonne"
+        region: @languedoc_rou_mp
+        country: "FR"
+        
+    var:
+        code: "83"
+        name: "Var"
+        region: @paca
+        country: "FR"
+        
+    vaucluse:
+        code: "84"
+        name: "Vaucluse"
+        region: @paca
+        country: "FR"
+        
+    vendee:
+        code: "85"
+        name: "Vendée"
+        region: @pays_de_loire
+        country: "FR"
+        
+    vienne:
+        code: "86"
+        name: "Vienne"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    haute_vienne:
+        code: "87"
+        name: "Haute-Vienne"
+        region: @aquitaine_limousin_pc
+        country: "FR"
+        
+    vosges:
+        code: "88"
+        name: "Vosges"
+        region: @alsace_champ_ard_lorraine
+        country: "FR"
+        
+    yonne:
+        code: "89"
+        name: "Yonne"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    territoire_de_belfort:
+        code: "90"
+        name: "Territoire de Belfort"
+        region: @bourgogne_franche_comte
+        country: "FR"
+        
+    essonne:
+        code: "91"
+        name: "Essonne"
+        region: @ile_de_france
+        country: "FR"
+        
+    hauts_de_seine:
+        code: "92"
+        name: "Hauts-de-Seine"
+        region: @ile_de_france
+        country: "FR"
+        
+    seine_saint_denis:
+        code: "93"
+        name: "Seine-Saint-Denis"
+        region: @ile_de_france
+        country: "FR"
+        
+    val_de_marne:
+        code: "94"
+        name: "Val de Marne"
+        region: @ile_de_france
+        country: "FR"
+        
+    val_oise:
+        code: "95"
+        name: "Val-d'Oise"
+        region: @ile_de_france
+        country: "FR"
+        
+    guadeloupe:
+        code: "971"
+        name: "Guadeloupe"
+        region: @r_guadeloupe
+        country: "FR"
+        
+    martinique:
+        code: "972"
+        name: "Martinique"
+        region: @r_martinique
+        country: "FR"
+        
+    guyane:
+        code: "973"
+        name: "Guyane"
+        region: @r_guyane
+        country: "FR"
+        
+    la_reunion:
+        code: "974"
+        name: "La Réunion"
+        region: @r_reunion
+        country: "FR"
+        
+    mayotte:
+        code: "976"
+        name: "Mayotte"
+        region: @r_mayotte
+        country: "FR"
+        
+    saint_pierre_et_miquelon:
+        code: "975"
+        name: "Saint-Pierre-Et-Miquelon"
+        country: "FR"
+        
+    saint_barthelemy:
+        code: "977"
+        name: "Saint-Barthélemy"
+        country: "FR"
+        
+    saint_martin:
+        code: "978"
+        name: "Saint-Martin"
+        country: "FR"
+        
+    polynesie_francaise:
+        code: "987"
+        name: "Polynésie Française"
+        country: "FR"
+        
+    ile_de_clipperton:
+        code: "989"
+        name: "Île-de-Clipperton"
+        country: "FR"
+        
+    wallis_et_futuna:
+        code: "986"
+        name: "Wallis-et-Futuna"
+        country: "FR"
+        
+    nouvell_caledonie:
+        code: "988"
+        name: "Nouvelle-Calédonie"
+        country: "FR"
+        
+    terres_australes_et_antartique:
+        code: "984"
+        name: "Terres australes et antartiques françaises"
+        country: "FR"
