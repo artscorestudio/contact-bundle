@@ -1,0 +1,20 @@
+{% extends 'ASFContactBundle::layout.html.twig'  %}
+
+{% trans_default_domain 'asf_contact' %}
+
+{% block title %}{{ view_title }}{% endblock %}
+
+{% block breadcrumbs_tree %}
+{{ parent() }}
+ > <a href="{{ breadcrumb_route }}" title="{{ view_title }}">{{ view_title }}</a>
+{% endblock %}
+
+{% block page_title %}{{ view_title }}{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+	<div class="row">
+		{{ form(form) }}
+	</div>
+</div>
+{% endblock %}
