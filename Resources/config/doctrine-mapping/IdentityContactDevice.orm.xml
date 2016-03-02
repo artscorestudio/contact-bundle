@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="ASF\ContactBundle\Entity\IdentityContactDevice" table="asf_contact_identity_contact_device">
+	    
+		<unique-constraints>
+			<unique-constraint columns="identity_id,contact_device_id" name="unique_relation" />
+		</unique-constraints>
+        	
+		<id name="id" type="integer" column="id">
+			<generator strategy="AUTO" />
+		</id>
+       		
+       	<field name="isMain" type="boolean" nullable="false" />
+       		
+		<many-to-one field="identity" target-entity="Identity" inversed-by="contactDevices">
+			<join-column name="identity_id" ullable="false" />
+		</many-to-one>
+		
+		<many-to-one field="contactDevice" target-entity="ContactDevice" inversed-by="identities">
+			<join-column name="contact_device_id" nullable="false" />
+			<cascade>
+        		<cascade-persist />
+        	</cascade>
+		</many-to-one>
+	    
+    </entity>
+
+</doctrine-mapping>

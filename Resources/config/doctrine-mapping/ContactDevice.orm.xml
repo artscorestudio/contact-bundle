@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                  http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="ASF\ContactBundle\Entity\ContactDevice" table="asf_contact_contact_device" inheritance-type="SINGLE_TABLE" repository-class="ASF\ContactBundle\Repository\ContactDeviceRepository">
+	    
+	    <discriminator-column name="discr" type="string" />
+	    <discriminator-map>
+	    	<discriminator-mapping value="contact_device" class="ContactDevice" />
+	    	<discriminator-mapping value="email_address" class="EmailAddress" />
+	    	<discriminator-mapping value="phone_number" class="PhoneNumber" />
+	    	<discriminator-mapping value="website_address" class="WebsiteAddress" />
+	    </discriminator-map>
+	    
+	    <id name="id" type="integer" column="id">
+	    	<generator strategy="AUTO" />
+	    </id>
+	    
+	    <field name="label" type="string" length="255" nullable="false" />
+	    
+	    <field name="value" type="string" length="255" nullable="false" />
+	    
+	    <field name="type" type="string" length="255" nullable="false" />
+	    
+	    <one-to-many field="identities" target-entity="IdentityContactDevice" mapped-by="contactDevice">
+	    	<join-column name="contact_device_id" referenced-column-name="id" />
+	    	<cascade>
+	    		<cascade-persist/>
+                <cascade-remove />
+	    	</cascade>
+		</one-to-many>
+
+    </entity>
+
+</doctrine-mapping>
