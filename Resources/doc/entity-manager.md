@@ -159,7 +159,7 @@ You can also do it in bundle extension class :
 
 ```php
 <?php
-<!-- @AcmeDemoBundle/DependencyInjection/AcmeDemoExtension.php -->
+// @AcmeDemoBundle/DependencyInjection/AcmeDemoExtension.php
 namespace Acme\DemoBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Extension\Extension;
