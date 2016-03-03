@@ -133,8 +133,6 @@ These entities are not enabled by default because it is not necessarily required
 
 ### AddressModel and AddressInterface
 
-You have an abstract class : *AddressModel* :
-
 ```php
 <?php
 // @ASFContactBundle/Model/Address/AddressModel.php
