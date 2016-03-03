@@ -18,11 +18,6 @@ namespace ASF\ContactBundle\Model\Identity;
 interface IdentityInterface
 {
 	/**
-	 * @return number
-	 */
-	public function getId();
-	
-	/**
 	 * @return string
 	 */
 	public function getName();
@@ -32,28 +27,6 @@ interface IdentityInterface
 	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
 	 */
 	public function setName($name);
-	
-	/**
-	 * @return string
-	 */
-	public function getState();
-	
-	/**
-	 * @param string $state
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function setState($state);
-	
-	/**
-	 * @return string
-	 */
-	public function getEmailCanonical();
-	
-	/**
-	 * @param string $email
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function setEmailCanonical($email);
 	
 	/**
 	 * @return \ASF\ContactBundle\Model\Identity\IdentityAccountInterface
@@ -88,83 +61,4 @@ interface IdentityInterface
 	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
 	 */
 	public function removeOrganization($organization);
-	
-	/**
-	 * Return identity's addresses
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getAddresses();
-	
-	/**
-	 * Add address to the identity's addresses list
-	 *
-	 * @param mixed $address
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function addAddress($address);
-	
-	/**
-	 * Remove address to the identity's addresses list
-	 *
-	 * @param mixed $address
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function removeAddress($address);
-	
-	/**
-	 * Return identity's contact devices
-	 *
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getContactDevices();
-	
-	/**
-	 * Add contact device to the identity's contact devices list
-	 *
-	 * @param mixed $contact_device
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function addContactDevice($contact_device);
-	
-	/**
-	 * Remove contact device to the identity's contact devices list
-	 *
-	 * @param mixed $contact_device
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function removeContactDevice($contact_device);
-	
-	/**
-	 * @return DateTime
-	 */
-	public function getCreatedAt();
-	
-	/**
-	 * @param \DateTime $date
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function setCreatedAt(\DateTime $date);
-	
-	/**
-	 * @return DateTime
-	 */
-	public function getUpdatedAt();
-	
-	/**
-	 * @param \DateTime $date
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function setUpdatedAt(\DateTime $date);
-	
-	/**
-	 * @return string
-	 */
-	public function getType();
-	
-	/**
-	 * @param string $type
-	 * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
-	 */
-	public function setType($type);
 }
