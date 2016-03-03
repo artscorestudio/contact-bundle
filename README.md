@@ -1,16 +1,16 @@
 # Artscore Studio Website bundle
 
-Website Bundle is a Symfony 2/3 bundle for create and manage frontends in your Symfony 2+ application. This package is a part of Artscore Studio Framework.
+Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Symfony 2+ application. This package is a part of Artscore Studio Framework.
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
-[![Build Status](https://travis-ci.org/artscorestudio/website-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/website-bundle)
+[![Build Status](https://travis-ci.org/artscorestudio/website-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/contact-bundle)
 
 ## Documentation
 
 The bulk of the documentation is stored in the Resources/docs/index.md file in bundle :
 
-[Read the documentation for master](https://github.com/artscorestudio/website-bundle/blob/master/Resources/doc/index.md).
+[Read the documentation for master](https://github.com/artscorestudio/contact-bundle/blob/master/Resources/doc/index.md).
 
 
 ## Installation
@@ -42,10 +42,10 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## About
 
-Artscore Studio Website Bundle is an [Artscore Studio](http://www.artscore-studio.fr) initiative.
+Artscore Studio Contact Bundle is an [Artscore Studio](http://www.artscore-studio.fr) initiative.
 
 ## Reporting an issue or a feature request
 
-Issues and features requests are tracked in the [GitHub issue tracker](https://github.com/artscorestudio/website-bundle/issues).
+Issues and features requests are tracked in the [GitHub issue tracker](https://github.com/artscorestudio/contact-bundle/issues).
 
 When reporting a bug, it may be a good idea to reproduce it in a basic project built using the Symfony Standard Edition to allow developers of the bundle te reproduce the issue by simply cloning it and following steps.
