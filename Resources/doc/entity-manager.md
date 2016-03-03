@@ -79,7 +79,7 @@ class PersonType extends BasePersonType
 	public function configureOptions(OptionsResolver $resolver)
 	{
 		$resolver->setDefaults(array(
-			'data_class' => 'Acme\DemoBundle\Entity\Person',
+			'data_class' => $this->personManager->getClassName(),
 			'translation_domain' => 'asf_contact',
 			'is_new' => false
 		));
@@ -87,9 +87,9 @@ class PersonType extends BasePersonType
 }
 ```
 
-All entity managers provided in this bundle are based on [ASFEntityManager provided by ASFCoreBundle](https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/entity-manager.md). If you do not want to install ASFCoreBUndle, you have to create your own Entity Manager implementing the ASFContactEntityManagerInterface and overriding the Person Entity Manager class parameter :
+All entity managers provided in this bundle are based on [ASFEntityManager provided by ASFCoreBundle](https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/entity-manager.md). If you do not want to install ASFCoreBUndle, you have to create your own Entity Manager implementing the ASFContactEntityManagerInterface and overriding the Person Entity Manager class parameter.
 
-Default Person Entity Manager :
+### Default Person Entity Manager
 ```xml
 <!-- @ASFContactBundle/Resources/config/services/asf_core_enabled/services.xml -->
 <?xml version="1.0" ?>
@@ -133,5 +133,55 @@ class ASFContactEntityManager extends ASFEntityManager implements ASFContactEnti
 
 You can see that this default parameter implements *ASFContactEntityManagerInterface*, yours should be the same.
 
- 
+### Using defaults
 
+If you use ContactBundle with its default configuration and services. When you extends the bundle and define persisted entities, you just have to override  *asf_contact.person.entity.class* with the name of your entity :
+
+```xml
+<!-- @AcmeDemoBundle/Resources/config/services.xml -->
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+
+		<!-- Person Manager -->
+		<parameter key="asf_contact.person.entity.class">Acme\DemoBundle\Entity\Person</parameter>
+    	
+    </parameters>
+    
+</container>
+```
+
+You can also do it in bundle extension class :
+
+```
+<?php
+<!-- @AcmeDemoBundle/DependencyInjection/AcmeDemoExtension.php -->
+namespace Acme\DemoBundle\DependencyInjection;
+
+use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+/**
+ * This is the class that loads and manages your bundle configuration
+ *
+ * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
+ */
+class AcmeDemoExtension extends Extension
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $configuration = new Configuration();
+	    $config = $this->processConfiguration($configuration, $configs);
+		// [...]
+	    $container->setParameter('asf_contact.person.entity.class', 'Acme\DemoBundle\Entity\Person');
+	   // [...]
+    }
+}
+```
