@@ -1,4 +1,4 @@
-# Artscore Studio Website bundle
+# Artscore Studio Contact bundle
 
 Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Symfony 2+ application. This package is a part of Artscore Studio Framework.
 
