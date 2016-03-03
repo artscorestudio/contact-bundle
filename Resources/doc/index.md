@@ -65,6 +65,27 @@ asf_contact:
 
 For more information about the bundle configuration, check [ASFContactBundle Configuration Reference](configuration.md).
 
+### Step 4 : Extends the bundle
+
+ContactBundle is an *abstract* bundle. You have to create an inherited bundle :
+
+```php
+<?php
+namespace Acme\DemoBundle;
+
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+
+class AcmeDemoBundle extends Bundle
+{
+	public function getParent()
+	{
+		return 'ASFContactBundle';
+	}
+}
+```
+
+For more information about bundle inheritance, check [Symfony documentation](http://symfony.com/doc/current/cookbook/bundles/inheritance.html).
+
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
