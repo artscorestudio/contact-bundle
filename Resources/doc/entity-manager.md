@@ -157,7 +157,7 @@ If you use ContactBundle with its default configuration and services. When you e
 
 You can also do it in bundle extension class :
 
-```
+```php
 <?php
 <!-- @AcmeDemoBundle/DependencyInjection/AcmeDemoExtension.php -->
 namespace Acme\DemoBundle\DependencyInjection;
