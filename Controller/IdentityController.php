@@ -143,7 +143,7 @@ class IdentityController extends Controller
 			$form = $this->createForm(OrganizationType::class, $contact);
 		}
 		
-		$formHandler = new IdentityFormHandler($form, $this->get('container'));
+		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
 		
 		if (true === $formHandler->process()) {
 		    try {
@@ -190,7 +190,7 @@ class IdentityController extends Controller
 			$form = $this->createForm(OrganizationType::class, $identity);
 		}
 		
-		$formHandler = new IdentityFormHandler($form, $this->get('container'));
+		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
 		
 		if ( $form->isSubmitted() && $form->isValid() ) {
 		    try {
