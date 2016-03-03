@@ -1,0 +1,2 @@
+# Bundle's entities
+

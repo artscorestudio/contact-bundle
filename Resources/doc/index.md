@@ -55,5 +55,6 @@ public function registerBundles()
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
+* [Bundle's entities](entities.md)
 * [ASFContactBundle embedded Entity Manager](entity-manager.md)
 * [ASFContactBundle Configuration Reference](configuration.md)
