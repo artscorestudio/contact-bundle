@@ -258,13 +258,11 @@ interface RegionInterface
 }
 ```
 
-> ContactBundle provides DataFixutres with all French *Départements* and French *Régions*.
+> ContactBundle provides DataFixtures with all French *Départements* and French *Régions*.
 
 ### ContactDeviceModel and ContactDeviceInterface
 
 ContactDevices represents all means of contact an identity : email, phone, website, etc.
-
-You have an abstract class : *ContactDeviceModel* :
 
 ```php
 <?php
