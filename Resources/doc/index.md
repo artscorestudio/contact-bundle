@@ -65,7 +65,15 @@ asf_contact:
 
 For more information about the bundle configuration, check [ASFContactBundle Configuration Reference](configuration.md).
 
-### Step 4 : Extends the bundle
+### Step 4 : Import ASFContactBundle routes
+
+```yaml
+# app/config/routing.yml
+asf_contact:
+    resource: "@ASFContactBundle/Resources/config/routing.yml"
+```
+
+### Step 5 : Extends the bundle
 
 ContactBundle is an *abstract* bundle. You have to create an inherited bundle :
 
