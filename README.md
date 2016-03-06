@@ -1,10 +1,12 @@
 # Artscore Studio Contact bundle
 
-Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Symfony 2+ application. This package is a part of Artscore Studio Framework.
+Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Symfony 2/3 application. This package is a part of Artscore Studio Framework.
 
 > IMPORTANT NOTICE: This bundle is still under development. Any changes will be done without prior notice to consumers of this package. Of course this code will become stable at a certain point, but for now, use at your own risk.
 
-[![Build Status](https://travis-ci.org/artscorestudio/website-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/contact-bundle)
+| [Master](https://github.com/artscorestudio/contact-bundle) | [Latest Release (1.0.0)](https://github.com/artscorestudio/contact-bundle/releases/tag/1.0.0) |
+| ------ | -------------- |
+| [![Build Status](https://travis-ci.org/artscorestudio/contact-bundle.svg?branch=master)](https://travis-ci.org/artscorestudio/core-bundle) | [![Build Status](https://travis-ci.org/artscorestudio/contact-bundle.svg?branch=1.0.0)](https://travis-ci.org/artscorestudio/contact-bundle) |
 
 ## Documentation
 
