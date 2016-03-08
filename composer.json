@@ -25,7 +25,7 @@
 	"require-dev" : {
         "phpunit/phpunit": "5.1.*",
         "mockery/mockery": "0.9.*",
-        "artscorestudio/core-bundle": "1.0.3",
+        "artscorestudio/core-bundle": "1.0.*",
         "apy/datagrid-bundle": "^2.2"
 	},
 	"autoload" : {
