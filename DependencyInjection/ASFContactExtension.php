@@ -73,7 +73,7 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
             $this->configureTwigBundle($container, $config);
     
         if ( !array_key_exists('ASFCoreBundle', $bundles) && $config['enable_core_support'] == true )
-            throw new InvalidConfigurationException('You have enabled the support of ASFCoreBundle but it is not enabled. Install it or disable ASFCoreBundle support in ASFUserBundle.');
+            throw new InvalidConfigurationException('You have enabled the support of ASFCoreBundle but it is not enabled. Install it or disable ASFCoreBundle support in ASFContactBundle.');
     }
     
     /**
