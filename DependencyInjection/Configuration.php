@@ -47,8 +47,429 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('form_theme')
                     ->defaultValue('ASFContactBundle:Form:fields.html.twig')
                 ->end()
+                
+                ->append($this->addIdentityParameterNode())
+                ->append($this->addPersonParameterNode())
+                ->append($this->addOrganizationParameterNode())
+                ->append($this->addAddressParameterNode())
+                ->append($this->addContactDeviceParameterNode())
+                ->append($this->addIdentityContactDeviceParameterNode())
+                ->append($this->addIdentityOrganizationParameterNode())
+                ->append($this->addIdentityAddressParameterNode())
+                ->append($this->addProvinceParameterNode())
+                ->append($this->addRegionParameterNode())
+                ->append($this->addEmailAddressParameterNode())
+                ->append($this->addWebsiteAddressParameterNode())
             ->end();
         
         return $treeBuilder;
+    }
+    
+    /**
+     * Add Identity Entity Configuration
+     */
+    protected function addIdentityParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('identity');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+		    	->addDefaultsIfNotSet()
+		    	->children()
+			    	->scalarNode('type')
+			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityType')
+			    	->end()
+			    	->scalarNode('name')
+			    		->defaultValue('identity_type')
+			    	->end()
+			    	->arrayNode('validation_groups')
+			    		->prototype('scalar')->end()
+			    		->defaultValue(array("Default"))
+			    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add Person Entity Configuration
+     */
+    protected function addPersonParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('person');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+		    	->addDefaultsIfNotSet()
+		    	->children()
+			    	->scalarNode('type')
+			    		->defaultValue('ASF\ContactBundle\Form\Type\PersonType')
+			    	->end()
+			    	->scalarNode('name')
+			    		->defaultValue('person_type')
+			    	->end()
+			    	->arrayNode('validation_groups')
+			    		->prototype('scalar')->end()
+			    		->defaultValue(array("Default"))
+			    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add Organization Entity Configuration
+     */
+    protected function addOrganizationParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('organization');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ProductBundle\Form\Type\OrganizationType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('organization_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add Address Entity Configuration
+     */
+    protected function addAddressParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('address');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ProductBundle\Form\Type\AddressType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('address_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+				    ->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add ContactDevice Entity Configuration
+     */
+    protected function addContactDeviceParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('contact_device');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\ContactDeviceType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('contact_device_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add IdentityContactDevice Entity Configuration
+     */
+    protected function addIdentityContactDeviceParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('identity_contact_device');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+		    	->addDefaultsIfNotSet()
+		    	->children()
+			    	->scalarNode('type')
+			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityContactDeviceType')
+			    	->end()
+			    	->scalarNode('name')
+			    		->defaultValue('identity_contact_device_type')
+			    	->end()
+			    	->arrayNode('validation_groups')
+			    		->prototype('scalar')->end()
+			    		->defaultValue(array("Default"))
+			    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add IdentityOrganization Entity Configuration
+     */
+    protected function addIdentityOrganizationParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('identity_organization');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+		    	->addDefaultsIfNotSet()
+		    	->children()
+			    	->scalarNode('type')
+			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityOrganizationType')
+			    	->end()
+			    	->scalarNode('name')
+			    		->defaultValue('identity_organization_type')
+			    	->end()
+			    	->arrayNode('validation_groups')
+			    		->prototype('scalar')->end()
+			    		->defaultValue(array("Default"))
+			    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    	
+    	return $node;
+    }
+    
+    /**
+     * Add IdentityAddress Entity Configuration
+     */
+    protected function addIdentityAddressParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('identity_organization');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityAddressType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('identity_address_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+				    ->end()
+		    	->end()
+	    	->end()
+    	;
+    	 
+    	return $node;
+    }
+    
+    /**
+     * Add Province Entity Configuration
+     */
+    protected function addProvinceParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('identity_organization');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\ProvinceType')
+				    	->end()
+				    		->scalarNode('name')
+				    	->defaultValue('province_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add Region Entity Configuration
+     */
+    protected function addRegionParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('region');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\RegionType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('region_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+				    ->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add WebsiteAddress Entity Configuration
+     */
+    protected function addWebsiteAddressParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('website_address');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\WebsiteAddressType')
+				    	->end()
+				    	->scalarNode('name')
+				    		->defaultValue('website_address_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
+    }
+    
+    /**
+     * Add EmailAddress Entity Configuration
+     */
+    protected function addEmailAddressParameterNode()
+    {
+    	$builder = new TreeBuilder();
+    	$node = $builder->root('email_address');
+    
+    	$node
+	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
+	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
+	    	->addDefaultsIfNotSet()
+	    	->children()
+		    	->arrayNode('form')
+			    	->addDefaultsIfNotSet()
+			    	->children()
+				    	->scalarNode('type')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\EmailAddressType')
+				    	->end()
+				    		->scalarNode('name')
+				    	->defaultValue('region_type')
+				    	->end()
+				    	->arrayNode('validation_groups')
+				    		->prototype('scalar')->end()
+				    		->defaultValue(array("Default"))
+				    	->end()
+			    	->end()
+		    	->end()
+	    	->end()
+    	;
+    
+    	return $node;
     }
 }

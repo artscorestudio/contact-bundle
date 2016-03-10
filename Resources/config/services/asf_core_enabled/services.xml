@@ -8,7 +8,8 @@
     	
     	<!-- Generic Entity Manager -->
     	<parameter key="asf_contact.entity.manager.class">ASF\ContactBundle\Entity\Manager\ASFContactEntityManager</parameter>
-
+		
+		<!-- Identity Manager -->
 		<parameter key="asf_contact.identity.entity.class">ASF\ContactBundle\Entity\Identity</parameter>
 
 		<!-- Organization Manager -->

@@ -42,6 +42,13 @@
             <tag name="asf_core.manager" entity="%asf_contact.identity_address.entity.class%" />
         </service>
 
+		<!-- Address Forms -->
+    	<service id="asf_product.form.factory.address" class="%asf_contact.form.factory.class%">
+            <argument type="service" id="form.factory" />
+            <argument>%asf_contact.address.form.name%</argument>
+            <argument>%asf_contact.address.form.type%</argument>
+        </service>
+        
     </services>
     
 </container>
