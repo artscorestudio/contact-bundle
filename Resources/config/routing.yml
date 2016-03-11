@@ -5,3 +5,8 @@ asf_contact_homepage:
 asf_contact_identity:
     prefix: /admin/contact/identity
     resource: "@ASFContactBundle/Resources/config/routing/identity.yml"
+    
+asf_contact_doc:
+    prefix: /admin/contact/doc
+    resource: "@ASFContactBundle/Resources/config/routing/doc.yml"
+    
