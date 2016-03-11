@@ -52,29 +52,24 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
 	    $this->mapsParameters($container, $this->getAlias(), $config);
 	    
 	    $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-	    $loader->load('services/forms/services.xml');
 
 	    $container->setParameter('asf_contact.enable_address', $config['enable_address']);
 	    $container->setParameter('asf_contact.enable_contact_device', $config['enable_contact_device']);
 	    
 	    if ( isset($config['enable_core_support']) && $config['enable_core_support'] === true ) {
+	        
 	        $loader->load('services/asf_core_enabled/services.xml');
+	        $loader->load('services/asf_core_enabled/identity.xml');
+	        $loader->load('services/asf_core_enabled/person.xml');
+	        $loader->load('services/asf_core_enabled/organization.xml');
 	        
 	        if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
-	            $loader->load('services/asf_core_enabled/Address.xml');
+	            $loader->load('services/asf_core_enabled/address.xml');
 	        }
 	         
 	        if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
-	            $loader->load('services/asf_core_enabled/ContactDevice.xml');
+	            $loader->load('services/asf_core_enabled/contact_device.xml');
 	        }
-	    }
-	    
-	    if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
-	        $loader->load('services/forms/Address.xml');
-	    }
-	    
-	    if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
-	        $loader->load('services/forms/ContactDevice.xml');
 	    }
     }
     

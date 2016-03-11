@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+	
+		<!-- Identity Manager -->
+		<parameter key="asf_contact.identity.entity.class">ASF\ContactBundle\Entity\Identity</parameter>
+		
+		<!-- Form -->
+		<parameter key="asf_contact.form.type.identity.class">ASF\ContactBundle\Form\Type\IdentityType</parameter>
+		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
+		
+		<!-- Form Subscribers and Listeners -->
+		<parameter key="asf_contact.form.identity.subscriber.class">ASF\ContactBundle\Event\IdentityFormSubscriber</parameter>
+		
+    </parameters>
+
+    <services>
+        
+         <!-- Identity Entity Manager -->
+        <service id="asf_contact.identity.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.identity.entity.class%" />
+        </service>
+        
+        <!-- Form -->
+        <service id="asf_contact.form.factory.identity" class="%asf_contact.form.factory.class%">
+            <argument type="service" id="form.factory" />
+            <argument>%asf_contact.identity.form.name%</argument>
+            <argument>%asf_contact.identity.form.type%</argument>
+        </service>
+        
+        <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
+        	<argument type="service" id="asf_contact.identity.manager" />
+			<tag name="form.type" alias="identity_type" />
+		</service>
+		
+		<!-- Search Forms -->
+		<service id="asf_contact.form.type.search_identity" class="%asf_contact.form.type.search_identity.class%">
+        	<argument type="service" id="asf_contact.identity.manager" />
+            <tag name="form.type" alias="search_identity" />
+        </service>
+        
+        <!-- Form Subscribers and Listeners -->
+        <service id="asf_contact.form.identity.subscriber" class="%asf_contact.form.identity.subscriber.class%">
+        	<argument>%asf_contact.enable_address%</argument>
+        	<argument>%asf_contact.enable_contact_device%</argument>
+        	<tag name="kernel.event_subscriber" />
+        </service>
+        
+    </services>
+    
+</container>

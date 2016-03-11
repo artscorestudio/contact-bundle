@@ -9,42 +9,9 @@
     	<!-- Generic Entity Manager -->
     	<parameter key="asf_contact.entity.manager.class">ASF\ContactBundle\Entity\Manager\ASFContactEntityManager</parameter>
 		
-		<!-- Identity Manager -->
-		<parameter key="asf_contact.identity.entity.class">ASF\ContactBundle\Entity\Identity</parameter>
-
-		<!-- Organization Manager -->
-		<parameter key="asf_contact.organization.entity.class">ASF\ContactBundle\Entity\Organization</parameter>
+		<!-- Form Factory -->
+		<parameter key="asf_contact.form.factory.class">ASF\ContactBundle\Form\Factory\FormFactory</parameter>
 		
-		<!-- Person Manager -->
-		<parameter key="asf_contact.person.entity.class">ASF\ContactBundle\Entity\Person</parameter>
-		
-		<!-- Identity Organization Manager -->
-		<parameter key="asf_contact.identity_organization.entity.class">ASF\ContactBundle\Entity\IdentityOrganization</parameter>
-    	
     </parameters>
 
-    <services>
-        
-         <!-- Identity Entity Manager -->
-        <service id="asf_contact.identity.manager" class="%asf_contact.entity.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.identity.entity.class%" />
-        </service>
-        
-        <!-- Organization Entity Manager -->
-        <service id="asf_contact.organization.manager" class="%asf_contact.entity.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.organization.entity.class%" />
-        </service>
-        
-        <!-- Person Entity Manager -->
-        <service id="asf_contact.person.manager" class="%asf_contact.entity.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.person.entity.class%" />
-        </service>
-        
-        <!-- Identity Organization Entity Manager -->
-        <service id="asf_contact.identity_organization.manager" class="%asf_contact.entity.manager.class%">
-            <tag name="asf_core.manager" entity="%asf_contact.identity_organization.entity.class%" />
-        </service>
-        
-    </services>
-    
 </container>

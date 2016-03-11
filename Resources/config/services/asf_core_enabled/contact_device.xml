@@ -5,26 +5,68 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
 	<parameters>
+    	
+		<!-- ContactDevice Manager -->
+		<parameter key="asf_contact.contact_device.entity.class">ASF\ContactBundle\Entity\ContactDevice</parameter>
 		
-		<!-- ContactDevice -->
+		<!-- Identity ContactDevice Manager -->
+		<parameter key="asf_contact.identity_contact_device.entity.class">ASF\ContactBundle\Entity\IdentityContactDevice</parameter>
+		
+		<!-- EmailAddress Manager -->
+		<parameter key="asf_contact.email_address.entity.class">ASF\ContactBundle\Entity\EmailAddress</parameter>
+		
+		<!-- Phone Number Manager -->
+		<parameter key="asf_contact.phone_number.entity.class">ASF\ContactBundle\Entity\PhoneNumber</parameter>
+		
+		<!-- WebsiteAddress Manager -->
+		<parameter key="asf_contact.website_address.entity.class">ASF\ContactBundle\Entity\WebsiteAddress</parameter>
+    	
+    	<!-- ContactDevice Form -->
     	<parameter key="asf_contact.form.type.contact_device.class">ASF\ContactBundle\Form\Type\ContactDeviceType</parameter>
+    	
+    	<!-- Identity ContactDevice Form -->
     	<parameter key="asf_contact.form.type.identity_contact_device.class">ASF\ContactBundle\Form\Type\IdentityContactDeviceType</parameter>
     	
-    	<!-- EmailAddress -->
+    	<!-- EmailAddress Form -->
     	<parameter key="asf_contact.form.type.email_address.class">ASF\ContactBundle\Form\Type\EmailAddressType</parameter>
     	
-    	<!-- WebsiteAddress -->
+    	<!-- WebsiteAddress Form -->
     	<parameter key="asf_contact.form.type.website_address.class">ASF\ContactBundle\Form\Type\WebsiteAddressType</parameter>
     	
-    	<!-- PhoneNumber -->
+    	<!-- PhoneNumber Form -->
     	<parameter key="asf_contact.form.type.phone_number.class">ASF\ContactBundle\Form\Type\PhoneNumberType</parameter>
     	
     </parameters>
 
     <services>
         
-        <!-- ContactDevice Forms -->
-        <service id="asf_product.form.factory.contact_device" class="%asf_contact.form.factory.class%">
+        <!-- ContactDevice Entity Manager -->
+        <service id="asf_contact.contact_device.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.contact_device.entity.class%" />
+        </service>
+        
+        <!-- Identity ContactDevice Manager -->
+		<service id="asf_contact.identity_contact_device.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.identity_contact_device.entity.class%" />
+        </service>
+        
+        <!-- EmailAddress Entity Manager -->
+        <service id="asf_contact.email_address.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.email_address.entity.class%" />
+        </service>
+        
+        <!-- Phone Number Entity Manager -->
+        <service id="asf_contact.phone_number.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.phone_number.entity.class%" />
+        </service>
+		
+		<!-- WebsiteAddress Manager -->
+		<service id="asf_contact.website_address.manager" class="%asf_contact.entity.manager.class%">
+            <tag name="asf_core.manager" entity="%asf_contact.website_address.entity.class%" />
+        </service>
+		
+		<!-- ContactDevice Forms -->
+        <service id="asf_contact.form.factory.contact_device" class="%asf_contact.form.factory.class%">
             <argument type="service" id="form.factory" />
             <argument>%asf_contact.contact_device.form.name%</argument>
             <argument>%asf_contact.contact_device.form.type%</argument>
@@ -36,7 +78,7 @@
 		</service>
 		
 		<!-- IdentityContactDevice Forms -->
-		<service id="asf_product.form.factory.identity_contact_device" class="%asf_contact.form.factory.class%">
+		<service id="asf_contact.form.factory.identity_contact_device" class="%asf_contact.form.factory.class%">
             <argument type="service" id="form.factory" />
             <argument>%asf_contact.identity_contact_device.form.name%</argument>
             <argument>%asf_contact.identity_contact_device.form.type%</argument>
@@ -49,7 +91,7 @@
 		</service>
 		
 		<!-- EmailAddress Forms -->
-		<service id="asf_product.form.factory.email_address" class="%asf_contact.form.factory.class%">
+		<service id="asf_contact.form.factory.email_address" class="%asf_contact.form.factory.class%">
             <argument type="service" id="form.factory" />
             <argument>%asf_contact.email_address.form.name%</argument>
             <argument>%asf_contact.email_address.form.type%</argument>
@@ -61,7 +103,7 @@
 		</service>
 		
 		<!-- WebsiteAddress Froms -->
-		<service id="asf_product.form.factory.website_address" class="%asf_contact.form.factory.class%">
+		<service id="asf_contact.form.factory.website_address" class="%asf_contact.form.factory.class%">
             <argument type="service" id="form.factory" />
             <argument>%asf_contact.website_address.form.name%</argument>
             <argument>%asf_contact.website_address.form.type%</argument>
@@ -73,7 +115,7 @@
 		</service>
 		
 		<!-- PhoneNumber -->
-		<service id="asf_product.form.factory.phone_number" class="%asf_contact.form.factory.class%">
+		<service id="asf_contact.form.factory.phone_number" class="%asf_contact.form.factory.class%">
             <argument type="service" id="form.factory" />
             <argument>%asf_contact.phone_number.form.name%</argument>
             <argument>%asf_contact.phone_number.form.type%</argument>
@@ -83,7 +125,8 @@
         	<argument type="service" id="asf_contact.phone_number.manager" />
 			<tag name="form.type" alias="phone_number_type" />
 		</service>
-
+		
+        
     </services>
     
 </container>
