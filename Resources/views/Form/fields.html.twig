@@ -204,13 +204,13 @@
 {% endblock %}
 
 {# --------------------------------- Identity Form Type --------------------------------- #}
-{% block _person_errors %}
+{% block _person_type_errors %}
 {% spaceless %}
 	{{ block('form_errors')  }}
 {% endspaceless %}
 {% endblock %}
 
-{% block _person_widget %}
+{% block _person_type_widget %}
 {% spaceless %}
 
 	{{ form_errors(form) }}
@@ -250,7 +250,7 @@
 {% endspaceless %}
 {% endblock %}
 
-{% block _organization_widget %}
+{% block _organization_type_widget %}
 {% spaceless %}
 
 	<div class="row">

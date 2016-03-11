@@ -2,22 +2,21 @@
 
 {% trans_default_domain 'asf_contact' %}
 
-{% block asf_base_meta_title %}{{ 'Address book'|trans }}{% endblock %}
+{% block title %}{{ 'Address book'|trans }}{% endblock %}
 
-{% block page_title %}{{ 'Address book'|trans }}{% endblock %}
+{% block asf_contact_content %}
+    <h1>{{ 'Address book'|trans }}</h1>
 
-{% block asf_cmd_buttons %}
-<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ 'Add new contact'|trans }} <span class="caret"></span></button>
-<ul class="dropdown-menu" role="menu">
-	<li><a href="{{ path('asf_contact_identity_add', {type:'person'}) }}" title="{{ 'Add a person'|trans }}">{{ 'Add a person'|trans }}</a></li>
-	<li><a href="{{ path('asf_contact_identity_add', {type:'organisation'}) }}" title="{{ 'Add an organization'|trans }}">{{ 'Add an organization'|trans }}</a></li>
-</ul>
-{% endblock %}
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ 'Add new contact'|trans }} <span class="caret"></span></button>
+    <ul class="dropdown-menu" role="menu">
+    	<li><a href="{{ path('asf_contact_identity_add', {type:'person'}) }}" title="{{ 'Add a person'|trans }}">{{ 'Add a person'|trans }}</a></li>
+    	<li><a href="{{ path('asf_contact_identity_add', {type:'organisation'}) }}" title="{{ 'Add an organization'|trans }}">{{ 'Add an organization'|trans }}</a></li>
+    </ul>
 
-{% block content %}
-<div class="row">
-	<div class="col-xs-12">
-		{{ grid(grid, 'ASFContactBundle:Identity:grid-template.html.twig') }}
-	</div>
-</div>
+    <div class="row">
+    	<div class="col-xs-12">
+    		{{ grid(grid) }}
+    	</div>
+    </div>
+
 {% endblock %}

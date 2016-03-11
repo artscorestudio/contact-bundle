@@ -1,17 +1,5 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}
-	{% block asf_base_meta_title %}{% endblock %}
-{% endblock %}
-
 {% block body %}
-
-	{% block breadcrumbs_tree %}{% endblock %}
-
-	<h1>{% block page_title %}ASFContactBundle{% endblock %}</h1>
-
-	{% block asf_cmd_buttons %}{% endblock %}
-
-	{% block content %}{% endblock %}
-
-{% endblock body %}
+	{% block asf_contact_content %}{% endblock %}
+{% endblock %}
