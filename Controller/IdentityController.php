@@ -126,6 +126,9 @@ class IdentityController extends Controller
 	 */
 	public function addAction(Request $request, $type)
 	{
+		if ( false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') )
+			throw new AccessDeniedException();
+		
 		$view_options = array();
 		
 		if ('person' === $type) {
@@ -133,14 +136,18 @@ class IdentityController extends Controller
 			$view_options['view_title'] = $this->get('translator')->trans('Add a person', array(), 'asf_contact');
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'person'));
 			
-			$form = $this->createForm(PersonType::class, $contact);
+			$formFactory = $this->get('asf_contact.form.factory.person');
+			$form = $formFactory->createForm();
+			$form->setData($contact);
 			
 		} elseif ('organisation' === $type) {
 			$contact = $this->get('asf_contact.organization.manager')->createInstance();
 			$view_options['view_title'] = $this->get('translator')->trans('Add an organization', array(), 'asf_contact');
 			$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'organisation'));
 			
-			$form = $this->createForm(OrganizationType::class, $contact);
+			$formFactory = $this->get('asf_contact.form.factory.organization');
+			$form = $formFactory->createForm();
+			$form->setData($contact);
 		}
 		
 		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
@@ -185,9 +192,13 @@ class IdentityController extends Controller
 		$view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_edit', array('id' => $identity->getId()));
 		
 		if ( $identity instanceof $personClassName ) {
-			$form = $this->createForm(PersonType::class, $identity);
+			$formFactory = $this->get('asf_contact.form.factory.person');
+			$form = $formFactory->createForm();
+			$form->setData($identity);
 		} else {
-			$form = $this->createForm(OrganizationType::class, $identity);
+			$formFactory = $this->get('asf_contact.form.factory.organization');
+			$form = $formFactory->createForm();
+			$form->setData($identity);
 		}
 		
 		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
