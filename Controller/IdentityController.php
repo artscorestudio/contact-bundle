@@ -87,7 +87,7 @@ class IdentityController extends Controller
 				IdentityModel::STATE_ENABLED => $this->get('translator')->trans('Activated', array(), 'asf_contact'), 
 				IdentityModel::STATE_DISABLED => $this->get('translator')->trans('Deactivated', array(), 'asf_contact')
 			));
-		
+			
 		$editAction = new RowAction('btn_edit', 'asf_contact_identity_edit');
 		$editAction->setRouteParameters(array('id'));
 		$grid->addRowAction($editAction);
@@ -109,7 +109,7 @@ class IdentityController extends Controller
 			))->manipulateRenderCell(function($value, $row, $router){
 				if ( $value == IdentityModel::TYPE_PERSON )
 					return $this->get('translator')->trans('Person', array(), 'asf_contact');
-				elseif ( $value == IdentityModel::TYPE_ORGANISATION )
+				elseif ( $value == IdentityModel::TYPE_ORGANIZATION )
 					return $this->get('translator')->trans('Organization', array(), 'asf_contact');
 			});
 		
@@ -150,11 +150,10 @@ class IdentityController extends Controller
 			$form->setData($contact);
 		}
 		
-		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
+		$formHandler = new IdentityFormHandler($form, $request, $this->container);
 		
 		if (true === $formHandler->process()) {
 		    try {
-		        $this->get('asf_contact.identity.manager')->validateForm($contact);
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->persist($contact);
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
 		        
@@ -201,7 +200,7 @@ class IdentityController extends Controller
 			$form->setData($identity);
 		}
 		
-		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
+		$formHandler = new IdentityFormHandler($form, $request, $this->container);
 		
 		if ( true === $formHandler->process() ) {
 		    try {
@@ -231,11 +230,11 @@ class IdentityController extends Controller
 	public function deleteAction($id)
 	{
 		$identity = $this->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('id' => $id));
-			
-		if ( is_null($identity) && $this->get('asf_layout.flash_message') ) {
-			$this->get('asf_layout.flash_message')->danger($this->get('translator')->trans("The contact with the id %id% not found.", array('%id%', $id), 'asf_contact'));
-		} else {
-		    throw new \Exception($this->get('translator')->trans("The contact with the id %id% not found.", array('%id%', $id), 'asf_contact'));
+		
+		if ( is_null($identity) && $this->has('asf_layout.flash_message') ) {
+			$this->get('asf_layout.flash_message')->danger($this->get('translator')->trans("The contact with the id %id% not found.", array('%id%' => $id), 'asf_contact'));
+		} elseif (is_null($identity)) {
+		    throw new \Exception($this->get('translator')->trans("The contact with the id %id% not found.", array('%id%' => $id), 'asf_contact'));
 		}
 		
 		try {

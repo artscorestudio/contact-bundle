@@ -370,10 +370,13 @@ abstract class IdentityModel implements IdentityInterface
 	public function onPrePersist()
 	{
 		$this->createdAt = new \DateTime();
-		foreach($this->contactDevices as $contact_device) {
-		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
-		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
-		    }
+		$this->updatedAt = new \DateTime();
+		if ( is_array($this->contactDevices) ) {
+    		foreach($this->contactDevices as $contact_device) {
+    		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
+    		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
+    		    }
+    		}
 		}
 	}
 	
@@ -383,10 +386,12 @@ abstract class IdentityModel implements IdentityInterface
 	public function onPreUpdate()
 	{
 		$this->updatedAt = new \DateTime();
-		foreach($this->contactDevices as $contact_device) {
-		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
-		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
-		    }
+		if ( is_array($this->contactDevices) ) {
+    		foreach($this->contactDevices as $contact_device) {
+    		    if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
+    		        $this->emailCanonical = $contact_device->getContactDevice()->getValue();
+    		    }
+    		}
 		}
 	}
 

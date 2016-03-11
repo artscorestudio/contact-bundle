@@ -13,6 +13,7 @@ use ASF\CoreBundle\Form\Handler\FormHandlerModel;
 
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Identity Form Handler
@@ -31,9 +32,9 @@ class IdentityFormHandler extends FormHandlerModel
 	 * @param FormInterface      $form
 	 * @param ContainerInterface $container
 	 */
-	public function __construct(FormInterface $form, ContainerInterface $container)
+	public function __construct(FormInterface $form, Request $request, ContainerInterface $container)
 	{
-		parent::__construct($form);
+		parent::__construct($form, $request);
 		$this->container = $container;
 	}
 	
@@ -46,7 +47,7 @@ class IdentityFormHandler extends FormHandlerModel
 	{
 		try {
 			if ( is_null($model->getId()) ) {
-				$isIdentityExist = $this->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('name' => $model->getName()));
+				$isIdentityExist = $this->container->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('name' => $model->getName()));
 				if ( !is_null($isIdentityExist) ) {
 					$this->flashMessage->danger($this->translator->trans('A contact with that name already exists', array(), 'AsfContact'));
 					return false;
@@ -58,9 +59,14 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			
 			$this->updateIdentityOrganizationsRelations($model);
-			$this->updateIdentityAddressRelations($model);
-			$this->updateIdentityContactDeviceRelations($model);
 			
+			if ( $this->container->has('asf_contact.address.manager') ) {
+                $this->updateIdentityAddressRelations($model);
+			}
+			
+			if ( $this->container->has('asf_contact.contact_device.manager') ) {
+                $this->updateIdentityContactDeviceRelations($model);
+			}
 			return true;
 			
 		} catch (\Exception $e) {
@@ -78,6 +84,11 @@ class IdentityFormHandler extends FormHandlerModel
 	protected function updateIdentityOrganizationsRelations($model)
 	{
 		$orgas = array(); $form_identity_orgas = $model->getOrganizations();
+		
+		if ( is_null($form_identity_orgas) ) {
+		    return;
+		}
+		    
 		foreach($form_identity_orgas as $identity_orga) {
 			if ( !isset($orgas[$identity_orga->getOrganization()->getId()]) )
 				$orgas[$identity_orga->getOrganization()->getId()] = 1;
@@ -86,7 +97,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detecte relations removed
-		$relations = $this->get('asf_contact.identity_organization.manager')->getRepository()->findBy(array('member' => $model->getId()));
+		$relations = $this->container->get('asf_contact.identity_organization.manager')->getRepository()->findBy(array('member' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getOrganizations() as $identity_organization) {
@@ -95,7 +106,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->get('asf_contact.identity_organization.manager')->getEntityManager()->remove($relation);
+				$this->container->get('asf_contact.identity_organization.manager')->getEntityManager()->remove($relation);
 			}
 		}
 	
@@ -109,7 +120,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_organization->setMember($model);
-				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_organization);
+				$this->container->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_organization);
 			}
 		}
 	}
@@ -131,7 +142,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detect relations removed
-		$relations = $this->get('asf_contact.identity_address.manager')->getRepository()->findBy(array('identity' => $model->getId()));
+		$relations = $this->container->get('asf_contact.identity_address.manager')->getRepository()->findBy(array('identity' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getAddresses() as $identity_address) {
@@ -140,7 +151,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
+				$this->container->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
 			}
 		}
 		
@@ -154,7 +165,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_address->setIdentity($model);
-				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_address);
+				$this->container->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_address);
 			}
 		}
 	}
@@ -168,7 +179,7 @@ class IdentityFormHandler extends FormHandlerModel
 	{
 		foreach($model->getContactDevices() as $identity_contact_device) {
 			if ( is_null($identity_contact_device->getId()) ) {
-				$contact_device = $this->get('asf_contact.contact_device.manager')->createTypedInstance($identity_contact_device->getContactDevice()->getType());
+				$contact_device = $this->container->get('asf_contact.contact_device.manager')->createTypedInstance($identity_contact_device->getContactDevice()->getType());
 				$contact_device->setType($identity_contact_device->getContactDevice()->getType())
 					->setLabel($identity_contact_device->getContactDevice()->getLabel())
 					->setValue($identity_contact_device->getContactDevice()->getValue());
@@ -185,7 +196,7 @@ class IdentityFormHandler extends FormHandlerModel
 		}
 		
 		// Detecte relations removed
-		$relations = $this->get('asf_contact.identity_contact_device.manager')->getRepository()->findBy(array('identity' => $model->getId()));
+		$relations = $this->container->get('asf_contact.identity_contact_device.manager')->getRepository()->findBy(array('identity' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
 			foreach($model->getContactDevices() as $identity_contact_device) {
@@ -194,7 +205,7 @@ class IdentityFormHandler extends FormHandlerModel
 				}
 			}
 			if ( false === $found ) {
-				$this->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
+				$this->container->get('asf_contact.identity.manager')->getEntityManager()->remove($relation);
 			}
 		}
 		
@@ -208,7 +219,7 @@ class IdentityFormHandler extends FormHandlerModel
 			}
 			if ( false === $found ) {
 				$identity_contact_devices->setIdentity($model);
-				$this->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_contact_devices);
+				$this->container->get('asf_contact.identity.manager')->getEntityManager()->persist($identity_contact_devices);
 			}
 		}
 	}
