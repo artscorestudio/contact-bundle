@@ -60,6 +60,9 @@ class Configuration implements ConfigurationInterface
                 ->append($this->addRegionParameterNode())
                 ->append($this->addEmailAddressParameterNode())
                 ->append($this->addWebsiteAddressParameterNode())
+                ->append($this->addPhoneNumberParameterNode())
+                ->append($this->addGeolocParameterNode())
+                
             ->end();
         
         return $treeBuilder;
@@ -150,7 +153,7 @@ class Configuration implements ConfigurationInterface
 			    	->addDefaultsIfNotSet()
 			    	->children()
 				    	->scalarNode('type')
-				    		->defaultValue('ASF\ProductBundle\Form\Type\OrganizationType')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\OrganizationType')
 				    	->end()
 				    	->scalarNode('name')
 				    		->defaultValue('organization_type')
@@ -184,7 +187,7 @@ class Configuration implements ConfigurationInterface
 			    	->addDefaultsIfNotSet()
 			    	->children()
 				    	->scalarNode('type')
-				    		->defaultValue('ASF\ProductBundle\Form\Type\AddressType')
+				    		->defaultValue('ASF\ContactBundle\Form\Type\AddressType')
 				    	->end()
 				    	->scalarNode('name')
 				    		->defaultValue('address_type')
@@ -309,7 +312,7 @@ class Configuration implements ConfigurationInterface
     protected function addIdentityAddressParameterNode()
     {
     	$builder = new TreeBuilder();
-    	$node = $builder->root('identity_organization');
+    	$node = $builder->root('identity_address');
     
     	$node
 	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
@@ -343,7 +346,7 @@ class Configuration implements ConfigurationInterface
     protected function addProvinceParameterNode()
     {
     	$builder = new TreeBuilder();
-    	$node = $builder->root('identity_organization');
+    	$node = $builder->root('province');
     
     	$node
 	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
@@ -459,7 +462,7 @@ class Configuration implements ConfigurationInterface
 				    		->defaultValue('ASF\ContactBundle\Form\Type\EmailAddressType')
 				    	->end()
 				    		->scalarNode('name')
-				    	->defaultValue('region_type')
+				    	->defaultValue('email_address_type')
 				    	->end()
 				    	->arrayNode('validation_groups')
 				    		->prototype('scalar')->end()
@@ -471,5 +474,73 @@ class Configuration implements ConfigurationInterface
     	;
     
     	return $node;
+    }
+    
+    /**
+     * Add EmailAddress Entity Configuration
+     */
+    protected function addPhoneNumberParameterNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('phone_number');
+    
+        $node
+            ->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
+            ->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\PhoneNumberType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('phone_number_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    
+        return $node;
+    }
+    
+    /**
+     * Add EmailAddress Entity Configuration
+     */
+    protected function addGeolocParameterNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('geoloc');
+    
+        $node
+            ->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
+            ->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\GeolocType')
+                        ->end()
+                            ->scalarNode('name')
+                        ->defaultValue('geoloc_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    
+        return $node;
     }
 }
