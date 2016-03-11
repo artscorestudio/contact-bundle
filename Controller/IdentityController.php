@@ -203,9 +203,8 @@ class IdentityController extends Controller
 		
 		$formHandler = new IdentityFormHandler($form, $request, $this->get('container'));
 		
-		if ( $form->isSubmitted() && $form->isValid() ) {
+		if ( true === $formHandler->process() ) {
 		    try {
-		        $this->get('asf_contact.identity.manager')->handleForm($contact);
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
 		        if ( $this->has('asf_layout.flash_message') ) {
 		            $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been updated', array(), 'asf_contact'));
