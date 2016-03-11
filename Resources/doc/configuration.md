@@ -9,6 +9,54 @@ asf_contact:
     enable_contact_device: false
     enable_address: false
     form_theme: "ASFContactBundle:Form:fields.html.twig"
+    identity:
+        form:
+            type: "ASF\ContactBundle\Form\Type\IdentityType"
+            name: "identity_type"
+    person:
+        form:
+            type: "ASF\ContactBundle\Form\Type\PersonType"
+            name: "person_type"
+    organization:
+        form:
+            type: "ASF\ContactBundle\Form\Type\OrganizationType"
+            name: "organization_type"
+    identity_organization:
+        form:
+            type: "ASF\ContactBundle\Form\Type\IdentityOrganizationType"
+            name: "identity_organization_type"
+    address:
+        form:
+            type: "ASF\ContactBundle\Form\Type\AddressType"
+            name: "address_type"
+    contact_device:
+        form:
+            type: "ASF\ContactBundle\Form\Type\ContactDeviceType"
+            name: "contact_device_type"
+    identity_address:
+        form:
+            type: "ASF\ContactBundle\Form\Type\IdentityAddressType"
+            name: "identity_address_type"
+    identity_contact_device:
+        form:
+            type: "ASF\ContactBundle\Form\Type\IdentityContactDeviceType"
+            name: "identity_contact_device_type"
+    province:
+        form:
+            type: "ASF\ContactBundle\Form\Type\ProvinceType"
+            name: "province_type"
+    region:
+        form:
+            type: "ASF\ContactBundle\Form\Type\RegionType"
+            name: "rregion_type"
+    email_address:
+        form:
+            type: "ASF\ContactBundle\Form\Type\EmailAddressType"
+            name: "email_address_type"
+    website_address:
+        form:
+            type: "ASF\ContactBundle\Form\Type\WebsiteAddressType"
+            name: "website_address_type"
 ```
 
 ### *enable_core_support* parameter
@@ -48,3 +96,7 @@ No explanation needed for that. If you do not want to use addresses for identiti
 ### *form_theme* parameter
 
 Use embedded form theme based on select2/select2 Jquery plugin and Twitter Bootstrap.
+
+### Identity, and all other entities parameters
+
+This parameters is for configurate forms for entities. If you want to customize forms according  to your needs, you can override forms without rewrite all the controllers or forms. For further information, check documentation on [overriding forms](forms.md).
