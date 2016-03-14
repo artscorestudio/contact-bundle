@@ -1,0 +1,9 @@
+# Homepage
+Contact Manager: "Gestionnaire de contact"
+Welcome in the contact manager section of your Symfony Application.: "Bienvenue dans votre gestionnaire de contact."
+Manage your contacts: "Gérer vos contacts"
+'Manage addresses (optional)': "Gérer les adresses (optionnel)"
+'Manage contact devices (optional)': "Gérer les moyens de contact (optionnel)"
+contacts_text: Vous pouvez créer, mettre à jour ou supprimer des contacts à partir de la <a href="%url%" title="Contacts list">liste des contacts</a>.
+addresses_text: Si l'administrateur l'a activé, vous pouvez gérer les adresses des contacts. <a href="%url%" title="ASFContactBundle Documentation">Lire la documentation pour en savoir plus</a>.
+contact_devices_text: Si l'administrateur l'a activé, vous pouvez gérer les moyens de contact (téléphone, email, site Internet, etc.). <a href="%url%" title="ASFContactBundle Documentation">Lire la documentation pour en savoir plus</a>.
