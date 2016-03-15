@@ -88,7 +88,7 @@ class IdentityFormHandler extends FormHandlerModel
 		if ( is_null($form_identity_orgas) ) {
 		    return;
 		}
-		    
+		   
 		foreach($form_identity_orgas as $identity_orga) {
 			if ( !isset($orgas[$identity_orga->getOrganization()->getId()]) )
 				$orgas[$identity_orga->getOrganization()->getId()] = 1;

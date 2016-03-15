@@ -12,6 +12,21 @@
 		<!-- Form Factory -->
 		<parameter key="asf_contact.form.factory.class">ASF\ContactBundle\Form\Factory\FormFactory</parameter>
 		
+		<!-- Form -->
+		<parameter key="asf_contact.form.type.search_identity.class">ASF\ContactBundle\Form\Type\SearchIdentityType</parameter>
+		
     </parameters>
+
+	<services>
+		
+		<!-- Search Forms -->
+		<service id="asf_contact.form.type.search_identity" class="%asf_contact.form.type.search_identity.class%">
+        	<argument type="service" id="asf_contact.identity.manager" />
+        	<argument type="service" id="asf_contact.person.manager" />
+        	<argument type="service" id="asf_contact.organization.manager" />
+            <tag name="form.type" alias="search_identity" />
+        </service>
+		
+	</services>
 
 </container>

@@ -154,6 +154,7 @@ class IdentityController extends Controller
 		
 		if (true === $formHandler->process()) {
 		    try {
+		    	
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->persist($contact);
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
 		        
@@ -268,11 +269,18 @@ class IdentityController extends Controller
 		$search = array();
 		 
 		foreach($identities as $identity) {
-			$search[] = $identity->getName();
+			$search[] = array(
+	            'id' => $identity->getId(),
+	            'name' => $identity->getName(),
+	            'email' => $identity->getEmailCanonical()
+	        );
 		}
 		
 		$response = new Response();
-		$response->setContent(json_encode($search));
+		$response->setContent(json_encode(array(
+	        'total_count' => count($search),
+	        'items' => $search
+	    )));
 		 
 		return $response;
 	}
@@ -292,7 +300,7 @@ class IdentityController extends Controller
 	    foreach($identities as $identity) {
 	        $search[] = array(
 	            'id' => $identity->getId(),
-	            'username' => $identity->getName(),
+	            'name' => $identity->getName(),
 	            'email' => $identity->getEmailCanonical()
 	        );
 	    }

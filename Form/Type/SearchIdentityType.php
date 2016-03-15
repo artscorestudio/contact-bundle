@@ -18,6 +18,7 @@ use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
+use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
  * Search Identity Type
@@ -33,11 +34,23 @@ class SearchIdentityType extends AbstractType
     protected $identityManager;
     
     /**
+     * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+     */
+    protected $personManager;
+
+    /**
+     * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+     */
+    protected $organizationManager;
+    
+    /**
      * @param ASFContactEntityManagerInterface $identity_manager
      */
-    public function __construct(ASFContactEntityManagerInterface $identity_manager)
+    public function __construct(ASFContactEntityManagerInterface $identity_manager, ASFContactEntityManagerInterface $personManager, ASFContactEntityManagerInterface $organizationManager)
     {
         $this->identityManager = $identity_manager;
+        $this->personManager = $personManager;
+        $this->organizationManager = $organizationManager;
     }
     
     /**
@@ -46,7 +59,14 @@ class SearchIdentityType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $identity_transformer = new StringToIdentityTransformer($this->identityManager, $options['identity_type']);
+    	if ( $options['identity_type'] == IdentityModel::TYPE_PERSON ) {
+    		$identity_transformer = new StringToIdentityTransformer($this->personManager, $options['identity_type']);
+    	} elseif ( $options['identity_type'] == IdentityModel::TYPE_ORGANIZATION ) {
+    		$identity_transformer = new StringToIdentityTransformer($this->organizationManager, $options['identity_type']);
+    	} else {
+    		$identity_transformer = new StringToIdentityTransformer($this->identityManager, $options['identity_type']);
+    	}
+        
         $builder->addModelTransformer($identity_transformer);
     }
     
