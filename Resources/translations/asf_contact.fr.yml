@@ -1,7 +1,10 @@
 # Commons
-enable: Activer
+enabled: Activer
 disabled: Désactiver
 State: "Etat"
+Activated: "Activer"
+Deactivated: Désactiver
+Name: Nom
 
 # Homepage
 Contact Manager: "Gestionnaire de contact"
@@ -18,12 +21,15 @@ Add new contact: "Ajouter un contact"
 No contact in the address book.: Pas de contacts.
 Identity: Contact
 Choose an identity: "Choisir un contact"
+The contact has been added: Le conact a bien été créé
 
 # Person
 Add a person: "Ajouter une personne"
 First Name: "Prénom"
 Last Name: "Nom"
 List of organizations: Structure
+Person: Personne
 
 # Organization
 Add an organization: "Ajouter une structure"
+Organization: Organisation
