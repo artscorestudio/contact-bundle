@@ -67,7 +67,7 @@ class SearchIdentityType extends AbstractType
     		$identity_transformer = new StringToIdentityTransformer($this->identityManager, $options['identity_type']);
     	}
         
-        $builder->addModelTransformer($identity_transformer);
+        //$builder->addModelTransformer($identity_transformer);
     }
     
     /**
