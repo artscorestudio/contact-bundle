@@ -96,7 +96,7 @@ class IdentityFormHandler extends FormHandlerModel
 				$model->removeOrganization($identity_orga);
 		}
 		
-		// Detecte relations removed
+		// Detect relations removed
 		$relations = $this->container->get('asf_contact.identity_organization.manager')->getRepository()->findBy(array('member' => $model->getId()));
 		foreach($relations as $relation) {
 			$found = false;
