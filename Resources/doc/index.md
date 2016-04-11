@@ -97,12 +97,15 @@ class AcmeContactBundle extends Bundle
 
 For more information about bundle inheritance, check [Symfony documentation][4].
 
+### Step 6 : Create your entity classes
+
+The goal of this bundle is to manage contacts, so you have to create your contact entities according to your needs and persist it in a database. For a complete explanation of entities in ASFContactBundle, see [Using ASFContactBundle entities][7] in this documentation.
+
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
-* [Using ASFContactBundle entities][7]
 * [Overriding default ASFContactBundle Templates][5]
 * [Overriding Default ASFContactBundle Forms][6]
 * [ASFContactBundle Entity Repositories][8]
