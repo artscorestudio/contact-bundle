@@ -10,6 +10,8 @@ This version of the bundle requires :
 * [Symfony 2.8+ LTS / 3+][1]
 * [artscorestudio/APYDataGridBundle dev-master][11]
 
+> Warning ! artscorestudio/APYDataGridBundle is a fork from APY/APYDataGridBundle who is not compatible with symfony 3.0. You have to install it before artscoretudio/contact-bundle, as long as [APY/APYDataGridBundle][12] not support symfony 3.
+
 ### Translations
 
 If you wish to use default texts provided in this bundle, you have to make sure you have translator enabled in your config.
@@ -119,3 +121,4 @@ The following documents are available :
 [9]: entity-manager.md
 [10]: crud-system.md
 [11]: https://github.com/artscorestudio/APYDataGridBundle
+[12]: https://github.com/APY/APYDataGridBundle
