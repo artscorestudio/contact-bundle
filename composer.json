@@ -24,6 +24,25 @@
 	"require-dev" : {
         "artscorestudio/core-bundle": "^1.0@dev"
 	},
+	"repositories" : [{
+        "type": "package",
+        "package": {
+            "name": "artscorestudio/APYDataGridBundle",
+            "version": "dev-master",
+            "dist" : {
+                "url" : "https://github.com/artscorestudio/APYDataGridBundle/archive/master.zip",
+                "type" : "zip"
+            },
+            "source" : {
+                "url" : "https://github.com/artscorestudio/APYDataGridBundle.git",
+                "type" : "git",
+                "reference" : "dev-master"
+            },
+            "autoload": {
+                "psr-4": { "APY\\DataGridBundle\\": "" }
+            }
+        }
+    }],
 	"autoload" : {
 		"psr-4" : {
 			"ASF\\ContactBundle\\" : ""
