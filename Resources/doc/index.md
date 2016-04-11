@@ -101,6 +101,8 @@ For more information about bundle inheritance, check [Symfony documentation][4].
 
 The goal of this bundle is to manage contacts, so you have to create your contact entities according to your needs and persist it in a database. For a complete explanation of entities in ASFContactBundle, see [Using ASFContactBundle entities][7] in this documentation.
 
+> Don't forget, *ASFContactBundle* provides one abtract class *IdentityModel* that you can extends and who define a set of generic attributes like (name, email, etc.) but Person, Organization and IdentityOrganization entities must implements interfaces *PersonInterface*, *OrganizationInterface* and *IdentityOrganizationInterface* for a correct use of the bundle.
+
 #### 6.1 Create Identity entity in your bundle
 
 ```php
@@ -112,7 +114,7 @@ use ASF\ContactBundle\Model\Identity\IdentityModel;
 class Identity extends IdentityModel {}
 ```
 
-Don't forgeet to define entity for Doctinre ORM, see [Identity.rom.xml example file][13]
+Don't forget to define entity for Doctrine ORM, see [Identity.orm.xml][13] example file provided by this bundle.
 
 #### 6.2 Create Person entity in your bundle
 
@@ -125,6 +127,8 @@ use ASF\ContactBundle\Model\Person\PersonInterface;
 class Person extends Identity implements PersonInterface {}
 ```
 
+Don't forget to define entity for Doctrine ORM, see [Person.orm.xml][14] example file provided by this bundle.
+
 #### 6.3 Create Organization entity in your bundle
 
 ```php
@@ -135,6 +139,23 @@ use ASF\ContactBundle\Model\Person\OrganizationInterface;
 
 class Organization extends Identity implements OrganizationInterface {}
 ```
+
+Don't forget to define entity for Doctrine ORM, see [Organization.orm.xml][15] example file provided by this bundle.
+
+#### 6.3 Create IdentityOrganization entity in your bundle
+
+This entity represent the relation between an Identity and an Organization.
+
+```php
+// Acme/ContactBundle/Entity
+namespace Acme\ContactBundle\Entity;
+
+use ASF\ContactBundle\Model\Person\OrganizationInterface;
+
+class IdentityOrganization implements IdentityOrganizationInterface {}
+```
+
+Don't forget to define entity for Doctrine ORM, see [IdentityOrganization.orm.xml][16] example file provided by this bundle.
 
 ### Next Steps
 
@@ -161,3 +182,6 @@ The following documents are available :
 [11]: https://github.com/artscorestudio/APYDataGridBundle
 [12]: https://github.com/APY/APYDataGridBundle
 [13]: ../config/doctrine-mapping/Identity.orm.xml
+[14]: ../config/doctrine-mapping/Person.orm.xml
+[15]: ../config/doctrine-mapping/Organization.orm.xml
+[16]: ../config/doctrine-mapping/IdentityOrganization.orm.xml
