@@ -7,7 +7,7 @@ Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Sy
 ## Prerequisites
 
 This version of the bundle requires :
-* Symfony 2.8+ / 3+
+* [Symfony 2.8+ LTS / 3+][1]
 
 ### Translations
 
@@ -19,7 +19,7 @@ framework:
     translator: ~
 ```
 
-For more information about translations, check [Symfony documentation](https://symfony.com/doc/current/book/translation.html).
+For more information about translations, check [Symfony documentation][2].
 
 ## Installation
 
@@ -63,7 +63,7 @@ asf_contact:
     enable_contact_device: true  # Default : false. Enable ContactDevice entity
 ```
 
-For more information about the bundle configuration, check [ASFContactBundle Configuration Reference](configuration.md).
+For more information about the bundle configuration, check [ASFContactBundle Configuration Reference][3].
 
 ### Step 4 : Import ASFContactBundle routes
 
@@ -75,15 +75,15 @@ asf_contact:
 
 ### Step 5 : Extends the bundle
 
-ContactBundle is an *abstract* bundle. You have to create an inherited bundle :
+ContactBundle is an *abstract* bundle. You have to create an inherited bundle if you want to persist entities :
 
 ```php
 <?php
-namespace Acme\DemoBundle;
+namespace Acme\ContactBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AcmeDemoBundle extends Bundle
+class AcmeContactBundle extends Bundle
 {
 	public function getParent()
 	{
@@ -92,16 +92,26 @@ class AcmeDemoBundle extends Bundle
 }
 ```
 
-For more information about bundle inheritance, check [Symfony documentation](http://symfony.com/doc/current/cookbook/bundles/inheritance.html).
+For more information about bundle inheritance, check [Symfony documentation][4].
 
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
-* [Overriding default ASFContactBundle Templates](templates.md)
-* [Overriding Default ASFContactBundle Forms](forms.md)
-* [Bundle's entities](entities.md)
-* [Entity Repositories](repositories.md)
-* [ASFContactBundle embedded Entity Manager](entity-manager.md)
-* [ASFContactBundle Configuration Reference](configuration.md)
+* [Overriding default ASFContactBundle Templates][5]
+* [Overriding Default ASFContactBundle Forms][6]
+* [ASFContactBundle entities][7]
+* [ASFContactBundle Entity Repositories][8]
+* [ASFContactBundle embedded Entity Manager][9]
+* [ASFContactBundle Configuration Reference][3]
+
+[1]: http://symfony.com/download
+[2]: https://symfony.com/doc/current/book/translation.html
+[3]: configuration.md
+[4]: http://symfony.com/doc/current/cookbook/bundles/inheritance.html
+[5]: templates.md
+[6]: forms.md
+[7]: entities.md
+[8]: repositories.md
+[9]: entity-manager.md
