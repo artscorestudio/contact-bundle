@@ -23,8 +23,6 @@ use APY\DataGridBundle\Grid\Row;
 use Doctrine\ORM\QueryBuilder;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-use ASF\ContactBundle\Form\Type\PersonType;
-use ASF\ContactBundle\Form\Type\OrganizationType;
 use ASF\ContactBundle\Form\Handler\IdentityFormHandler;
 
 /**
@@ -44,9 +42,10 @@ class IdentityController extends Controller
 	{
 		// Initialize variables
 		$view_options = array();
+		$identityManager = $this->get('asf_contact.identity.manager');
 		
 		// Set Datagrid source
-		$source = new Entity($this->get('asf_contact.identity.manager')->getClassName());
+		$source = new Entity($identityManager->getClassName());
 		$tableAlias = $source->getTableAlias();
 		$source->manipulateQuery(function($query) use ($tableAlias){
 			$query instanceof QueryBuilder;
