@@ -8,6 +8,7 @@ Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Sy
 
 This version of the bundle requires :
 * [Symfony 2.8+ LTS / 3+][1]
+* [artscorestudio/APYDataGridBundle dev-master][11]
 
 ### Translations
 
@@ -105,6 +106,7 @@ The following documents are available :
 * [ASFContactBundle Entity Repositories][8]
 * [ASFContactBundle embedded Entity Manager][9]
 * [ASFContactBundle Configuration Reference][3]
+* [How to use ASFContactBundle CRUD System][10]
 
 [1]: http://symfony.com/download
 [2]: https://symfony.com/doc/current/book/translation.html
@@ -115,3 +117,5 @@ The following documents are available :
 [7]: entities.md
 [8]: repositories.md
 [9]: entity-manager.md
+[10]: crud-system.md
+[11]: https://github.com/artscorestudio/APYDataGridBundle
