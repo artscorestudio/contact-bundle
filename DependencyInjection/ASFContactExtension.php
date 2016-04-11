@@ -9,9 +9,8 @@
  */
 namespace ASF\ContactBundle\DependencyInjection;
 
-use Symfony\Component\DependencyInjection\Extension\Extension;
+use ASF\CoreBundle\DependencyInjection\ASFExtension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
-
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
@@ -21,26 +20,8 @@ use Symfony\Component\Config\FileLocator;
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class ASFContactExtension extends Extension implements PrependExtensionInterface
+class ASFContactExtension extends ASFExtension implements PrependExtensionInterface
 {
-	/**
-	 * Maps parameters in container
-	 *
-	 * @param ContainerBuilder $container
-	 * @param string $rootNodeName
-	 * @param array $config
-	 */
-	public function mapsParameters(ContainerBuilder $container, $rootNodeName, $config)
-	{
-		foreach($config as $name => $value) {
-			if ( is_array($value) ) {
-				$this->mapsParameters($container, $rootNodeName . '.' . $name, $value);
-			} else {
-				$container->setParameter($rootNodeName . '.' . $name, $value);
-			}
-		}
-	}
-	
     /**
      * {@inheritdoc}
      */
@@ -56,21 +37,18 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
 	    $container->setParameter('asf_contact.enable_address', $config['enable_address']);
 	    $container->setParameter('asf_contact.enable_contact_device', $config['enable_contact_device']);
 	    
-	    if ( isset($config['enable_core_support']) && $config['enable_core_support'] === true ) {
-	        
-	        $loader->load('services/asf_core_enabled/services.xml');
-	        $loader->load('services/asf_core_enabled/identity.xml');
-	        $loader->load('services/asf_core_enabled/person.xml');
-	        $loader->load('services/asf_core_enabled/organization.xml');
-	        
-	        if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
-	            $loader->load('services/asf_core_enabled/address.xml');
-	        }
-	         
-	        if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
-	            $loader->load('services/asf_core_enabled/contact_device.xml');
-	        }
-	    }
+        $loader->load('services/services.xml');
+        $loader->load('services/identity.xml');
+        $loader->load('services/person.xml');
+        $loader->load('services/organization.xml');
+        
+        if ( isset($config['enable_address']) && $config['enable_address'] === true ) {
+            $loader->load('services/address.xml');
+        }
+         
+        if ( isset($config['enable_contact_device']) && $config['enable_contact_device'] === true ) {
+            $loader->load('services/contact_device.xml');
+        }
     }
     
     /**
@@ -86,9 +64,6 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
     
         if ( $config['enable_select2_support'] == true )
             $this->configureTwigBundle($container, $config);
-    
-        if ( !array_key_exists('ASFCoreBundle', $bundles) && $config['enable_core_support'] == true )
-            throw new InvalidConfigurationException('You have enabled the support of ASFCoreBundle but it is not enabled. Install it or disable ASFCoreBundle support in ASFContactBundle.');
     }
     
     /**

@@ -101,7 +101,6 @@ class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 	protected function getDefaultConfig()
 	{
 	    return array(
-			'enable_core_support' => false,
 	    	'enable_select2_support' => false,
 	    	'enable_contact_device' => false,
 	    	'enable_address' => false,
