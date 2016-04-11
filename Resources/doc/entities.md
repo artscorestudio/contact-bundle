@@ -1,4 +1,4 @@
-# Bundle's entities
+# Using ASFContactBundle entities
 
 ContactBundle allows you to create and manage contacts like an address book. As you will see, there are not entities that can be directly persisted in this bundle. This bundle provides a model that you can use. So, apart of the class *IdentityModel*, the bundle provides interfaces.
 

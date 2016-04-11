@@ -102,9 +102,9 @@ For more information about bundle inheritance, check [Symfony documentation][4].
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
 
 The following documents are available :
+* [Using ASFContactBundle entities][7]
 * [Overriding default ASFContactBundle Templates][5]
 * [Overriding Default ASFContactBundle Forms][6]
-* [ASFContactBundle entities][7]
 * [ASFContactBundle Entity Repositories][8]
 * [ASFContactBundle embedded Entity Manager][9]
 * [ASFContactBundle Configuration Reference][3]
