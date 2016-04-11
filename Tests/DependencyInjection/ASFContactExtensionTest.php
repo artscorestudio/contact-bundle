@@ -11,7 +11,6 @@ namespace ASF\ContactBundle\Tests\DependencyInjection;
 
 use ASF\ContactBundle\DependencyInjection\ASFContactExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Bundle\AsseticBundle\DependencyInjection\AsseticExtension;
 use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 
 /**
@@ -66,14 +65,12 @@ class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 		 
 		if ( is_null($bundles) ) {
 			$bundles = $bundles = array(
-				'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
 				'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
 			);
 		}
 		 
 		if ( is_null($extensions) ) {
 			$extensions = array(
-				'assetic' => new AsseticExtension(),
 				'twig' => new TwigExtension()
 			);
 		}
