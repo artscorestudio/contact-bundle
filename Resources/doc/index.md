@@ -8,6 +8,7 @@ Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Sy
 
 This version of the bundle requires :
 * [Symfony 2.8+ LTS / 3+][1]
+* [artscorestudio/core-bundle dev-master][17]
 * [artscorestudio/APYDataGridBundle dev-master][11]
 
 > Warning ! artscorestudio/APYDataGridBundle is a fork from APY/APYDataGridBundle who is not compatible with symfony 3.0. You have to install it before artscoretudio/contact-bundle, as long as [APY/APYDataGridBundle][12] not support symfony 3.
@@ -36,7 +37,9 @@ $ composer require artscorestudio/contact-bundle "dev-master"
 
 Composer will install the bundle to your project's *vendor/artscorestudio/contact-bundle* directory. It also install dependencies. 
 
-### Step 2 : Enable the bundle
+### Step 2 : Enable the bundle and its dependencies
+
+Check the [artscorestudio/core-bundle][18] installation process and [artscorestudio/APYDataGridBundle][19] installation process for enable the dependencies in your applciation. Throught Composer, this dependencies are already downloaded in your application.
 
 Enable the bundle in the kernel :
 
@@ -193,3 +196,6 @@ The following documents are available :
 [14]: ../config/doctrine-mapping/Person.orm.xml
 [15]: ../config/doctrine-mapping/Organization.orm.xml
 [16]: ../config/doctrine-mapping/IdentityOrganization.orm.xml
+[17]: https://packagist.org/packages/artscorestudio/core-bundle
+[18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md#step-2--enable-the-bundle
+[19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md#step-2--enable-the-bundle
