@@ -11,7 +11,7 @@ namespace ASF\ContactBundle\Form\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 
 /**
  * Transform a string to a Province Entity
@@ -22,16 +22,16 @@ use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
 class StringToProvinceTransformer implements DataTransformerInterface
 {
 	/**
-	 * @var ASFContactEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	private $provinceManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface $province_manager
+	 * @param DefaultEntityManagerInterface $provinceManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $province_manager)
+	public function __construct(DefaultEntityManagerInterface $provinceManager)
 	{
-		$this->provinceManager = $province_manager;
+		$this->provinceManager = $provinceManager;
 	}
 	
 	/**

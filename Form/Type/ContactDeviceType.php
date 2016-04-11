@@ -13,8 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -29,16 +28,16 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class ContactDeviceType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $contactDeviceManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface  $contact_device_manager
+	 * @param DefaultEntityManagerInterface  $contactDeviceManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $contact_device_manager)
+	public function __construct(DefaultEntityManagerInterface $contactDeviceManager)
 	{
-		$this->contactDeviceManager = $contact_device_manager;
+		$this->contactDeviceManager = $contactDeviceManager;
 	}
 
 	/**

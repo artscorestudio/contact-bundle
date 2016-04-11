@@ -13,8 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
@@ -27,16 +26,16 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class AddressType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $addressManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface  $address_manager
+	 * @param DefaultEntityManagerInterface  $address_manager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $address_manager)
+	public function __construct(DefaultEntityManagerInterface $addressManager)
 	{
-		$this->addressManager = $address_manager;
+		$this->addressManager = $addressManager;
 	}
 
 	/**

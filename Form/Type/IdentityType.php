@@ -16,7 +16,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 
@@ -29,16 +29,16 @@ use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 class IdentityType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $identityManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface $identity_manager
+	 * @param DefaultEntityManagerInterface $identityManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $identity_manager)
+	public function __construct(DefaultEntityManagerInterface $identityManager)
 	{
-		$this->identityManager = $identity_manager;
+		$this->identityManager = $identityManager;
 	}
 	
 	/**

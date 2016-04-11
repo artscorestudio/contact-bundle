@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -28,23 +28,23 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 class IdentityContactDeviceType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $identityContactDeviceManager;
 	
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $identityManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface $identity_contact_device_manager
-	 * @param ASFContactEntityManagerInterface $identity_manager
+	 * @param DefaultEntityManagerInterface $identityContactDeviceManager
+	 * @param DefaultEntityManagerInterface $identityManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $identity_contact_device_manager, ASFContactEntityManagerInterface $identity_manager)
+	public function __construct(DefaultEntityManagerInterface $identityContactDeviceManager, DefaultEntityManagerInterface $identityManager)
 	{
-		$this->identityContactDeviceManager = $identity_contact_device_manager;
-		$this->identityManager = $identity_manager;
+		$this->identityContactDeviceManager = $identityContactDeviceManager;
+		$this->identityManager = $identityManager;
 	}
 	
 	/**

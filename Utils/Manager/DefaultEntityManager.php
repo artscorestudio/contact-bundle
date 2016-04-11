@@ -7,7 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace ASF\ContactBundle\Entity\Manager;
+namespace ASF\ContactBundle\Utils\Manager;
 
 use ASF\CoreBundle\Entity\Manager\ASFEntityManager;
 
@@ -17,4 +17,4 @@ use ASF\CoreBundle\Entity\Manager\ASFEntityManager;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ASFContactEntityManager extends ASFEntityManager implements ASFContactEntityManagerInterface {}
+class DefaultEntityManager extends ASFEntityManager implements DefaultEntityManagerInterface {}

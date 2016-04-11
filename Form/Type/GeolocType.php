@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -30,12 +30,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class GeolocType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $provinceManager;
 	
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $regionManager;
 	
@@ -45,14 +45,14 @@ class GeolocType extends AbstractType
 	protected $request;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface   $province_manager
-	 * @param ASFContactEntityManagerInterface   $region_manager
-	 * @param RequestStack                       $request
+	 * @param DefaultEntityManagerInterface   $provinceManager
+	 * @param DefaultEntityManagerInterface   $regionManager
+	 * @param RequestStack                    $request
 	 */
-	public function __construct(ASFContactEntityManagerInterface $province_manager, ASFContactEntityManagerInterface $region_manager, RequestStack $request)
+	public function __construct(DefaultEntityManagerInterface $provinceManager, DefaultEntityManagerInterface $regionManager, RequestStack $request)
 	{
-		$this->provinceManager = $province_manager;
-		$this->regionManager = $region_manager;
+		$this->provinceManager = $provinceManager;
+		$this->regionManager = $regionManager;
 		$this->request = $request;
 	}
 	

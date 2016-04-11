@@ -13,7 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 
@@ -26,14 +26,14 @@ use Doctrine\ORM\EntityRepository;
 class RegionType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $regionManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface $region_manager
+	 * @param DefaultEntityManagerInterface $regionManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $region_manager)
+	public function __construct(DefaultEntityManagerInterface $regionManager)
 	{
 		$this->regionManager = $region_manager;
 	}

@@ -9,7 +9,6 @@
  */
 namespace ASF\ContactBundle\Model\Identity;
 
-use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
 
@@ -18,7 +17,6 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
- * @GRID\Source(columns="name,emailCanonical,state,type,id,updatedAt,createdAt")
  */
 abstract class IdentityModel implements IdentityInterface
 {

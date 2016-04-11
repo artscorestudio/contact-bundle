@@ -13,7 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Entity\Manager\ASFContactEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 
@@ -26,16 +26,16 @@ use Doctrine\ORM\EntityRepository;
 class ProvinceType extends AbstractType
 {
 	/**
-	 * @var ASFContactEntityManagerInterface|ASFEntityManagerInterface
+	 * @var DefaultEntityManagerInterface
 	 */
 	protected $provinceManager;
 	
 	/**
-	 * @param ASFContactEntityManagerInterface|ASFEntityManagerInterface $province_manager
+	 * @param DefaultEntityManagerInterface $provinceManager
 	 */
-	public function __construct(ASFContactEntityManagerInterface $province_manager)
+	public function __construct(DefaultEntityManagerInterface $provinceManager)
 	{
-		$this->provinceManager = $province_manager;
+		$this->provinceManager = $provinceManager;
 	}
 	
 	/**
