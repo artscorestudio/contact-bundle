@@ -7,7 +7,7 @@ Deactivated: Désactiver
 Name: Nom
 
 # Homepage
-Contact Manager: "Gestionnaire de contact"
+Contacts Manager: "Gestionnaire de contact"
 Welcome in the contact manager section of your Symfony Application.: "Bienvenue dans votre gestionnaire de contact."
 Manage your contacts: "Gérer vos contacts"
 'Manage addresses (optional)': "Gérer les adresses (optionnel)"
