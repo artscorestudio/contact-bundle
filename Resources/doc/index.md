@@ -101,6 +101,41 @@ For more information about bundle inheritance, check [Symfony documentation][4].
 
 The goal of this bundle is to manage contacts, so you have to create your contact entities according to your needs and persist it in a database. For a complete explanation of entities in ASFContactBundle, see [Using ASFContactBundle entities][7] in this documentation.
 
+#### 6.1 Create Identity entity in your bundle
+
+```php
+// Acme/ContactBundle/Entity
+namespace Acme\ContactBundle\Entity;
+
+use ASF\ContactBundle\Model\Identity\IdentityModel;
+
+class Identity extends IdentityModel {}
+```
+
+Don't forgeet to define entity for Doctinre ORM, see [Identity.rom.xml example file][13]
+
+#### 6.2 Create Person entity in your bundle
+
+```php
+// Acme/ContactBundle/Entity
+namespace Acme\ContactBundle\Entity;
+
+use ASF\ContactBundle\Model\Person\PersonInterface;
+
+class Person extends Identity implements PersonInterface {}
+```
+
+#### 6.3 Create Organization entity in your bundle
+
+```php
+// Acme/ContactBundle/Entity
+namespace Acme\ContactBundle\Entity;
+
+use ASF\ContactBundle\Model\Person\OrganizationInterface;
+
+class Organization extends Identity implements OrganizationInterface {}
+```
+
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
@@ -125,3 +160,4 @@ The following documents are available :
 [10]: crud-system.md
 [11]: https://github.com/artscorestudio/APYDataGridBundle
 [12]: https://github.com/APY/APYDataGridBundle
+[13]: ../config/doctrine-mapping/Identity.orm.xml
