@@ -157,6 +157,14 @@ class IdentityOrganization implements IdentityOrganizationInterface {}
 
 Don't forget to define entity for Doctrine ORM, see [IdentityOrganization.orm.xml][16] example file provided by this bundle.
 
+#### 6.4 Update your schema
+
+You have to update your schema by fire the following command :
+
+```bash
+$ php bin/console doctrine:schema:update --force
+```
+
 ### Next Steps
 
 Now you have completed the basic installation and configuration of the ASFContactBundle, you are ready to learn about more advanced features and usages of the bundle.
