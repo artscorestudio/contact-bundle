@@ -9,9 +9,10 @@
  */
 namespace ASF\ContactBundle\Tests\DependencyInjection;
 
-use \Mockery as m; 
 use ASF\ContactBundle\DependencyInjection\ASFContactExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Bundle\AsseticBundle\DependencyInjection\AsseticExtension;
+use Symfony\Bundle\TwigBundle\DependencyInjection\TwigExtension;
 
 /**
  * Bundle's Extension Test Suites
@@ -60,36 +61,39 @@ class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function getContainer($bundles = null, $extensions = null)
 	{
-	    $bag = m::mock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
-	    $bag->shouldReceive('add');
-	    
-	    if ( is_null($bundles) ) {
-    	    $bundles = $bundles = array(
-    	        'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle',
-    	    );
-	    }
-	    
-	    if ( is_null($extensions) ) {
-    	    $extensions = array(
-    	        'twig' => array()
-    	    );
-	    }
-	    
-	    $container = m::mock('Symfony\Component\DependencyInjection\ContainerBuilder');
-	    $container->shouldReceive('getParameter')->with('kernel.bundles')->andReturn($bundles);
-	    $container->shouldReceive('getExtensions')->andReturn($extensions);
-	    $container->shouldReceive('getExtensionConfig')->andReturn(array());
-	    $container->shouldReceive('prependExtensionConfig');
-	    $container->shouldReceive('setAlias');
-	    
-	    $container->shouldReceive('addResource');
-	    $container->shouldReceive('setParameter');
-	    $container->shouldReceive('hasExtension')->andReturn(false);
-	    $container->shouldReceive('getParameterBag')->andReturn($bag);
-	    $container->shouldReceive('setDefinition');
-	    $container->shouldReceive('setParameter');
-	    
-	    return $container;
+	    $bag = $this->getMock('Symfony\Component\DependencyInjection\ParameterBag\ParameterBag');
+		$bag->method('add');
+		 
+		if ( is_null($bundles) ) {
+			$bundles = $bundles = array(
+				'AsseticBundle' => 'Symfony\Bundle\AsseticBundle\AsseticBundle',
+				'TwigBundle' => 'Symfony\Bundle\TwigBundle\TwigBundle'
+			);
+		}
+		 
+		if ( is_null($extensions) ) {
+			$extensions = array(
+				'assetic' => new AsseticExtension(),
+				'twig' => new TwigExtension()
+			);
+		}
+		
+		$container = $this->getMock('Symfony\Component\DependencyInjection\ContainerBuilder');
+		$container->method('getParameter')->with('kernel.bundles')->willReturn($bundles);
+		$container->method('getExtensions')->willReturn($extensions);
+
+		$container->method('getExtensionConfig')->willReturn(array());
+		$container->method('prependExtensionConfig');
+		$container->method('setAlias');
+		$container->method('getExtension');
+		 
+		$container->method('addResource');
+		$container->method('setParameter');
+		$container->method('getParameterBag')->willReturn($bag);
+		$container->method('setDefinition');
+		$container->method('setParameter');
+		
+		return $container;
 	}
 	
 	/**
@@ -100,7 +104,95 @@ class ASFContactExtensionTest extends \PHPUnit_Framework_TestCase
 	protected function getDefaultConfig()
 	{
 	    return array(
-	        
-	    );
+			'enable_core_support' => false,
+	    	'enable_select2_support' => false,
+	    	'enable_contact_device' => false,
+	    	'enable_address' => false,
+	    	'form_theme' => 'ASFContactBundle:Form:fields.html.twig',
+			'identity' => array(
+				'form' => array(
+					'type' => "ASF\ContactBundle\Form\Type\IdentityType",
+					'name' => 'identity_type'	
+				)
+			),
+    		'person' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\PersonType",
+    				'name' => 'person_type'
+    			)
+    		),
+    		'organization' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\OrganizationType",
+    				'name' => 'organization_type'
+    			)
+    		),
+    		'address' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\AddressType",
+    				'name' => 'address_type'
+    			)
+    		),
+    		'contact_device' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\ContactDeviceType",
+    				'name' => 'contact_device_type'
+    			)
+    		),
+    		'identity_contact_device' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType",
+    				'name' => 'identity_contact_device_type'
+    			)
+    		),
+    		'identity_organization' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType",
+    				'name' => 'identity_organization_type'
+    			)
+    		),
+    		'identity_address' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\IdentityAddressType",
+    				'name' => 'identity_address_type'
+    			)
+    		),
+    		'province' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\ProvinceType",
+    				'name' => 'province_type'
+    			)
+    		),
+    		'region' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\RegionType",
+    				'name' => 'region_type'
+    			)
+    		),
+    		'website_address' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType",
+    				'name' => 'website_address_type'
+    			)
+    		),
+    		'email_address' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\EmailAddressType",
+    				'name' => 'email_address_type'
+    			)
+    		),
+    		'phone_number' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\PhoneNumberType",
+    				'name' => 'phone_number_type'
+    			)
+    		),
+    		'geoloc' => array(
+    			'form' => array(
+    				'type' => "ASF\ContactBundle\Form\Type\GeolocType",
+    				'name' => 'geoloc_type'
+    			)
+    		)
+		);
 	}
 }
