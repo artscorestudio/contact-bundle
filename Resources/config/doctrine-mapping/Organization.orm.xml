@@ -13,6 +13,11 @@
                 <cascade-remove />
 	    	</cascade>
 		</one-to-many>
+		
+		<lifecycle-callbacks>
+	    	<lifecycle-callback type="preUpdate" method="onPreUpdate" />
+	    	<lifecycle-callback type="prePersist" method="onPrePersist" />
+	    </lifecycle-callbacks>
 
 	</entity>
 	
