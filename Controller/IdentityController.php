@@ -42,7 +42,7 @@ class IdentityController extends Controller
 	public function listAction()
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		// Initialize variables
 		$view_options = array();
@@ -130,7 +130,7 @@ class IdentityController extends Controller
 	public function addAction(Request $request, $type)
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		$view_options = array();
 		
@@ -187,7 +187,7 @@ class IdentityController extends Controller
 	public function editAction(Request $request, $id)
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		$view_options = array();
 		
@@ -237,7 +237,7 @@ class IdentityController extends Controller
 	public function deleteAction($id)
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		$identity = $this->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('id' => $id));
 		
@@ -274,7 +274,7 @@ class IdentityController extends Controller
 	public function ajaxRequestOrganizationAction(Request $request)
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		$term = $request->get('term');
 		$identities = $this->get('asf_contact.identity.manager')->getRepository()->findByNameContains($term, IdentityModel::TYPE_ORGANISATION);
@@ -306,7 +306,7 @@ class IdentityController extends Controller
 	public function ajaxRequestByNameAction(Request $request)
 	{
 		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
-			throw new AccessDeniedException();
+			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 	    $term = $request->get('name');
 	    $identities = $this->get('asf_contact.identity.manager')->getRepository()->findByNameContains($term);
