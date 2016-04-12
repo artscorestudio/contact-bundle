@@ -40,9 +40,9 @@ class PersonType extends AbstractType
     /**
      * @param DefaultEntityManagerInterface $personManager
      */
-    public function __construct(DefaultEntityManagerInterface $person_Manager, EventSubscriberInterface $subscriber)
+    public function __construct(DefaultEntityManagerInterface $personManager, EventSubscriberInterface $subscriber)
     {
-        $this->personManager = $person_manager;
+        $this->personManager = $personManager;
         $this->subscriber = $subscriber;
     }
     
