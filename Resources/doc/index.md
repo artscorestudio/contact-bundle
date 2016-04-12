@@ -132,7 +132,7 @@ class Person extends Identity implements PersonInterface {}
 
 Don't forget to define entity for Doctrine ORM, see [Person.orm.xml][14] example file provided by this bundle.
 
-> A Person Entity is composed by a firstname and a lastname and a Document Entity extended by Person entity is composed by a name attribute which cannot be null. So when you create/update a Person entity don't forget to fill in the name attribute with the firstname and lastname. [You can do it with preUpdate, prePersist Doctrine Events if you want][20]. 
+> A Person Entity is composed by a firstname and a lastname and a Document Entity extended by Person entity is composed by a name attribute which cannot be null. Similarly, the type attribute must be defined (Person or Organization). So when you create/update a Person entity don't forget to fill in the name attribute with the firstname and lastname and update the type attribute. [You can do it with preUpdate, prePersist Doctrine Events if you want][20]. 
 
 #### 6.3 Create Organization entity in your bundle
 
