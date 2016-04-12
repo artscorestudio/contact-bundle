@@ -34,5 +34,11 @@ Controllers generate messages for the success or errors during the process. This
 
 For further informations about Session Flash Messages, see [Symfony documentation : Session Management][2]
 
+## Forms
+
+The forms provided by ASFContactBundle use generic [Symfony Form Types][3] or if installed more advanced form features like form templating or specific types like *CollectionType* or *DatePickerType*, etc. based on Twitter Bootstrap with [artscorestudio/layout-bundle][4].
+
 [1]: entities.md
 [2]: http://symfony.com/doc/current/components/http_foundation/sessions.html
+[3]: http://symfony.com/doc/current/reference/forms/types.html
+[4]: https://packagist.org/packages/artscorestudio/layout-bundle
