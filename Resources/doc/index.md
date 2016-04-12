@@ -39,7 +39,7 @@ Composer will install the bundle to your project's *vendor/artscorestudio/contac
 
 ### Step 2 : Enable the bundle and its dependencies
 
-Check the [artscorestudio/core-bundle][18] installation process and [artscorestudio/APYDataGridBundle][19] installation process for enable the dependencies in your applciation. Throught Composer, this dependencies are already downloaded in your application.
+Check the [artscorestudio/core-bundle][18] installation process and [artscorestudio/APYDataGridBundle][19] installation process for enable the dependencies in your application.
 
 Enable the bundle in the kernel :
 
@@ -197,5 +197,5 @@ The following documents are available :
 [15]: ../config/doctrine-mapping/Organization.orm.xml
 [16]: ../config/doctrine-mapping/IdentityOrganization.orm.xml
 [17]: https://packagist.org/packages/artscorestudio/core-bundle
-[18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md#step-2--enable-the-bundle
-[19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md#step-2--enable-the-bundle
+[18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md
+[19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md
