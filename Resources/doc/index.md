@@ -132,6 +132,8 @@ class Person extends Identity implements PersonInterface {}
 
 Don't forget to define entity for Doctrine ORM, see [Person.orm.xml][14] example file provided by this bundle.
 
+> A Person Entity is composed by a firstname and a lastname and a Document Entity extended by Person entity is composed by a name attribute which cannot be null. So when you create/update a Person entity don't forget to fill in the name attribute with the firstname and lastname. [You can do it with preUpdate, prePersist Doctrine Events if you want][20]. 
+
 #### 6.3 Create Organization entity in your bundle
 
 ```php
@@ -199,3 +201,4 @@ The following documents are available :
 [17]: https://packagist.org/packages/artscorestudio/core-bundle
 [18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md
 [19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md
+[20]: http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html
