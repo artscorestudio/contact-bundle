@@ -22,6 +22,12 @@
 		"artscorestudio/datagrid-bundle": "dev-master",
 		"artscorestudio/core-bundle": "dev-master"
 	},
+	"require-dev": {
+	    "artscorestudio/layout-bundle": "dev-master"
+	},
+	"suggest": {
+	    "artscorestudio/layout-bundle": "A Symfony 2/3 bundle for manager User Interface."
+	},
 	"autoload" : {
 		"psr-4" : {
 			"ASF\\ContactBundle\\" : ""

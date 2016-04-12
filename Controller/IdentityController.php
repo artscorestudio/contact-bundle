@@ -163,6 +163,8 @@ class IdentityController extends Controller
 		        
 		        if ( $this->has('asf_layout.flash_message') ) {
 		            $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
+		        } else {
+		        	$this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
 		        }
 		        
 		        return $this->redirect($this->generateUrl('asf_contact_identity_edit', array('id' => $contact->getId())));
@@ -170,6 +172,8 @@ class IdentityController extends Controller
 		    } catch (\Exception $e) {
 		        if ( $this->has('asf_layout.flash_message') ) {
 		            $this->get('asf_layout.flash_message')->danger(sprintf('An error occurs when creating contact : %s', $e->getMessage()));
+		        } else {
+		        	$this->get('session')->getFlashBag()->add('error', sprintf('An error occurs when creating contact : %s', $e->getMessage()));
 		        }
 		    }
 		}
@@ -190,6 +194,7 @@ class IdentityController extends Controller
 			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 		$view_options = array();
+		$view_options['display_standalone_msg'] = !$this->has('asf_layout.flash_message') ? true : false;
 		
 		$identity = $this->get('asf_contact.identity.manager')->getRepository()->find($id);
 		$personClassName = $this->get('asf_contact.person.manager')->getClassName();
@@ -214,11 +219,15 @@ class IdentityController extends Controller
 		        $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
 		        if ( $this->has('asf_layout.flash_message') ) {
 		            $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been updated', array(), 'asf_contact'));
+		        } else {
+		        	$this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The contact has been updated', array(), 'asf_contact'));
 		        }
 		        
 		    } catch (\Exception $e) {
 		        if ( $this->has('asf_layout.flash_message') ) {
 		            $this->get('asf_layout.flash_message')->danger(sprintf('An error occurs when creating contact : %s', $e->getMessage()));
+		        } else {
+		        	$this->get('session')->getFlashBag()->add('error', sprintf('An error occurs when creating contact : %s', $e->getMessage()));
 		        }
 		    }
 		}
@@ -252,13 +261,15 @@ class IdentityController extends Controller
 			$this->get('asf_contact.identity.manager')->getEntityManager()->flush();
 			if ( $this->has('asf_layout.flash_message') ) {
                 $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been deleted succesfully', array(), 'asf_contact'));
-			}
+			} else {
+		       	$this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The contact has been deleted succesfully', array(), 'asf_contact'));
+		    }
 			
 		}  catch (\Exception $e) {
 		    if ( $this->has('asf_layout.flash_message') ) {
                 $this->get('asf_layout.flash_message')->danger(sprintf("An error occured : %s", $e->getMessage()));
 		    } else {
-		        $e->getMessage();
+		       	$this->get('session')->getFlashBag()->add('error', sprintf('An error occurs when creating contact : %s', $e->getMessage()));
 		    }
 		}
 		

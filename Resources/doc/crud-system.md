@@ -10,7 +10,7 @@ ASFContactBundle provides four principal views for :
 
 For these features, ASFContactBundle provides set of routes, controllers and views based on the bundle's default data model allowing you to quickly manage the contacts throught a User Interface (UI). However, it's up to you to add these different views in your application : throught hardcored menus or via dynamic menus, etc.
 
-Here is the route names :
+## Default routes provided for edit contacts
 
 | Route name | Parameters needed | Description |
 | ---------- | ----------------- | ----------- |
@@ -20,4 +20,19 @@ Here is the route names :
 | *asf_contact_identity_delete* | id: contact entity ID | For remove an existing contact. |
 
 
+## Flash Messages
+
+Controllers generate messages for the success or errors during the process. This messages are stored in Session Flash Messages. Displaying flash messages might look as follows :
+
+```twig
+{% for type, messages in app.session.flashbag.all() %}
+    {% for message in messages %}
+        <div class="flash-{{ type }}">{{ message }}</div>
+    {% endfor %}
+{% endfor %}
+``` 
+
+For further informations about Session Flash Messages, see [Symfony documentation : Session Management][2]
+
 [1]: entities.md
+[2]: http://symfony.com/doc/current/components/http_foundation/sessions.html
