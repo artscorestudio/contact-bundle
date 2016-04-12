@@ -62,26 +62,6 @@ class ASFContactExtension extends ASFExtension implements PrependExtensionInterf
         $configs = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration(new Configuration(), $configs);
     
-        if ( $config['enable_select2_support'] == true )
-            $this->configureTwigBundle($container, $config);
-    }
-    
-    /**
-     * Configure twig bundle
-     *
-     * @param ContainerBuilder $container
-     * @param array $config
-     */
-    public function configureTwigBundle(ContainerBuilder $container, array $config)
-    {
-        foreach(array_keys($container->getExtensions()) as $name) {
-            switch($name) {
-                case 'twig':
-                    $container->prependExtensionConfig($name, array(
-                        'form_themes' => array($config['form_theme'])
-                    ));
-                    break;
-            }
-        }
+        $this->configureTwigBundle($container, $config);
     }
 }

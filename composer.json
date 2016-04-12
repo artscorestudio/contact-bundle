@@ -14,33 +14,14 @@
 	],
 	"require" : {
 		"php": ">=5.5.9",
-	        "symfony/framework-bundle": "~2.8|~3.0",
-	        "symfony/twig-bundle": "~2.8|~3.0",
-	        "doctrine/orm": "~2.4|^2.5",
-	        "doctrine/doctrine-bundle": "^1.6",
-	        "twig/twig": "~1.10",
-	        "artscorestudio/APYDataGridBundle": "dev-master",
-	        "artscorestudio/core-bundle": "dev-master"
+		"symfony/framework-bundle": "~2.8|~3.0",
+		"symfony/twig-bundle": "~2.8|~3.0",
+		"doctrine/orm": "~2.4|^2.5",
+		"doctrine/doctrine-bundle": "^1.6",
+		"twig/twig": "~1.10",
+		"artscorestudio/APYDataGridBundle": "dev-master",
+		"artscorestudio/core-bundle": "dev-master"
 	},
-	"repositories" : [{
-        "type": "package",
-        "package": {
-            "name": "artscorestudio/APYDataGridBundle",
-            "version": "dev-master",
-            "dist" : {
-                "url" : "https://github.com/artscorestudio/APYDataGridBundle/archive/master.zip",
-                "type" : "zip"
-            },
-            "source" : {
-                "url" : "https://github.com/artscorestudio/APYDataGridBundle.git",
-                "type" : "git",
-                "reference" : "dev-master"
-            },
-            "autoload": {
-                "psr-4": { "APY\\DataGridBundle\\": "" }
-            }
-        }
-    }],
 	"autoload" : {
 		"psr-4" : {
 			"ASF\\ContactBundle\\" : ""

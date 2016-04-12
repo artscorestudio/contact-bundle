@@ -32,9 +32,6 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
-                ->booleanNode('enable_select2_support')
-                    ->defaultFalse()
-                ->end()
                 ->booleanNode('enable_contact_device')
                     ->defaultFalse()
                 ->end()
