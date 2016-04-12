@@ -24,6 +24,7 @@ use Doctrine\ORM\QueryBuilder;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\ContactBundle\Form\Handler\IdentityFormHandler;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Identity Controller
@@ -40,6 +41,9 @@ class IdentityController extends Controller
 	 */
 	public function listAction()
 	{
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+			throw new AccessDeniedException();
+		
 		// Initialize variables
 		$view_options = array();
 		$identityManager = $this->get('asf_contact.identity.manager');
@@ -125,7 +129,7 @@ class IdentityController extends Controller
 	 */
 	public function addAction(Request $request, $type)
 	{
-		if ( false === $this->get('security.authorization_checker')->isGranted('ROLE_ADMIN') )
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
 			throw new AccessDeniedException();
 		
 		$view_options = array();
@@ -182,6 +186,9 @@ class IdentityController extends Controller
 	 */
 	public function editAction(Request $request, $id)
 	{
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+			throw new AccessDeniedException();
+		
 		$view_options = array();
 		
 		$identity = $this->get('asf_contact.identity.manager')->getRepository()->find($id);
@@ -229,6 +236,9 @@ class IdentityController extends Controller
 	 */ 
 	public function deleteAction($id)
 	{
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+			throw new AccessDeniedException();
+		
 		$identity = $this->get('asf_contact.identity.manager')->getRepository()->findOneBy(array('id' => $id));
 		
 		if ( is_null($identity) && $this->has('asf_layout.flash_message') ) {
@@ -263,6 +273,9 @@ class IdentityController extends Controller
 	 */
 	public function ajaxRequestOrganizationAction(Request $request)
 	{
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+			throw new AccessDeniedException();
+		
 		$term = $request->get('term');
 		$identities = $this->get('asf_contact.identity.manager')->getRepository()->findByNameContains($term, IdentityModel::TYPE_ORGANISATION);
 		$search = array();
@@ -292,6 +305,9 @@ class IdentityController extends Controller
 	 */
 	public function ajaxRequestByNameAction(Request $request)
 	{
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+			throw new AccessDeniedException();
+		
 	    $term = $request->get('name');
 	    $identities = $this->get('asf_contact.identity.manager')->getRepository()->findByNameContains($term);
 	    $search = array();

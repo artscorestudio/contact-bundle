@@ -41,7 +41,10 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('form_theme')
                     ->defaultValue('ASFContactBundle:Form:fields.html.twig')
                 ->end()
-                
+                ->scalarNode('secure_controller')
+                	->info('Fill this value with the minimum ROLE required for access this controller.')
+                	->defaultFalse()
+                ->end()
                 ->append($this->addIdentityParameterNode())
                 ->append($this->addPersonParameterNode())
                 ->append($this->addOrganizationParameterNode())

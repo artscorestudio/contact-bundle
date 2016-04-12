@@ -33,6 +33,16 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers ASF\ContactBundle\DependencyInjection\Configuration
      */
+    public function testSecureControllerParameterInDefaultConfiguration()
+    {
+    	$processor = new Processor();
+    	$config = $processor->processConfiguration(new Configuration(), array());
+    	$this->assertFalse($config['secure_controller']);
+    }
+    
+    /**
+     * @covers ASF\ContactBundle\DependencyInjection\Configuration
+     */
     public function testEnableContactDeviceParameterInDefaultConfiguration()
     {
         $processor = new Processor();
