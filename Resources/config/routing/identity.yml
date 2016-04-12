@@ -3,11 +3,11 @@ asf_contact_identity_list:
     defaults: { _controller: "ASFContactBundle:Identity:list" }
     
 asf_contact_identity_add:
-    path: /list/add/{type}
+    path: /add/{type}
     defaults: { _controller: "ASFContactBundle:Identity:add" }
         
 asf_contact_identity_edit:
-    path: /list/edit/{id}
+    path: /edit/{id}
     defaults: { _controller: "ASFContactBundle:Identity:edit" }
     requirements:
         id: \d+
