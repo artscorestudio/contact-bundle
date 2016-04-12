@@ -13,12 +13,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use ASF\LayoutBundle\Form\Type\BaseCollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 /**
  * Identity Form Type
@@ -54,15 +53,26 @@ class IdentityType extends AbstractType
 				IdentityModel::STATE_ENABLED => 'Activated',
 				IdentityModel::STATE_DISABLED => 'Deactivated'
 			)
-		))
-		->add('organizations', BaseCollectionType::class, array(
-			'entry_type' => IdentityOrganizationType::class,
-			'label' => 'List of organizations',
-			'allow_add' => true,
-			'allow_delete' => true,
-			'prototype' => true,
-			'containerId' => 'organizations-collection'
 		));
+		
+		if ( class_exists('ASF\LayoutBundle\Form\Type\BaseCollectionType') ) {
+			$builder->add('organizations', BaseCollectionType::class, array(
+				'entry_type' => IdentityOrganizationType::class,
+				'label' => 'List of organizations',
+				'allow_add' => true,
+				'allow_delete' => true,
+				'prototype' => true,
+				'containerId' => 'organizations-collection'
+			));
+		} else {
+			$builder->add('organizations', CollectionType::class, array(
+				'entry_type' => IdentityOrganizationType::class,
+				'label' => 'List of organizations',
+				'allow_add' => true,
+				'allow_delete' => true,
+				'prototype' => true
+			));
+		}
 	}
 	
 	/**
