@@ -64,6 +64,27 @@ asf_contact:
     enable_address: true
 ```
 
+### Override container parameters
+
+All entities are stored in container parameters. This is for avoid to hardcoded entity names in classes. After the creation of your entities, you have to override container parameters. 
+
+```xml
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="asf_contact.address.entity.class">Acme\ContactBundle\Entity\Address</parameter>
+		<parameter key="asf_contact.province.entity.class">Acme\ContactBundle\Entity\Province</parameter>
+		<parameter key="asf_contact.region.entity.class">Acme\ContactBundle\Entity\Region</parameter>
+		<parameter key="asf_contact.identity_address.entity.class">Acme\ContactBundle\Entity\IdentityAddress</parameter>
+    </parameters>
+
+</container>
+```
+
 ## ContactDevice Entity
 
 ### ContactDevice Entity
@@ -135,6 +156,27 @@ After the update of your Doctrine schema, don't forget to enable ContactDevice e
 ```yaml
 asf_contact:
     enable_contact_device: true
+```
+
+### Override container parameters
+
+All entities are stored in container parameters. This is for avoid to hardcoded entity names in classes. After the creation of your entities, you have to override container parameters. 
+
+```xml
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="asf_contact.contact_device.entity.class">Acme\ContactBundle\Entity\ContactDevice</parameter>
+		<parameter key="asf_contact.email_address.entity.class">Acme\ContactBundle\Entity\EmailAddress</parameter>
+		<parameter key="asf_contact.phone_number.entity.class">Acme\ContactBundle\Entity\PhoneNumber</parameter>
+		<parameter key="asf_contact.website_address.entity.class">Acme\ContactBundle\Entity\WebsiteAddress</parameter>
+		<parameter key="asf_contact.identity_contact_device.entity.class">Acme\ContactBundle\Entity\IdentityContactDevice</parameter>
+
+</container>
 ```
 
 [1]: ../config/doctrine-mapping/Address.orm.xml

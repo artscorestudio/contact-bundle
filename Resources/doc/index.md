@@ -162,7 +162,29 @@ class IdentityOrganization implements IdentityOrganizationInterface {}
 
 Don't forget to define entity for Doctrine ORM, see [IdentityOrganization.orm.xml][16] example file provided by this bundle.
 
-#### 6.4 Update your schema
+#### 6.4 Update container arguments
+
+All entities are stored in container parameters. This is for avoid to hardcoded entity names in classes. After the creation of your entities, you have to override container parameters. 
+
+```xml
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+	<parameters>
+		<parameter key="asf_contact.identity.entity.class">Acme\ContactBundle\Entity\Identity</parameter>
+		<parameter key="asf_contact.organization.entity.class">Acme\ContactBundle\Entity\Organization</parameter>
+		<parameter key="asf_contact.person.entity.class">Acme\ContactBundle\Entity\Person</parameter>
+		<parameter key="asf_contact.identity_organization.entity.class">Acme\ContactBundle\Entity\IdentityOrganization</parameter>
+
+    </parameters>
+
+</container>
+```
+
+#### 6.5 Update your schema
 
 You have to update your schema by fire the following command :
 
