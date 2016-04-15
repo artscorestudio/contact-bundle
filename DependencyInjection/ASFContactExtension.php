@@ -37,6 +37,8 @@ class ASFContactExtension extends ASFExtension implements PrependExtensionInterf
 	    $container->setParameter('asf_contact.enable_address', $config['enable_address']);
 	    $container->setParameter('asf_contact.enable_contact_device', $config['enable_contact_device']);
 	    
+	    $container->setParameter('asf_contact.enable_asf_layout', $container->hasExtension('asf_layout'));
+	    
         $loader->load('services/services.xml');
         $loader->load('services/identity.xml');
         $loader->load('services/person.xml');

@@ -33,11 +33,17 @@ class IdentityType extends AbstractType
 	protected $identityManager;
 	
 	/**
+	 * @var boolean
+	 */
+	protected $asfLayoutEnabled;
+	
+	/**
 	 * @param DefaultEntityManagerInterface $identityManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $identityManager)
+	public function __construct(DefaultEntityManagerInterface $identityManager, $asfLayoutEnabled)
 	{
 		$this->identityManager = $identityManager;
+		$this->asfLayoutEnabled = $asfLayoutEnabled;
 	}
 	
 	/**
@@ -55,7 +61,7 @@ class IdentityType extends AbstractType
 			)
 		));
 		
-		if ( class_exists('ASF\LayoutBundle\Form\Type\BaseCollectionType') ) {
+		if ( $this->asfLayoutEnabled === true ) {
 			$builder->add('organizations', BaseCollectionType::class, array(
 				'entry_type' => IdentityOrganizationType::class,
 				'label' => 'List of organizations',

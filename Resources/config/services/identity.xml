@@ -33,6 +33,7 @@
         
         <service id="asf_contact.form.type.identity" class="%asf_contact.form.type.identity.class%">
         	<argument type="service" id="asf_contact.identity.manager" />
+        	<argument>%asf_contact.enable_asf_layout%</argument>
 			<tag name="form.type" alias="identity_type" />
 		</service>
 		
@@ -40,6 +41,7 @@
         <service id="asf_contact.form.identity.subscriber" class="%asf_contact.form.identity.subscriber.class%">
         	<argument>%asf_contact.enable_address%</argument>
         	<argument>%asf_contact.enable_contact_device%</argument>
+        	<argument>%asf_contact.enable_asf_layout%</argument>
         	<tag name="kernel.event_subscriber" />
         </service>
         

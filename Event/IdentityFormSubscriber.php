@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormEvent;
 use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 use ASF\ContactBundle\Form\Type\IdentityAddressType;
 use ASF\ContactBundle\Form\Type\IdentityContactDeviceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 /**
  * Identity Form Event Subscriber
@@ -36,13 +37,20 @@ class IdentityFormSubscriber implements EventSubscriberInterface
     protected $isContactDeviceEnabled;
     
     /**
-     * @param boolean $is_address_enabled
-     * @param boolean $is_contact_device_enabled
+     * @var boolean
      */
-    public function __construct($is_address_enabled, $is_contact_device_enabled)
+    protected $isAsfLayoutEnabled;
+    
+    /**
+     * @param boolean $isAddressEnabled
+     * @param boolean $isContactDeviceEnabled
+     * @param boolean $isAsfLayoutEnabled
+     */
+    public function __construct($isAddressEnabled, $isContactDeviceEnabled, $isAsfLayoutEnabled)
     {
-        $this->isAddressEnabled = $is_address_enabled;
-        $this->isContactDeviceEnabled = $is_contact_device_enabled;
+        $this->isAddressEnabled = $isAddressEnabled;
+        $this->isContactDeviceEnabled = $isContactDeviceEnabled;
+        $this->isAsfLayoutEnabled = $isAsfLayoutEnabled;
     }
     
     /**
@@ -66,26 +74,47 @@ class IdentityFormSubscriber implements EventSubscriberInterface
         $identity = $event->getData();
         
         if ( true === $this->isAddressEnabled ) {
-            $form->add('addresses', BaseCollectionType::class, array(
-    		    'entry_type' => IdentityAddressType::class,
-    		    'label' => 'Addresses list',
-    		    'allow_add' => true,
-    		    'allow_delete' => true,
-    		    'prototype' => true,
-    		    'containerId' => 'addresses-collection'
-    		));
+        	if ( $this->isAsfLayoutEnabled ) {
+	            $form->add('addresses', BaseCollectionType::class, array(
+	    		    'entry_type' => IdentityAddressType::class,
+	    		    'label' => 'Addresses list',
+	    		    'allow_add' => true,
+	    		    'allow_delete' => true,
+	    		    'prototype' => true,
+	    		    'containerId' => 'addresses-collection'
+	    		));
+        	} else {
+        		$form->add('addresses', CollectionType::class, array(
+        			'entry_type' => IdentityAddressType::class,
+        			'label' => 'Addresses list',
+        			'allow_add' => true,
+        			'allow_delete' => true,
+        			'prototype' => true
+        		));
+        	}
         }
         
         if ( true === $this->isContactDeviceEnabled ) {
-            $form->add('contactDevices', BaseCollectionType::class, array(
-                'entry_type' => IdentityContactDeviceType::class,
-                'label' => 'Contact device list',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'prototype' => true,
-                'mapped' => true,
-                'containerId' => 'contact-devices-collection'
-            ));
+        	if ( $this->isAsfLayoutEnabled ) {
+	            $form->add('contactDevices', BaseCollectionType::class, array(
+	                'entry_type' => IdentityContactDeviceType::class,
+	                'label' => 'Contact device list',
+	                'allow_add' => true,
+	                'allow_delete' => true,
+	                'prototype' => true,
+	                'mapped' => true,
+	                'containerId' => 'contact-devices-collection'
+	            ));
+        	} else {
+        		$form->add('contactDevices', CollectionType::class, array(
+       				'entry_type' => IdentityContactDeviceType::class,
+       				'label' => 'Contact device list',
+       				'allow_add' => true,
+       				'allow_delete' => true,
+       				'prototype' => true,
+       				'mapped' => true,
+        		));
+        	}
         }
     }
 }
