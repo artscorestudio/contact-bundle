@@ -35,7 +35,7 @@ class RegionType extends AbstractType
 	 */
 	public function __construct(DefaultEntityManagerInterface $regionManager)
 	{
-		$this->regionManager = $region_manager;
+		$this->regionManager = $regionManager;
 	}
 
 	/**
