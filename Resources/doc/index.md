@@ -181,6 +181,7 @@ The following documents are available :
 * [ASFContactBundle embedded Entity Manager][9]
 * [ASFContactBundle Configuration Reference][3]
 * [How to use ASFContactBundle CRUD System][10]
+* [How to use Address entity and ContactDevice Entity][21]
 
 [1]: http://symfony.com/download
 [2]: https://symfony.com/doc/current/book/translation.html
@@ -202,3 +203,4 @@ The following documents are available :
 [18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md
 [19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md
 [20]: http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html
+[21]: enable-extra-entities.md
