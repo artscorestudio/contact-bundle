@@ -31,7 +31,7 @@ class IdentityRepository extends EntityRepository
         $qb instanceof QueryBuilder;
 
         $qb->add('where', $qb->expr()->like('i.name', $qb->expr()->lower(':searched_term')))
-            ->setParameter('searched_term', $searched_term . '%');
+            ->setParameter(':searched_term', $searched_term . '%');
 
         return $qb->getQuery()->getResult();
     }

@@ -13,11 +13,10 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
+
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
@@ -29,20 +28,20 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class IdentityOrganizationType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $identityOrganizationManager;
 	
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $identityManager;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $identityOrganizationManager
-	 * @param DefaultEntityManagerInterface $identityManager
+	 * @param DefaultManagerInterface $identityOrganizationManager
+	 * @param DefaultManagerInterface $identityManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $identityOrganizationManager, DefaultEntityManagerInterface $identityManager)
+	public function __construct(DefaultManagerInterface $identityOrganizationManager, DefaultManagerInterface $identityManager)
 	{
 		$this->identityOrganizationManager = $identityOrganizationManager;
 		$this->identityManager = $identityManager;

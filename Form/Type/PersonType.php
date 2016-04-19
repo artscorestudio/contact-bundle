@@ -13,7 +13,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
+
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -26,7 +27,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class PersonType extends AbstractType
 {
     /**
-     * @var DefaultEntityManagerInterface
+     * @var DefaultManagerInterface
      */
     protected $personManager;
     
@@ -36,9 +37,10 @@ class PersonType extends AbstractType
     protected $subscriber;
     
     /**
-     * @param DefaultEntityManagerInterface $personManager
+     * @param DefaultManagerInterface  $personManager
+     * @param EventSubscriberInterface $subscriber
      */
-    public function __construct(DefaultEntityManagerInterface $personManager, EventSubscriberInterface $subscriber)
+    public function __construct(DefaultManagerInterface $personManager, EventSubscriberInterface $subscriber)
     {
         $this->personManager = $personManager;
         $this->subscriber = $subscriber;

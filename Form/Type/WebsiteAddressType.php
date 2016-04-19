@@ -13,9 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
-
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 /**
  * Website Address Form Type
@@ -26,14 +24,14 @@ use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 class WebsiteAddressType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $websiteAddressManager;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $websiteAddressManager
+	 * @param DefaultManagerInterface $websiteAddressManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $websiteAddressManager)
+	public function __construct(DefaultManagerInterface $websiteAddressManager)
 	{
 		$this->websiteAddressManager = $websiteAddressManager;
 	}

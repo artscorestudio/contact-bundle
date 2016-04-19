@@ -13,8 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 /**
  * Phone number Form Type
@@ -25,14 +24,14 @@ use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 class PhoneNumberType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $phoneNumberManager;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $phoneNumberManager
+	 * @param DefaultManagerInterface $phoneNumberManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $phoneNumberManager)
+	public function __construct(DefaultManagerInterface $phoneNumberManager)
 	{
 		$this->phoneNumberManager = $phoneNumberManager;
 	}

@@ -7,7 +7,7 @@
 	<parameters>
     	
     	<!-- Generic Entity Manager -->
-    	<parameter key="asf_contact.entity.manager.class">ASF\ContactBundle\Utils\Manager\DefaultEntityManager</parameter>
+    	<parameter key="asf_contact.default.manager.class">ASF\ContactBundle\Utils\Manager\DefaultManager</parameter>
 		
 		<!-- Form Factory -->
 		<parameter key="asf_contact.form.factory.class">ASF\ContactBundle\Form\Factory\FormFactory</parameter>

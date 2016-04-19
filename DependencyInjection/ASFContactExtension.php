@@ -36,9 +36,7 @@ class ASFContactExtension extends ASFExtension implements PrependExtensionInterf
 
 	    $container->setParameter('asf_contact.enable_address', $config['enable_address']);
 	    $container->setParameter('asf_contact.enable_contact_device', $config['enable_contact_device']);
-	    
-	    $container->setParameter('asf_contact.enable_asf_layout', $container->hasExtension('asf_layout'));
-	    
+
         $loader->load('services/services.xml');
         $loader->load('services/identity.xml');
         $loader->load('services/person.xml');
@@ -60,10 +58,12 @@ class ASFContactExtension extends ASFExtension implements PrependExtensionInterf
     public function prepend(ContainerBuilder $container)
     {
         $bundles = $container->getParameter('kernel.bundles');
-    
+        
         $configs = $container->getExtensionConfig($this->getAlias());
         $config = $this->processConfiguration(new Configuration(), $configs);
     
+        $container->setParameter('asf_contact.enable_asf_layout', $container->hasExtension('asf_layout'));
+
         $this->configureTwigBundle($container, $config);
     }
 }

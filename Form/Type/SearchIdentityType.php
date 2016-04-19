@@ -14,9 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 
@@ -29,24 +27,26 @@ use ASF\ContactBundle\Model\Identity\IdentityModel;
 class SearchIdentityType extends AbstractType
 {
     /**
-     * @var DefaultEntityManagerInterface
+     * @var DefaultManagerInterface
      */
     protected $identityManager;
     
     /**
-     * @var DefaultEntityManagerInterface
+     * @var DefaultManagerInterface
      */
     protected $personManager;
 
     /**
-     * @var DefaultEntityManagerInterface
+     * @var DefaultManagerInterface
      */
     protected $organizationManager;
     
     /**
-     * @param DefaultEntityManagerInterface
+     * @param DefaultManagerInterface $identityManager
+     * @param DefaultManagerInterface $personManager
+     * @param DefaultManagerInterface $organizationManager
      */
-    public function __construct(DefaultEntityManagerInterface $identityManager, DefaultEntityManagerInterface $personManager, DefaultEntityManagerInterface $organizationManager)
+    public function __construct(DefaultManagerInterface $identityManager, DefaultManagerInterface $personManager, DefaultManagerInterface $organizationManager)
     {
         $this->identityManager = $identityManager;
         $this->personManager = $personManager;

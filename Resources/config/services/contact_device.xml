@@ -7,6 +7,7 @@
 	<parameters>
     	
 		<!-- ContactDevice Manager -->
+		<parameter key="asf_contact.contact_device.manager.class">ASF\ContactBundle\Utils\Manager\ContactDeviceManager</parameter>
 		<parameter key="asf_contact.contact_device.entity.class">ASF\ContactBundle\Entity\ContactDevice</parameter>
 		
 		<!-- Identity ContactDevice Manager -->
@@ -41,27 +42,27 @@
     <services>
         
         <!-- ContactDevice Entity Manager -->
-        <service id="asf_contact.contact_device.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.contact_device.manager" class="%asf_contact.contact_device.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.contact_device.entity.class%" />
         </service>
         
         <!-- Identity ContactDevice Manager -->
-		<service id="asf_contact.identity_contact_device.manager" class="%asf_contact.entity.manager.class%">
+		<service id="asf_contact.identity_contact_device.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.identity_contact_device.entity.class%" />
         </service>
         
         <!-- EmailAddress Entity Manager -->
-        <service id="asf_contact.email_address.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.email_address.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.email_address.entity.class%" />
         </service>
         
         <!-- Phone Number Entity Manager -->
-        <service id="asf_contact.phone_number.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.phone_number.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.phone_number.entity.class%" />
         </service>
 		
 		<!-- WebsiteAddress Manager -->
-		<service id="asf_contact.website_address.manager" class="%asf_contact.entity.manager.class%">
+		<service id="asf_contact.website_address.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.website_address.entity.class%" />
         </service>
 		

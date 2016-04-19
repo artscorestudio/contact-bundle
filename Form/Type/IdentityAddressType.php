@@ -13,8 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
@@ -29,20 +28,20 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class IdentityAddressType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $identityAddressManager;
 	
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $identityManager;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $identityAddressManager
-	 * @param DefaultEntityManagerInterface $identityManager
+	 * @param DefaultManagerInterface $identityAddressManager
+	 * @param DefaultManagerInterface $identityManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $identityAddressManager, DefaultEntityManagerInterface $identityManager)
+	public function __construct(DefaultManagerInterface $identityAddressManager, DefaultManagerInterface $identityManager)
 	{
 		$this->identityAddressManager = $identityAddressManager;
 		$this->identityManager = $identityManager;

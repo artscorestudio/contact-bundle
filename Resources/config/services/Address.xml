@@ -38,22 +38,22 @@
     <services>
         
         <!-- Address Entity Manager -->
-        <service id="asf_contact.address.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.address.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.address.entity.class%" />
         </service>
         
         <!-- Identity Address Manager -->
-		<service id="asf_contact.identity_address.manager" class="%asf_contact.entity.manager.class%">
+		<service id="asf_contact.identity_address.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.identity_address.entity.class%" />
         </service>
         
         <!-- Province Manager -->
-		<service id="asf_contact.province.manager" class="%asf_contact.entity.manager.class%">
+		<service id="asf_contact.province.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.province.entity.class%" />
         </service>
 		
 		<!-- Region Manager -->
-		<service id="asf_contact.region.manager" class="%asf_contact.entity.manager.class%">
+		<service id="asf_contact.region.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.region.entity.class%" />
         </service>
 

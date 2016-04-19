@@ -9,15 +9,15 @@
  */
 namespace ASF\ContactBundle\Utils\Manager;
 
-use ASF\CoreBundle\Utils\Manager\ASFEntityManagerInterface;
+use ASF\CoreBundle\Utils\Manager\ASFManagerInterface;
 
 /**
- * Identity Manager Interface
+ * Generic Manager Interface for this bundle
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-interface DefaultEntityManagerInterface extends ASFEntityManagerInterface
+interface DefaultManagerInterface extends ASFManagerInterface
 {
     /**
      * Return the entity class name

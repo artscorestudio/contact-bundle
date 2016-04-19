@@ -14,12 +14,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\HttpFoundation\Request;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
-
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\HttpFoundation\RequestStack;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 /**
  * Geolocalization Form Type
@@ -30,12 +29,12 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class GeolocType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $provinceManager;
 	
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $regionManager;
 	
@@ -45,11 +44,11 @@ class GeolocType extends AbstractType
 	protected $request;
 	
 	/**
-	 * @param DefaultEntityManagerInterface   $provinceManager
-	 * @param DefaultEntityManagerInterface   $regionManager
-	 * @param RequestStack                    $request
+	 * @param DefaultManagerInterface   $provinceManager
+	 * @param DefaultManagerInterface   $regionManager
+	 * @param RequestStack              $request
 	 */
-	public function __construct(DefaultEntityManagerInterface $provinceManager, DefaultEntityManagerInterface $regionManager, RequestStack $request)
+	public function __construct(DefaultManagerInterface $provinceManager, DefaultManagerInterface $regionManager, RequestStack $request)
 	{
 		$this->provinceManager = $provinceManager;
 		$this->regionManager = $regionManager;

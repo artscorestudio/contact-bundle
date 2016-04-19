@@ -21,12 +21,12 @@
     <services>
 
         <!-- Organization Entity Manager -->
-        <service id="asf_contact.organization.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.organization.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.organization.entity.class%" />
         </service>
         
         <!-- Identity Organization Entity Manager -->
-        <service id="asf_contact.identity_organization.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.identity_organization.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.identity_organization.entity.class%" />
         </service>
         

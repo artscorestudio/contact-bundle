@@ -316,7 +316,7 @@ class IdentityController extends Controller
 	 */
 	public function ajaxRequestByNameAction(Request $request)
 	{
-		if ( $this->getParameter('asf_contact.secure_controller') !== false && false === $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) )
+		if ( $this->getParameter('asf_contact.secure_controller') !== false && $this->get('security.authorization_checker')->isGranted($this->getParameter('asf_contact.secure_controller')) === false )
 			throw new AccessDeniedException('You don\'t have permission to access this resource.');
 		
 	    $term = $request->get('name');

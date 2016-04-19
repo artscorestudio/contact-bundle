@@ -14,10 +14,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use ASF\LayoutBundle\Form\Type\BaseCollectionType;
+
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
  * Identity Form Type
@@ -28,7 +29,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class IdentityType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $identityManager;
 	
@@ -38,9 +39,10 @@ class IdentityType extends AbstractType
 	protected $asfLayoutEnabled;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $identityManager
+	 * @param DefaultManagerInterface $identityManager
+	 * @param boolean                 $asfLayoutEnabled
 	 */
-	public function __construct(DefaultEntityManagerInterface $identityManager, $asfLayoutEnabled)
+	public function __construct(DefaultManagerInterface $identityManager, $asfLayoutEnabled)
 	{
 		$this->identityManager = $identityManager;
 		$this->asfLayoutEnabled = $asfLayoutEnabled;

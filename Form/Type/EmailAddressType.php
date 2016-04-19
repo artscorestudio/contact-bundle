@@ -13,8 +13,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use ASF\CoreBundle\Model\Manager\ASFEntityManagerInterface;
 use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 /**
  * Email Address Form Type
@@ -25,14 +25,14 @@ use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
 class EmailAddressType extends AbstractType
 {
 	/**
-	 * @var DefaultEntityManagerInterface
+	 * @var DefaultManagerInterface
 	 */
 	protected $emailAddressManager;
 	
 	/**
-	 * @param DefaultEntityManagerInterface $email_address_manager
+	 * @param DefaultManagerInterface $emailAddressManager
 	 */
-	public function __construct(DefaultEntityManagerInterface $emailAddressManager)
+	public function __construct(DefaultManagerInterface $emailAddressManager)
 	{
 		$this->emailAddressManager = $emailAddressManager;
 	}

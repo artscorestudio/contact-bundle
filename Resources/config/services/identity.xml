@@ -20,7 +20,7 @@
     <services>
         
         <!-- Identity Entity Manager -->
-        <service id="asf_contact.identity.manager" class="%asf_contact.entity.manager.class%">
+        <service id="asf_contact.identity.manager" class="%asf_contact.default.manager.class%">
             <tag name="asf_core.manager" entity="%asf_contact.identity.entity.class%" />
         </service>
         
