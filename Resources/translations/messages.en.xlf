@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            
+            <!-- FORMS -->
+            <trans-unit id="asf.contact.form.label.search_a_contact">
+                <source>asf.contact.form.label.search_a_contact</source>
+                <target>Search a contact</target>
+            </trans-unit>
+            
+            <trans-unit id="asf.contact.form.placeholder.choose_a_contact">
+                <source>asf.contact.form.placeholder.choose_a_contact</source>
+                <target>Choose a contact</target>
+            </trans-unit>
+            
+        </body>
+    </file>
+</xliff>
