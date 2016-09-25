@@ -10,13 +10,8 @@
 namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
-use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
-use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
  * Search Identity Type
@@ -27,31 +22,16 @@ use ASF\ContactBundle\Model\Identity\IdentityModel;
 class SearchIdentityType extends AbstractType
 {
     /**
-     * @var string
-     */
-    protected $identityClassName;
-    
-    /**
-     * @param string $identityClassName
-     */
-    public function __construct($identityClassName)
-    {
-        $this->identityClassName = $identityClassName;
-    }
-    
-    /**
      * {@inheritDoc}
      * @see \Symfony\Component\Form\AbstractType::configureOptions()
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'asf.contact.identity.form.search_identity',
-            'class' => $this->identityClassName,
+            'label' => 'asf.contact.form.placeholder.search_a_contact',
             'choice_label' => 'name',
-            'placeholder' => 'asf.contact.identity.form.search_an_identity',
-            'attr' => array('class' => 'select2-entity-ajax', 'data-route' => 'asf_contact_ajax_request_identity_by_name'),
-            'identity_type' => null
+            'placeholder' => 'asf.contact.form.placeholder.choose_a_contact',
+            'attr' => array('class' => 'select2-entity-ajax', 'data-route' => 'asf_contact_ajax_request_identity_by_name')
         ));
     }
     
