@@ -35,6 +35,11 @@ class FormFactory implements FactoryInterface
     private $type;
     
     /**
+     * @var string
+     */
+    private $entityClassName;
+    
+    /**
      * @var array
      */
     private $validationGroups;
@@ -43,13 +48,15 @@ class FormFactory implements FactoryInterface
      * @param FormFactoryInterface $formFactory
      * @param string               $name
      * @param string               $type
+     * @param string               $entityClassName
      * @param array                $validationGroups
      */
-    public function __construct(FormFactoryInterface $formFactory, $name, $type, array $validationGroups = null)
+    public function __construct(FormFactoryInterface $formFactory, $name, $type, $entityClassName, array $validationGroups = null)
     {
         $this->formFactory = $formFactory;
         $this->name = $name;
         $this->type = $type;
+        $this->entityClassName = $entityClassName;
         $this->validationGroups = $validationGroups;
     }
     
@@ -59,8 +66,11 @@ class FormFactory implements FactoryInterface
      */
     public function createForm(array $options = array())
     {
-        $options = array_merge(array('validation_groups' => $this->validationGroups), $options);
-        
+        $options = array_merge(array(
+            'validation_groups' => $this->validationGroups,
+            'data_class' => $this->entityClassName
+        ), $options);
+
         return $this->formFactory->createNamed($this->name, $this->type, null, $options);
     }
 }

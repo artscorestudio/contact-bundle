@@ -12,9 +12,6 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
-
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -27,62 +24,62 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class PersonType extends AbstractType
 {
     /**
-     * @var DefaultManagerInterface
-     */
-    protected $personManager;
-    
-    /**
      * @var EventSubscriberInterface
      */
     protected $subscriber;
     
     /**
-     * @param DefaultManagerInterface  $personManager
      * @param EventSubscriberInterface $subscriber
      */
-    public function __construct(DefaultManagerInterface $personManager, EventSubscriberInterface $subscriber)
+    public function __construct(EventSubscriberInterface $subscriber)
     {
-        $this->personManager = $personManager;
         $this->subscriber = $subscriber;
     }
     
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('identity', IdentityType::class)
-			->add('firstName', TextType::class, array(
-				'label' => 'First Name',
-				'required' => true
-			))
-			->add('lastName', TextType::class, array(
-				'label' => 'Last Name',
-				'required' => true
-			));
-			
-		$builder->addEventSubscriber($this->subscriber);
-	}
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('identity', IdentityType::class)
+            ->add('firstName', TextType::class, array(
+                'label' => 'First Name',
+                'required' => true
+            ))
+            ->add('lastName', TextType::class, array(
+                'label' => 'Last Name',
+                'required' => true
+            ));
+            
+        $builder->addEventSubscriber($this->subscriber);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => $this->personManager->getClassName(),
-			'translation_domain' => 'asf_contact',
-			'is_new' => false
-		));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'person_type';
-	}
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'is_new' => false
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'person_type';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
 }

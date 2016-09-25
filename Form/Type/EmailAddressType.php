@@ -10,11 +10,6 @@
 namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultEntityManagerInterface;
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 
 /**
  * Email Address Form Type
@@ -24,45 +19,20 @@ use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
  */
 class EmailAddressType extends AbstractType
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $emailAddressManager;
-	
-	/**
-	 * @param DefaultManagerInterface $emailAddressManager
-	 */
-	public function __construct(DefaultManagerInterface $emailAddressManager)
-	{
-		$this->emailAddressManager = $emailAddressManager;
-	}
-
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-	    $resolver->setDefaults(array(
-	        'data_class' => $this->emailAddressManager->getClassName(),
-	        'translation_domain' => 'asf_contact',
-	    ));
-	}
-	
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'email_address_type';
+    }
+    
 	/**
 	 * @return string
 	 */
 	public function getName()
 	{
-		return 'email_address_type';
+		return $this->getBlockPrefix();
 	}
 }

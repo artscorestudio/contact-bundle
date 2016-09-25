@@ -41,18 +41,17 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('form_theme')
                     ->defaultValue('ASFContactBundle:Form:fields.html.twig')
                 ->end()
-                ->scalarNode('secure_controller')
-                	->info('Fill this value with the minimum ROLE required for access this controller.')
-                	->defaultFalse()
-                ->end()
+                
                 ->append($this->addIdentityParameterNode())
                 ->append($this->addPersonParameterNode())
                 ->append($this->addOrganizationParameterNode())
                 ->append($this->addAddressParameterNode())
                 ->append($this->addContactDeviceParameterNode())
+                
                 ->append($this->addIdentityContactDeviceParameterNode())
                 ->append($this->addIdentityOrganizationParameterNode())
                 ->append($this->addIdentityAddressParameterNode())
+                
                 ->append($this->addProvinceParameterNode())
                 ->append($this->addRegionParameterNode())
                 ->append($this->addEmailAddressParameterNode())
@@ -70,33 +69,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addIdentityParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('identity');
+        $builder = new TreeBuilder();
+        $node = $builder->root('identity');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-		    	->addDefaultsIfNotSet()
-		    	->children()
-			    	->scalarNode('type')
-			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityType')
-			    	->end()
-			    	->scalarNode('name')
-			    		->defaultValue('identity_type')
-			    	->end()
-			    	->arrayNode('validation_groups')
-			    		->prototype('scalar')->end()
-			    		->defaultValue(array("Default"))
-			    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                  ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\IdentityType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('identity_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -104,33 +106,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addPersonParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('person');
+        $builder = new TreeBuilder();
+        $node = $builder->root('person');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-		    	->addDefaultsIfNotSet()
-		    	->children()
-			    	->scalarNode('type')
-			    		->defaultValue('ASF\ContactBundle\Form\Type\PersonType')
-			    	->end()
-			    	->scalarNode('name')
-			    		->defaultValue('person_type')
-			    	->end()
-			    	->arrayNode('validation_groups')
-			    		->prototype('scalar')->end()
-			    		->defaultValue(array("Default"))
-			    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\PersonType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\PersonType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('person_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -138,33 +143,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addOrganizationParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('organization');
+        $builder = new TreeBuilder();
+        $node = $builder->root('organization');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\OrganizationType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('organization_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\OrganizationType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\OrganizationType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('organization_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -172,33 +180,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addAddressParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('address');
+        $builder = new TreeBuilder();
+        $node = $builder->root('address');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\AddressType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('address_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-				    ->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\AddressType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\AddressType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('address_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -206,33 +217,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addContactDeviceParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('contact_device');
+        $builder = new TreeBuilder();
+        $node = $builder->root('contact_device');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\ContactDeviceType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('contact_device_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\ContactDeviceType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\ContactDeviceType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('contact_device_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -240,33 +254,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addIdentityContactDeviceParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('identity_contact_device');
+        $builder = new TreeBuilder();
+        $node = $builder->root('identity_contact_device');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-		    	->addDefaultsIfNotSet()
-		    	->children()
-			    	->scalarNode('type')
-			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityContactDeviceType')
-			    	->end()
-			    	->scalarNode('name')
-			    		->defaultValue('identity_contact_device_type')
-			    	->end()
-			    	->arrayNode('validation_groups')
-			    		->prototype('scalar')->end()
-			    		->defaultValue(array("Default"))
-			    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityContactDeviceType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\IdentityContactDeviceType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('identity_contact_device_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -274,33 +291,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addIdentityOrganizationParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('identity_organization');
+        $builder = new TreeBuilder();
+        $node = $builder->root('identity_organization');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-		    	->addDefaultsIfNotSet()
-		    	->children()
-			    	->scalarNode('type')
-			    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityOrganizationType')
-			    	->end()
-			    	->scalarNode('name')
-			    		->defaultValue('identity_organization_type')
-			    	->end()
-			    	->arrayNode('validation_groups')
-			    		->prototype('scalar')->end()
-			    		->defaultValue(array("Default"))
-			    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
-    	
-    	return $node;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityOrganizationType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\IdentityOrganizationType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('identity_organization_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+        
+        return $node;
     }
     
     /**
@@ -308,33 +328,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addIdentityAddressParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('identity_address');
+        $builder = new TreeBuilder();
+        $node = $builder->root('identity_address');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\IdentityAddressType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('identity_address_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-				    ->end()
-		    	->end()
-	    	->end()
-    	;
-    	 
-    	return $node;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\IdentityAddressType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\IdentityAddressType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('identity_address_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+         
+        return $node;
     }
     
     /**
@@ -342,33 +365,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addProvinceParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('province');
+        $builder = new TreeBuilder();
+        $node = $builder->root('province');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\ProvinceType')
-				    	->end()
-				    		->scalarNode('name')
-				    	->defaultValue('province_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\ProvinceType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\ProvinceType')
+                        ->end()
+                            ->scalarNode('name')
+                        ->defaultValue('province_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -376,33 +402,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addRegionParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('region');
+        $builder = new TreeBuilder();
+        $node = $builder->root('region');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\RegionType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('region_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-				    ->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\RegionType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\RegionType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('region_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -410,33 +439,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addWebsiteAddressParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('website_address');
+        $builder = new TreeBuilder();
+        $node = $builder->root('website_address');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\WebsiteAddressType')
-				    	->end()
-				    	->scalarNode('name')
-				    		->defaultValue('website_address_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\WebsiteAddressType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\WebsiteAddressType')
+                        ->end()
+                        ->scalarNode('name')
+                            ->defaultValue('website_address_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -444,33 +476,36 @@ class Configuration implements ConfigurationInterface
      */
     protected function addEmailAddressParameterNode()
     {
-    	$builder = new TreeBuilder();
-    	$node = $builder->root('email_address');
+        $builder = new TreeBuilder();
+        $node = $builder->root('email_address');
     
-    	$node
-	    	->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
-	    	->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
-	    	->addDefaultsIfNotSet()
-	    	->children()
-		    	->arrayNode('form')
-			    	->addDefaultsIfNotSet()
-			    	->children()
-				    	->scalarNode('type')
-				    		->defaultValue('ASF\ContactBundle\Form\Type\EmailAddressType')
-				    	->end()
-				    		->scalarNode('name')
-				    	->defaultValue('email_address_type')
-				    	->end()
-				    	->arrayNode('validation_groups')
-				    		->prototype('scalar')->end()
-				    		->defaultValue(array("Default"))
-				    	->end()
-			    	->end()
-		    	->end()
-	    	->end()
-    	;
+        $node
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\EmailAddressType")))
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
+                ->arrayNode('form')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('type')
+                            ->defaultValue('ASF\ContactBundle\Form\Type\EmailAddressType')
+                        ->end()
+                            ->scalarNode('name')
+                        ->defaultValue('email_address_type')
+                        ->end()
+                        ->arrayNode('validation_groups')
+                            ->prototype('scalar')->end()
+                            ->defaultValue(array("Default"))
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     
-    	return $node;
+        return $node;
     }
     
     /**
@@ -482,10 +517,13 @@ class Configuration implements ConfigurationInterface
         $node = $builder->root('phone_number');
     
         $node
-            ->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
-            ->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\PhoneNumberType")))
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
                 ->arrayNode('form')
                     ->addDefaultsIfNotSet()
                     ->children()
@@ -516,10 +554,13 @@ class Configuration implements ConfigurationInterface
         $node = $builder->root('geoloc');
     
         $node
-            ->treatTrueLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
-            ->treatFalseLike(array('form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
+            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
+            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
             ->addDefaultsIfNotSet()
             ->children()
+                ->scalarNode('entity')
+                    ->defaultNull()
+                ->end()
                 ->arrayNode('form')
                     ->addDefaultsIfNotSet()
                     ->children()

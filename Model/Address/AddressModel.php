@@ -9,6 +9,9 @@
  */
 namespace ASF\ContactBundle\Model\Address;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -16,67 +19,113 @@ use Doctrine\Common\Collections\ArrayCollection;
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
+ * @ORM\Entity(repositoryClass="ASF\ContactBundle\Repository\AddressRepository")
+ * @ORM\Table(name="asf_contact_address")
+ * @ORM\HasLifecycleCallbacks
  */
 abstract class AddressModel implements AddressInterface
 {
-	/**
-	 * @var string
-	 */
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @GRID\Column(visible=false)
+     * 
+     * @var number
+     */
 	protected $id;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=false)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.line1", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $line1;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.line2", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $line2;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.line3", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $line3;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.zip_code", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $zipCode;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.city", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $city;
 	
 	/**
-	 * @var string
+     * @ORM\ManyToOne(targetEntity="Province", cascade={"persist"})
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
+     * 
+	 * @var \ASF\ContactBundle\Model\Address\ProvinceInterface
 	 */
 	protected $province;
 	
 	/**
-	 * @var \ASF\ContactBundle\Entity\Region
+     * @ORM\ManyToOne(targetEntity="Region", cascade={"persist"})
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * 
+	 * @var \ASF\ContactBundle\Model\Address\RegionInterface
 	 */
 	protected $region;
 	
 	/**
-	 * @var string
-	 */
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\NotBlank()
+     * @GRID\Column(title="asf.contact.address.country", defaultOperator="like", operatorsVisible=false)
+     * 
+     * @var string
+     */
 	protected $country;
 	
 	/**
+	 * @ORM\Column(type="float", nullable=true)
+	 * @GRID\Column(title="asf.contact.address.latitude", defaultOperator="like", operatorsVisible=false)
+	 * 
 	 * @var float
 	 */
 	protected $latitude;
 	
 	/**
+	 * @ORM\Column(type="float", nullable=true)
+	 * @GRID\Column(title="asf.contact.address.longitude", defaultOperator="like", operatorsVisible=false)
+	 * 
 	 * @var float
 	 */
 	protected $longitude;
 	
 	/**
-	 * @var ArrayCollection
-	 */
+     * @ORM\OneToMany(targetEntity="IdentityAddress", mappedBy="address", cascade={"persist,"remove"})
+     * 
+     * @var ArrayCollection
+     */
 	protected $identities; 
 	
 	public function __construct()

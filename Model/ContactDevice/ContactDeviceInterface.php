@@ -18,9 +18,45 @@ namespace ASF\ContactBundle\Model\ContactDevice;
 interface ContactDeviceInterface
 {
 	/**
-	 * Return identities linked to this contact device
-	 * 
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getIdentities();
+     * @return number
+     */
+    public function getId();
+    
+    /**
+     * @return string
+     */
+    public function getLabel();
+    
+    /**
+     * @param string $label
+     * @return \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface
+     */
+    public function setLabel($label);
+    
+    /**
+     * @return string
+     */
+    public function getValue();
+    
+    /**
+     * @param string $value
+     * @return \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface
+     */
+    public function setValue($value);
+    
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getIdentities();
+    
+    /**
+     * @return string
+     */
+    public function getType();
+    
+    /**
+     * @param string $type
+     * @return \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface
+     */
+    public function setType($type);
 }

@@ -12,9 +12,6 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
-
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -27,57 +24,57 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class OrganizationType extends AbstractType
 {
     /**
-     * @var DefaultManagerInterface
-     */
-    protected $organizationManager;
-    
-    /**
      * @var EventSubscriberInterface
      */
     protected $subscriber;
     
     /**
-     * @param DefaultManagerInterface $organizationManager
      * EventSubscriberInterface       $subscriber
      */
-    public function __construct(DefaultManagerInterface $organizationManager, EventSubscriberInterface $subscriber)
+    public function __construct(EventSubscriberInterface $subscriber)
     {
-        $this->organizationManager = $organizationManager;
         $this->subscriber = $subscriber;
     }
     
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
         $builder->add('identity', IdentityType::class)
             ->add('name', TextType::class, array(
                 'label' => 'Name',
             ));
-			
+            
         $builder->addEventSubscriber($this->subscriber);
-	}
+    }
 
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => $this->organizationManager->getClassName(),
-			'translation_domain' => 'cd31_contact',
-			'is_new' => false
-		));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'organization_type';
-	}
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'is_new' => false
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'organization_type';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
 }

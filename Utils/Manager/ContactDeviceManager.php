@@ -10,6 +10,7 @@
 namespace ASF\ContactBundle\Utils\Manager;
 
 use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Contact Device Entity Manager for this bundle
@@ -17,52 +18,85 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
  */
-class ContactDeviceManager extends DefaultManager implements DefaultManagerInterface
+class ContactDeviceManager
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $emailAddressManager;
-	
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $phoneNumberManager;
-	
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $websiteAddressManager;
-	
-	/**
-	 * @param DefaultManagerInterface $emailAddressManager
-	 * @param DefaultManagerInterface $phoneNumberManager
-	 * @param DefaultManagerInterface $websiteAddressManager
-	 */
-	public function __construct(DefaultManagerInterface $emailAddressManager, DefaultManagerInterface $phoneNumberManager, DefaultManagerInterface $websiteAddressManager)
-	{
-		$this->emailAddressManager = $emailAddressManager;
-		$this->phoneNumberManager = $phoneNumberManager;
-		$this->websiteAddressManager = $websiteAddressManager;
-	}
-	
-	/**
-	 * Create new typed Instance of entity
-	 *
-	 * @param string $type Type of instance
-	 */
-	public function createTypedInstance($type)
-	{
-		if ( $type == ContactDeviceModel::TYPE_EMAIL )
-			$entityName = $this->emailAddressManager->getClassName();
-		elseif ( $type == ContactDeviceModel::TYPE_PHONE )
-			$entityName = $this->phoneNumberManager->getClassName();
-		elseif ( $type == ContactDeviceModel::TYPE_WEBSITE )
-			$entityName = $this->websiteAddressManager->getClassName();
-		else
-			throw new \Exception(sprintf('The type "%s" is not a valid ContactDevice inheritance entity', $type));
-	
-		$entity = new $entityName();
-		return $entity;
-	}
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
+    
+    /**
+     * @var string
+     */
+    protected $contactDeviceEntityClassName;
+    
+    /**
+     * @var string
+     */
+    protected $identityContactDeviceEntityClassName;
+    
+    /**
+     * @var string
+     */
+    protected $emailAddressEntityClassName;
+    
+    /**
+     * @var string
+     */
+    protected $phoneNumberEntityClassName;
+    
+    /**
+     * @var string
+     */
+    protected $websiteAddressEntityClassName;
+    
+    /**
+     * @param EntityManagerInterface $em
+     * @param string                 $contactDeviceEntityClassName
+     * @param string                 $identityContactDeviceEntityClassName
+     * @param string                 $emailAddressEntityClassName
+     * @param string                 $websiteAddressEntityClassName
+     * @param string                 $phoneNumberEntityClassName
+     */
+    public function __construct(EntityManagerInterface $em, $contactDeviceEntityClassName, $identityContactDeviceEntityClassName, $emailAddressEntityClassName, $websiteAddressEntityClassName, $phoneNumberEntityClassName)
+    {
+        $this->em = $em;
+        $this->contactDeviceEntityClassName = $contactDeviceEntityClassName;
+        $this->identityContactDeviceEntityClassName = $identityContactDeviceEntityClassName;
+        $this->emailAddressEntityClassName = $emailAddressEntityClassName;
+        $this->websiteAddressEntityClassName = $websiteAddressEntityClassName;
+        $this->phoneNumberEntityClassName = $phoneNumberEntityClassName;
+    }
+    
+    /**
+     * Create new typed Instance of entity
+     *
+     * @param string $type Type of instance
+     */
+    public function createTypedInstance($type)
+    {
+        if ( $type == ContactDeviceModel::TYPE_EMAIL )
+            $entityName = $this->emailAddressEntityClassName;
+        elseif ( $type == ContactDeviceModel::TYPE_PHONE )
+            $entityName = $this->phoneNumberEntityClassName;
+        elseif ( $type == ContactDeviceModel::TYPE_WEBSITE )
+            $entityName = $this->websiteAddressEntityClassName;
+        else
+            throw new \Exception(sprintf('The type "%s" is not a valid ContactDevice inheritance entity', $type));
+    
+        $entity = new $entityName();
+        return $entity;
+    }
+    
+    /**
+     * Create new IdentityContactDevice Instance.
+     *
+     * @param string $type Type of instance
+     */
+    public function createIdentityContactDeviceInstance()
+    {
+        $class = new \ReflectionClass($this->identityContactDeviceEntityClassName);
+    
+        return $class->newInstanceArgs();
+    }
 }

@@ -27,47 +27,16 @@ use ASF\ContactBundle\Model\Identity\IdentityModel;
 class SearchIdentityType extends AbstractType
 {
     /**
-     * @var DefaultManagerInterface
+     * @var string
      */
-    protected $identityManager;
+    protected $identityClassName;
     
     /**
-     * @var DefaultManagerInterface
+     * @param string $identityClassName
      */
-    protected $personManager;
-
-    /**
-     * @var DefaultManagerInterface
-     */
-    protected $organizationManager;
-    
-    /**
-     * @param DefaultManagerInterface $identityManager
-     * @param DefaultManagerInterface $personManager
-     * @param DefaultManagerInterface $organizationManager
-     */
-    public function __construct(DefaultManagerInterface $identityManager, DefaultManagerInterface $personManager, DefaultManagerInterface $organizationManager)
+    public function __construct($identityClassName)
     {
-        $this->identityManager = $identityManager;
-        $this->personManager = $personManager;
-        $this->organizationManager = $organizationManager;
-    }
-    
-    /**
-     * (non-PHPdoc)
-     * @see \Symfony\Component\Form\AbstractType::buildForm()
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-    	if ( $options['identity_type'] == IdentityModel::TYPE_PERSON ) {
-    		$identity_transformer = new StringToIdentityTransformer($this->personManager, $options['identity_type']);
-    	} elseif ( $options['identity_type'] == IdentityModel::TYPE_ORGANIZATION ) {
-    		$identity_transformer = new StringToIdentityTransformer($this->organizationManager, $options['identity_type']);
-    	} else {
-    		$identity_transformer = new StringToIdentityTransformer($this->identityManager, $options['identity_type']);
-    	}
-        
-        //$builder->addModelTransformer($identity_transformer);
+        $this->identityClassName = $identityClassName;
     }
     
     /**
@@ -77,10 +46,10 @@ class SearchIdentityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'Identity',
-            'class' => $this->identityManager->getClassName(),
-            'choice_label' => 'Name',
-            'placeholder' => 'Choose an identity',
+            'label' => 'asf.contact.identity.form.search_identity',
+            'class' => $this->identityClassName,
+            'choice_label' => 'name',
+            'placeholder' => 'asf.contact.identity.form.search_an_identity',
             'attr' => array('class' => 'select2-entity-ajax', 'data-route' => 'asf_contact_ajax_request_identity_by_name'),
             'identity_type' => null
         ));
@@ -96,11 +65,20 @@ class SearchIdentityType extends AbstractType
     }
     
     /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'search_identity';
+    }
+    
+    /**
      * (non-PHPdoc)
      * @see \Symfony\Component\Form\FormTypeInterface::getName()
      */
     public function getName()
     {
-        return 'search_identity';
+        return $this->getBlockPrefix();
     }
 }
