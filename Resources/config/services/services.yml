@@ -13,13 +13,6 @@ services:
         class: ASF\CommerceBundle\Form\Factory\FormFactory
         arguments: ["@form.factory", "%asf_contact.identity.form.name%", "%asf_contact.identity.form.type%", "%asf_contact.identity.entity%"]
             
-    # Search Identity Form
-    asf_contact.form.type.search_identity:
-        class: ASF\ContactBundle\Form\Type\SearchIdentityType
-        arguments: ["%asf_contact.identity.entity%"]
-        tags:
-            - { name: form.type, alias: search_identity }
-            
     # Person Form
     asf_contact.form.factory.person:
         class: ASF\ContactBundle\Form\Factory\FormFactory
