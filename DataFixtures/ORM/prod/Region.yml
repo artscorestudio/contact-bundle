@@ -1,4 +1,4 @@
-Asf\Bundle\ContactBundle\Entity\Region:
+ASF\ContactBundle\Entity\Region:
     alsace_champ_ard_lorraine:
         code: "ALCHARLO"
         name: "Alsace Champagne-Ardenne Lorraine"

@@ -1,4 +1,4 @@
-Asf\Bundle\ContactBundle\Entity\Province:
+ASF\ContactBundle\Entity\Province:
     ain:
         code: "01"
         name: "Ain"
