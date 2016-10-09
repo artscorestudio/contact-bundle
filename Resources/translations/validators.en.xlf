@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            
+            <!-- IDENTITY FORM -->
+            <trans-unit id="asf.contact.form.identity.already_exists">
+                <source>asf.contact.form.identity.already_exists</source>
+                <target>A contact with this name already exists.</target>
+            </trans-unit>
+            
+        </body>
+    </file>
+</xliff>

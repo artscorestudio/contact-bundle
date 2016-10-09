@@ -3,10 +3,69 @@
     <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
         <body>
             
+            <!-- BUTTONS -->
+            <trans-unit id="asf.contact.btn.add_new_contact">
+                <source>asf.contact.btn.add_new_contact</source>
+                <target>Add new contact</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.btn.add_a_person">
+                <source>asf.contact.btn.add_a_person</source>
+                <target>Add a person</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.btn.add_an_organization">
+                <source>asf.contact.btn.add_an_organization</source>
+                <target>Add an organization</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.btn.save">
+                <source>asf.contact.btn.save</source>
+                <target>Save</target>
+            </trans-unit>
+            
+            <!-- MESSAGES -->
+            <trans-unit id="asf.contact.msg.success.identity_created">
+                <source>asf.contact.msg.success.identity_created</source>
+                <target>The contact has been created successfully.</target>
+            </trans-unit>
+            
+            <!-- TITLES -->
+            <trans-unit id="asf.contact.title.contact_manager">
+                <source>asf.contact.title.contact_manager</source>
+                <target>Contact Manager</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.title.add_person">
+                <source>asf.contact.title.add_person</source>
+                <target>Add a person</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.title.add_organization">
+                <source>asf.contact.title.add_organization</source>
+                <target>Add organization</target>
+            </trans-unit>
+            
             <!-- FORMS -->
             <trans-unit id="asf.contact.form.label.search_a_contact">
                 <source>asf.contact.form.label.search_a_contact</source>
                 <target>Search a contact</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.label.identity_name">
+                <source>asf.contact.form.label.identity_name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.label.state">
+                <source>asf.contact.form.label.state</source>
+                <target>State</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.label.organizations_list">
+                <source>asf.contact.form.label.organizations_list</source>
+                <target>Organizations list</target>
+            </trans-unit>
+            
+            <trans-unit id="asf.contact.form.state.enabled">
+                <source>asf.contact.form.state.enabled</source>
+                <target>Enabled</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.state.disabled">
+                <source>asf.contact.form.state.disabled</source>
+                <target>Disabled</target>
             </trans-unit>
             
             <trans-unit id="asf.contact.form.placeholder.choose_a_contact">
@@ -14,6 +73,15 @@
                 <target>Choose a contact</target>
             </trans-unit>
             
+            <!-- SEARCH IDENTITY FORM -->
+            <trans-unit id="asf.contact.form.search_identity.modal.title">
+                <source>asf.contact.form.search_identity.modal.title</source>
+                <target>Choose a contact</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.search_identity.modal.loading">
+                <source>asf.contact.form.search_identity.modal.loading</source>
+                <target>Loading please wait...</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
