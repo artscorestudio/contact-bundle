@@ -31,11 +31,18 @@ class GeolocType extends AbstractType
     protected $request;
     
     /**
-     * @param RequestStack $request
+     * @var string
      */
-    public function __construct(RequestStack $request)
+    protected $addressEntityClassName;
+    
+    /**
+     * @param RequestStack $request
+     * @param string       $addressEntityClassName
+     */
+    public function __construct(RequestStack $request, $addressEntityClassName)
     {
         $this->request = $request;
+        $this->addressEntityClassName = $addressEntityClassName;
     }
     
     /**
@@ -60,7 +67,8 @@ class GeolocType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'inherit_data' => true,
+            'inherit_data' => true ,
+            'class' => $this->addressEntityClassName
         ));
     }
     

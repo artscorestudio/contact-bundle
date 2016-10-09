@@ -44,9 +44,10 @@ class OrganizationType extends AbstractType
     {
         $builder->add('identity', IdentityType::class)
             ->add('name', TextType::class, array(
-                'label' => 'Name',
+                'label' => 'asf.contact.form.label.identity_name',
+                'required' => true
             ));
-            
+        
         $builder->addEventSubscriber($this->subscriber);
     }
 

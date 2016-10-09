@@ -13,7 +13,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-use ASF\LayoutBundle\Form\Type\BaseCollectionType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -32,17 +31,17 @@ class IdentityType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('state', ChoiceType::class, array(
-            'label' => 'State',
+            'label' => 'asf.contact.form.label.state',
             'required' => true,
             'choices' => array(
-                IdentityModel::STATE_ENABLED => 'Activated',
-                IdentityModel::STATE_DISABLED => 'Deactivated'
+                'asf.contact.form.state.enabled' => IdentityModel::STATE_ENABLED,
+                'asf.contact.form.state.disabled' => IdentityModel::STATE_DISABLED
             )
         ));
         
         $builder->add('organizations', CollectionType::class, array(
             'entry_type' => IdentityOrganizationType::class,
-            'label' => 'List of organizations',
+            'label' => 'asf.contact.form.label.organizations_list',
             'allow_add' => true,
             'allow_delete' => true,
             'prototype' => true

@@ -7,16 +7,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
-use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
 use ASF\ContactBundle\Model\Identity\IdentityModel;
-
+use ASF\ContactBundle\Form\DataTransformer\StringToIdentityTransformer;
+use Doctrine\ORM\EntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\ContactManager;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 
 /**
@@ -27,56 +26,63 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
  */
 class IdentityOrganizationType extends AbstractType
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $identityOrganizationManager;
-	
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $identityManager;
-	
-	/**
-	 * @param DefaultManagerInterface $identityOrganizationManager
-	 * @param DefaultManagerInterface $identityManager
-	 */
-	public function __construct(DefaultManagerInterface $identityOrganizationManager, DefaultManagerInterface $identityManager)
-	{
-		$this->identityOrganizationManager = $identityOrganizationManager;
-		$this->identityManager = $identityManager;
-	}
-	
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		$builder->add('organization', SearchIdentityType::class, array(
-		    'identity_type' => IdentityModel::TYPE_ORGANIZATION
-		));
-		
-		$identity_transformer = new StringToIdentityTransformer($this->identityManager);
-		$builder->add($builder->create('member', HiddenType::class)->addModelTransformer($identity_transformer));
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => $this->identityOrganizationManager->getClassName()
-		));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'identity_organization_type';
-	}
+    /**
+     * @var EntityManagerInterface
+     */
+    protected  $em;
+    
+    /**
+     * @var ContactManager
+     */
+    protected $contactManager;
+    
+    /**
+     * @var string
+     */
+    protected $identityClassName;
+    
+    /**
+     * @param EntityManagerInterface $em
+     * @param ContactManager         $contactManager
+     * @param string                 $identityClassName
+     */
+    public function __construct(EntityManagerInterface $em, ContactManager $contactManager, $identityClassName)
+    {
+        $this->em = $em;
+        $this->contactManager = $contactManager;
+        $this->identityClassName = $identityClassName;
+    }
+    
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('organization', SearchIdentityType::class, array(
+            'identity_type' => IdentityModel::TYPE_ORGANIZATION,
+            'class' => $this->identityClassName
+        ));
+        
+        $identity_transformer = new StringToIdentityTransformer($this->em, $this->contactManager, $this->identityClassName, IdentityModel::TYPE_ORGANIZATION);
+        $builder->add($builder->create('member', HiddenType::class)->addModelTransformer($identity_transformer));
+        
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'identity_organization_type';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
 }

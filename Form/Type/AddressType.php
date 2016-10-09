@@ -48,9 +48,7 @@ class AddressType extends AbstractType
             'label' => 'City',
             'required' => true
         ))
-        ->add('geoloc', GeolocType::class, array(
-            'data_class' => $this->addressManager->getClassName()
-        ));
+        ->add('geoloc', GeolocType::class);
     }
     
     /**

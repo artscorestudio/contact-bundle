@@ -28,10 +28,10 @@ class SearchIdentityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'asf.contact.form.placeholder.search_a_contact',
+            'label' => 'asf.contact.form.label.search_a_contact',
             'choice_label' => 'name',
             'placeholder' => 'asf.contact.form.placeholder.choose_a_contact',
-            'attr' => array('class' => 'select2-entity-ajax', 'data-route' => 'asf_contact_ajax_request_identity_by_name')
+            'identity_type' => null
         ));
     }
     
