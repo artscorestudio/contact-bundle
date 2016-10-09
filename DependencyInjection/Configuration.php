@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                     ->defaultFalse()
                 ->end()
                 ->scalarNode('form_theme')
-                    ->defaultValue('ASFContactBundle:Form:fields.html.twig')
+                    ->defaultValue('ASFContactBundle:form:fields.html.twig')
                 ->end()
                 
                 ->append($this->addIdentityParameterNode())
@@ -57,7 +57,6 @@ class Configuration implements ConfigurationInterface
                 ->append($this->addEmailAddressParameterNode())
                 ->append($this->addWebsiteAddressParameterNode())
                 ->append($this->addPhoneNumberParameterNode())
-                ->append($this->addGeolocParameterNode())
                 
             ->end();
         
@@ -532,43 +531,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->scalarNode('name')
                             ->defaultValue('phone_number_type')
-                        ->end()
-                        ->arrayNode('validation_groups')
-                            ->prototype('scalar')->end()
-                            ->defaultValue(array("Default"))
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
-    
-        return $node;
-    }
-    
-    /**
-     * Add EmailAddress Entity Configuration
-     */
-    protected function addGeolocParameterNode()
-    {
-        $builder = new TreeBuilder();
-        $node = $builder->root('geoloc');
-    
-        $node
-            ->treatTrueLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
-            ->treatFalseLike(array('entity' => null, 'form' => array('type' => "ASF\ContactBundle\Form\Type\GeolocType")))
-            ->addDefaultsIfNotSet()
-            ->children()
-                ->scalarNode('entity')
-                    ->defaultNull()
-                ->end()
-                ->arrayNode('form')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->scalarNode('type')
-                            ->defaultValue('ASF\ContactBundle\Form\Type\GeolocType')
-                        ->end()
-                            ->scalarNode('name')
-                        ->defaultValue('geoloc_type')
                         ->end()
                         ->arrayNode('validation_groups')
                             ->prototype('scalar')->end()

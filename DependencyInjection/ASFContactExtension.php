@@ -159,7 +159,6 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
         
         $this->setProvinceParameters($container, $loader, $config);
         $this->setRegionParameters($container, $loader, $config);
-        $this->setGeolocParameters($container, $loader, $config);
         
         $loader->load('services/address.yml');
     }
@@ -301,26 +300,6 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
         $container->setParameter('asf_contact.phone_number.entity', $config['phone_number']['entity']);
         $container->setParameter('asf_contact.phone_number.form.name', $config['phone_number']['form']['name']);
         $container->setParameter('asf_contact.phone_number.form.type', $config['phone_number']['form']['type']);
-    }
-    
-    /**
-     * Set Phone Entity Parameters in Container.
-     *
-     * @param ContainerBuilder $container
-     * @param YamlFileLoader    $loader
-     * @param array            $config
-     *
-     * @throws InvalidConfigurationException
-     */
-    protected function setGeolocParameters(ContainerBuilder $container, YamlFileLoader $loader, array $config)
-    {
-        if (null === $config['geoloc']['entity']) {
-            throw new InvalidConfigurationException('The asf_contact.geoloc.entity parameter must be defined.');
-        }
-         
-        $container->setParameter('asf_contact.geoloc.entity', $config['geoloc']['entity']);
-        $container->setParameter('asf_contact.geoloc.form.name', $config['geoloc']['form']['name']);
-        $container->setParameter('asf_contact.geoloc.form.type', $config['geoloc']['form']['type']);
     }
     
     /**
