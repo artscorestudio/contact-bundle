@@ -1,16 +1,13 @@
-{% extends 'ASFContactBundle::layout.html.twig'  %}
+{% extends 'ASFContactBundle::layout.html.twig' %}
 
-{% trans_default_domain 'asf_contact' %}
-
-{% block title %}{{ view_title }}{% endblock %}
+{% form_theme form 'ASFContactBundle:form:fields.html.twig' %}
 
 {% block asf_contact_content %}
 
-    <h1>{{ view_title }}</h1>
-    
     <div class="container-fluid">
     	<div class="row">
-    		{{ form(form) }}
+    	    {{ form(form) }}
     	</div>
     </div>
+
 {% endblock %}
