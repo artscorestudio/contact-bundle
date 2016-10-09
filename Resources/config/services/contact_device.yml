@@ -1,15 +1,4 @@
 services:
-    # Manager
-    asf_contact.contact_device.manager:
-        class: ASF\ContactBundle\Utils\Manager\ContactDeviceManager
-        arguments:
-            - "@doctrine.orm.default_entity_manager"
-            - "%asf_contact.contact_device.entity%"
-            - "%asf_contact.identity_contact_device.entity%"
-            - "%asf_contact.email_address.entity%"
-            - "%asf_contact.website_address.entity%"
-            - "%asf_contact.phone_number.entity%"
-            
     # ContactDevice Form Factory
     asf_contact.form.factory.contact_device:
         class: ASF\CommerceBundle\Form\Factory\FormFactory

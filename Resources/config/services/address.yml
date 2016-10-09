@@ -1,14 +1,4 @@
 services:
-    # Manager
-    asf_contact.address.manager:
-        class: ASF\ContactBundle\Utils\Manager\AddressManager
-        arguments:
-            - "@doctrine.orm.default_entity_manager"
-            - "%asf_contact.address.entity%"
-            - "%asf_contact.identity_address.entity%"
-            - "%asf_contact.province.entity%"
-            - "%asf_contact.region.entity%"
-            
     # Address Form Factory
     asf_contact.form.factory.address:
         class: ASF\CommerceBundle\Form\Factory\FormFactory
@@ -44,6 +34,6 @@ services:
     # Geoloc Form
     asf_contact.form.type.geoloc:
         class: ASF\ContactBundle\Form\Type\GeolocType
-        arguments: ["@request_stack"]
+        arguments: ["@request_stack", "%asf_contact.address.entity%"]
         tags:
             - { name: form.type, alias: geoloc_type }
