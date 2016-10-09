@@ -11,6 +11,7 @@ namespace ASF\ContactBundle\Model\Identity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use ASF\ContactBundle\Validator\Constraints as ContactAssert;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
@@ -26,6 +27,8 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"Person"="Person", "Organization"="Organization"})
  * @ORM\HasLifecycleCallbacks
+ * 
+ * @ContactAssert\IdentityAlreadyExists
  */
 abstract class IdentityModel implements IdentityInterface
 {

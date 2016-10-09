@@ -131,11 +131,4 @@ interface AddressInterface
      * @return \ASF\ContactBundle\Model\Address\AddressInterface
      */
     public function setLongitude($longitude);
-    
-	/**
-	 * Return identities linked to this address
-	 * 
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getIdentities();
 }

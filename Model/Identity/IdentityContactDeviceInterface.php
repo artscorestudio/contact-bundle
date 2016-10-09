@@ -9,6 +9,8 @@
  */
 namespace ASF\ContactBundle\Model\Identity;
 
+use ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface;
+
 /**
  * Identity Contact Device Interface
  * 
@@ -17,5 +19,25 @@ namespace ASF\ContactBundle\Model\Identity;
  */
 interface IdentityContactDeviceInterface
 {
-	
+    /**
+     * @return \ASF\ContactBundle\Model\Identity\IdentityInterface
+     */
+    public function getIdentity();
+    
+    /**
+     * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $idetntity
+     * @return \ASF\ContactBundle\Model\Identity\IdentityContactDeviceInterface
+     */
+    public function setIdentity(IdentityInterface $identity);
+    
+    /**
+     * @return \ASF\ContactBundle\Model\Identity\ContactDeviceInterface
+     */
+    public function getContactDevice();
+    
+    /**
+     * @param \ASF\ContactBundle\Model\Identity\ContactDeviceInterface $contactDevice
+     * @return \ASF\ContactBundle\Model\Identity\IdentityContactDeviceInterface
+     */
+    public function setContactDevice(ContactDeviceInterface $contactDevice);
 }

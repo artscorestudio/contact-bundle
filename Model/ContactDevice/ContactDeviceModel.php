@@ -83,7 +83,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     protected $value;
     
     /**
-     * @ORM\OneToMany(targetEntity="IdentityContactDevice", mappedBy="contactDevice", cascade={"persist,"remove"})
+     * @ORM\OneToMany(targetEntity="IdentityContactDevice", mappedBy="contactDevice", cascade={"persist","remove"})
      * 
      * @var ArrayCollection
      */
