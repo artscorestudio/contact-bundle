@@ -1,3 +1,0 @@
-asf_contact_doc_homepage:
-    path: /
-    defaults: { _controller: "ASFContactBundle:Doc:index" }
