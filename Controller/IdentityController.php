@@ -7,25 +7,22 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\ContactBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
 use APY\DataGridBundle\Grid\Source\Entity;
 use APY\DataGridBundle\Grid\Action\RowAction;
 use APY\DataGridBundle\Grid\Grid;
 use APY\DataGridBundle\Grid\Row;
-
 use Doctrine\ORM\QueryBuilder;
-
 use ASF\ContactBundle\Model\Identity\IdentityModel;
 use ASF\ContactBundle\Form\Handler\IdentityFormHandler;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use ASF\ContactBundle\Event\ContactEvents;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
  * Identity Controller
@@ -134,17 +131,17 @@ class IdentityController extends Controller
         $view_options = array();
         
         if ('person' === $type) {
-            $contact = $this->get('asf_contact.person.manager')->createInstance();
-            $view_options['view_title'] = $this->get('translator')->trans('Add a person', array(), 'asf_contact');
+            $contact = $this->get('asf_contact.manager')->createPersonInstance();
+            $view_options['view_title'] = $this->get('translator')->trans('asf.contact.title.add_person');
             $view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'person'));
             
             $formFactory = $this->get('asf_contact.form.factory.person');
             $form = $formFactory->createForm();
             $form->setData($contact);
             
-        } elseif ('organisation' === $type) {
-            $contact = $this->get('asf_contact.organization.manager')->createInstance();
-            $view_options['view_title'] = $this->get('translator')->trans('Add an organization', array(), 'asf_contact');
+        } elseif ('organization' === $type) {
+            $contact = $this->get('asf_contact.manager')->createOrganizationInstance();
+            $view_options['view_title'] = $this->get('translator')->trans('asf.contact.title.add_organization');
             $view_options['breadcrumb_route'] = $this->get('router')->generate('asf_contact_identity_add', array('type' => 'organisation'));
             
             $formFactory = $this->get('asf_contact.form.factory.organization');
@@ -152,18 +149,20 @@ class IdentityController extends Controller
             $form->setData($contact);
         }
         
-        $formHandler = new IdentityFormHandler($form, $request, $this->container);
+        $form->handleRequest($request);
         
-        if (true === $formHandler->process()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             try {
+                $identity = $form->getData();
+                $this->get('asf_contact.form.handler.identity')->processForm($identity);
                 
-                $this->get('asf_contact.identity.manager')->getEntityManager()->persist($contact);
-                $this->get('asf_contact.identity.manager')->getEntityManager()->flush();
+                $this->get('doctrine.orm.default_entity_manager')->persist($identity);
+                $this->get('doctrine.orm.default_entity_manager')->flush();
                 
-                if ( $this->has('asf_layout.flash_message') ) {
-                    $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
+                if ($this->has('asf_layout.flash_message')) {
+                     $this->get('asf_layout.flash_message')->success($this->get('translator')->trans('asf.contact.msg.success.identity_created'));
                 } else {
-                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('The contact has been added', array(), 'asf_contact'));
+                    $this->get('session')->getFlashBag()->add('success', $this->get('translator')->trans('asf.contact.msg.success.identity_created'));
                 }
                 
                 return $this->redirect($this->generateUrl('asf_contact_identity_edit', array('id' => $contact->getId())));
