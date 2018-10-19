@@ -48,7 +48,7 @@ services:
     # Identity Form Handler
     asf_contact.form.handler.identity:
         class: ASF\ContactBundle\Form\Handler\IdentityFormHandler
-        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "@asf_layout.flash_message", "@translator"]
+        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "%asf_contact.flash_message%", "@translator"]
         
     # Validtors
     asf.contact.form.validator.identity_already_exists:

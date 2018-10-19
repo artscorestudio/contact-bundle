@@ -25,7 +25,7 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  * @ORM\Table(name="asf_contact_identity")
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
- * @ORM\DiscriminatorMap({"Person"="Person", "Organization"="Organization"})
+ * @ORM\DiscriminatorMap({"Identity"="Identity", "Person"="Person", "Organization"="Organization"})
  * @ORM\HasLifecycleCallbacks
  * 
  * @ContactAssert\IdentityAlreadyExists

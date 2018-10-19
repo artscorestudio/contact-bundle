@@ -198,7 +198,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     
     /**
      * @param string $discr
-     * @return \ASF\ContactBundle\Model\Identity\ContactDevice
+     * @return \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface
      */
     public function setDiscr($discr)
     {

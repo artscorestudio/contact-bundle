@@ -122,7 +122,7 @@ abstract class AddressModel implements AddressInterface
 	protected $longitude;
 	
 	/**
-     * @ORM\OneToMany(targetEntity="IdentityAddress", mappedBy="address", cascade={"persist,"remove"})
+     * @ORM\OneToMany(targetEntity="IdentityAddress", mappedBy="address", cascade={"persist","remove"})
      * 
      * @var ArrayCollection
      */

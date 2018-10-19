@@ -36,23 +36,6 @@ class RegionType extends AbstractType
     {
         $this->entityClassName = $entityClassName;
     }
-
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'label' => 'Region / State',
-            'empty_value' => 'asf.contact.region.choose_a_region',
-            'class' => $this->entityClassName,
-            'property' => 'name',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('p')
-                    ->orderBy('p.name', 'ASC');
-            }
-        ));
-    }
     
     /**
      * {@inheritDoc}
