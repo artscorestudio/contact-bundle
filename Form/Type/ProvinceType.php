@@ -45,6 +45,7 @@ class ProvinceType extends AbstractType
             'label' => 'asf.contact.form.address.province',
             'empty_value' => 'asf.contact.form.address.province.placeholder',
             'class' => $this->entityClassName,
+            'choice_label' => 'name',
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('p')
                     ->orderBy('p.code', 'ASC');

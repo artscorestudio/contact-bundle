@@ -47,7 +47,7 @@ class RegionType extends AbstractType
             'label' => 'asf.contact.form.address.region',
             'empty_value' => 'asf.contact.form.address.region.placeholder',
             'class' => $this->entityClassName,
-            'property' => 'name',
+            'choice_label' => 'name',
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('p')
                     ->orderBy('p.name', 'ASC');
