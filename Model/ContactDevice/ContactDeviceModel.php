@@ -15,7 +15,7 @@ use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Contact Device Model
+ * ContactDeviceModel.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -65,7 +65,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     protected $id;
 
     /**
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\NotBlank()
      * @GRID\Column(title="asf.contact.contact_device.label", defaultOperator="like", operatorsVisible=false)
      * 
