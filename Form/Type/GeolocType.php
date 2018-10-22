@@ -52,12 +52,11 @@ class GeolocType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('country', CountryType::class, array(
-            'label' => 'Country',
-            'required' => true,
+            'label' => 'asf.contact.form.address.country',
             'preferred_choices' => array(strtoupper($this->request->getCurrentRequest()->getLocale()))
         ))
-        ->add('province', ProvinceType::class)
-        ->add('region', RegionType::class);
+        ->add('region', RegionType::class)
+        ->add('province', ProvinceType::class);
     }
 
     /**

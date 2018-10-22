@@ -12,12 +12,12 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use ASF\ContactBundle\Model\Identity\IdentityModel;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
- * Identity Form Type
+ * IdentityType.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -37,9 +37,9 @@ class IdentityType extends AbstractType
                 'asf.contact.form.state.enabled' => IdentityModel::STATE_ENABLED,
                 'asf.contact.form.state.disabled' => IdentityModel::STATE_DISABLED
             )
-        ));
+        ))
         
-        $builder->add('organizations', CollectionType::class, array(
+        ->add('organizations', CollectionType::class, array(
             'entry_type' => IdentityOrganizationType::class,
             'label' => 'asf.contact.form.label.organizations_list',
             'allow_add' => true,
@@ -55,7 +55,6 @@ class IdentityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'inherit_data' => true,
             'is_new' => false
         ));
     }

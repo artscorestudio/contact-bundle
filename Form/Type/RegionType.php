@@ -12,9 +12,9 @@ namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Region Form Type
@@ -30,7 +30,7 @@ class RegionType extends AbstractType
     protected $entityClassName;
     
     /**
-     * @param DefaultManagerInterface $regionManager
+     * @param EntityManagerInterface $regionManager
      */
     public function __construct($entityClassName)
     {
@@ -44,8 +44,8 @@ class RegionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'Region / State',
-            'empty_value' => 'Please choice a Region / State',
+            'label' => 'asf.contact.form.address.region',
+            'empty_value' => 'asf.contact.form.address.region.placeholder',
             'class' => $this->entityClassName,
             'property' => 'name',
             'query_builder' => function(EntityRepository $er) {

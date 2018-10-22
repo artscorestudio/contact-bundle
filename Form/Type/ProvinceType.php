@@ -42,8 +42,8 @@ class ProvinceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'Province',
-            'empty_value' => 'Please choice a province',
+            'label' => 'asf.contact.form.address.province',
+            'empty_value' => 'asf.contact.form.address.province.placeholder',
             'class' => $this->entityClassName,
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('p')

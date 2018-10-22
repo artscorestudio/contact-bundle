@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 /**
- * Contact Device Form Type
+ * ContactDeviceType.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -31,17 +31,15 @@ class ContactDeviceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('type', ChoiceType::class, array(
-            'label' => 'Type',
-            'required' => true,
+            'label' => 'asf.contact.form.contact_device.label.type',
             'choices' => array(
-                ContactDeviceModel::TYPE_EMAIL => 'E-mail',
-                ContactDeviceModel::TYPE_PHONE => 'Phone',
-                ContactDeviceModel::TYPE_WEBSITE => 'Website',
+                ContactDeviceModel::TYPE_EMAIL => 'asf.contact.form.contact_device.label.type.email',
+                ContactDeviceModel::TYPE_PHONE => 'asf.contact.form.contact_device.label.type.phone',
+                ContactDeviceModel::TYPE_WEBSITE => 'asf.contact.form.contact_device.label.type.website',
             )
         ))
         ->add('label', ChoiceType::class, array(
-            'label' => 'Name',
-            'required' => true,
+            'label' => 'asf.contact.form.contact_device.label.label',
             'choices' => array(
                 ContactDeviceModel::LABEL_EMAIL => ContactDeviceModel::LABEL_EMAIL,
                 ContactDeviceModel::LABEL_MOBILE_PHONE => ContactDeviceModel::LABEL_MOBILE_PHONE,
@@ -50,11 +48,11 @@ class ContactDeviceType extends AbstractType
                 ContactDeviceModel::LABEL_WEBSITE => ContactDeviceModel::LABEL_WEBSITE,
                 ContactDeviceModel::LABEL_WEBSITE_PRO => ContactDeviceModel::LABEL_WEBSITE_PRO,
             ),
-            'attr' => array('class' => 'suggest-contactD-label')
+            'attr' => array('class' => 'suggest-contactD-label'),
+            'required' => false
         ))
         ->add('value', TextType::class, array(
-            'label' => 'Value',
-            'required' => true
+            'label' => 'asf.contact.form.contact_device.label.value',
         ));
     }
     

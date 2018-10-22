@@ -13,10 +13,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Person Form Type
+ * PersonType.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -24,37 +23,30 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class PersonType extends AbstractType
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    protected $subscriber;
-    
-    /**
-     * @param EventSubscriberInterface $subscriber
-     */
-    public function __construct(EventSubscriberInterface $subscriber)
-    {
-        $this->subscriber = $subscriber;
-    }
-    
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('identity', IdentityType::class)
+        $builder
             ->add('firstName', TextType::class, array(
-                'label' => 'First Name',
-                'required' => true
+                'label' => 'asf.contact.form.person.firstname'
             ))
             ->add('lastName', TextType::class, array(
-                'label' => 'Last Name',
-                'required' => true
+                'label' => 'asf.contact.form.person.lastname'
             ));
-            
-        $builder->addEventSubscriber($this->subscriber);
     }
 
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getParent()
+     */
+    public function getParent()
+    {
+        return IdentityType::class;
+    }
+    
     /**
      * {@inheritDoc}
      * @see \Symfony\Component\Form\AbstractType::configureOptions()
