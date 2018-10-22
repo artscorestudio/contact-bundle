@@ -73,6 +73,84 @@
                 <target>Choisissez un contact</target>
             </trans-unit>
             
+            <!-- PERSON -->
+            <trans-unit id="asf.contact.form.person.lastname">
+                <source>asf.contact.form.person.lastname</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.person.firstname">
+                <source>asf.contact.form.person.firstname</source>
+                <target>Prénom</target>
+            </trans-unit>
+            
+            <!-- ADDRESS -->
+            <trans-unit id="asf.contact.form.address.line1">
+                <source>asf.contact.form.address.line1</source>
+                <target>Adresse 1</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.line2">
+                <source>asf.contact.form.address.line2</source>
+                <target>Adresse 2</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.line3">
+                <source>asf.contact.form.address.line3</source>
+                <target>Adresse 3</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.zipCode">
+                <source>asf.contact.form.address.zipCode</source>
+                <target>Code postal</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.city">
+                <source>asf.contact.form.address.city</source>
+                <target>Ville</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.country">
+                <source>asf.contact.form.address.country</source>
+                <target>Pays</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.province">
+                <source>asf.contact.form.address.province</source>
+                <target>Département</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.province.placeholder">
+                <source>asf.contact.form.address.province.placeholder</source>
+                <target>Veuillez sélectionner un département</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.region">
+                <source>asf.contact.form.address.region</source>
+                <target>Région</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.region.placeholder">
+                <source>asf.contact.form.address.region.placeholder</source>
+                <target>Veuillez sélectionner une région</target>
+            </trans-unit>
+            
+            <!-- CONTACT DEVICE -->
+            <trans-unit id="asf.contact.form.contact_device.label.label">
+                <source>asf.contact.form.contact_device.label.label</source>
+                <target>Libellé</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.value">
+                <source>asf.contact.form.contact_device.label.value</source>
+                <target>Valeur</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.type">
+                <source>asf.contact.form.contact_device.label.type</source>
+                <target>Type de coordonnées</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.type.email">
+                <source>asf.contact.form.contact_device.label.type.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.type.phone">
+                <source>asf.contact.form.contact_device.label.type.phone</source>
+                <target>Téléphone</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.type.website">
+                <source>asf.contact.form.contact_device.label.type.website</source>
+                <target>Site Internet</target>
+            </trans-unit>
+            
             <!-- SEARCH IDENTITY FORM -->
             <trans-unit id="asf.contact.form.search_identity.modal.title">
                 <source>asf.contact.form.search_identity.modal.title</source>

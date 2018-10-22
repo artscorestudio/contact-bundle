@@ -73,6 +73,47 @@
                 <target>Choose a contact</target>
             </trans-unit>
             
+            <trans-unit id="asf.contact.form.address.line1">
+                <source>asf.contact.form.address.line1</source>
+                <target>Address 1</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.line2">
+                <source>asf.contact.form.address.line2</source>
+                <target>Address 2</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.line3">
+                <source>asf.contact.form.address.line3</source>
+                <target>Address 3</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.zipCode">
+                <source>asf.contact.form.address.zipCode</source>
+                <target>Zip code</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.city">
+                <source>asf.contact.form.address.city</source>
+                <target>City</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.country">
+                <source>asf.contact.form.address.country</source>
+                <target>Country</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.province">
+                <source>asf.contact.form.address.province</source>
+                <target>Province</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.province.placeholder">
+                <source>asf.contact.form.address.province.placeholder</source>
+                <target>Please choice a province</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.region">
+                <source>asf.contact.form.address.region</source>
+                <target>Region / State</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.address.region.placeholder">
+                <source>asf.contact.form.address.region.placeholder</source>
+                <target>Please choice a Region / State</target>
+            </trans-unit>
+            
             <!-- SEARCH IDENTITY FORM -->
             <trans-unit id="asf.contact.form.search_identity.modal.title">
                 <source>asf.contact.form.search_identity.modal.title</source>
