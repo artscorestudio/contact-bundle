@@ -12,6 +12,7 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * AddressType.
@@ -44,8 +45,23 @@ class AddressType extends AbstractType
         ))
         ->add('city', TextType::class, array(
             'label' => 'asf.contact.form.address.city',
-        ))
-        ->add('geoloc', GeolocType::class);
+        ));
+        
+        if ( true === $options['geoloc'] ) {
+            $buidler->add('geoloc', GeolocType::class);
+        }
+    }
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'geoloc' => false
+        ));
     }
     
     /**

@@ -32,11 +32,12 @@ class IdentityType extends AbstractType
     {
         $builder->add('state', ChoiceType::class, array(
             'label' => 'asf.contact.form.label.state',
-            'required' => true,
             'choices' => array(
                 'asf.contact.form.state.enabled' => IdentityModel::STATE_ENABLED,
                 'asf.contact.form.state.disabled' => IdentityModel::STATE_DISABLED
-            )
+            ),
+            'choices_as_values' => true,
+            'placeholder' => 'asf.contact.form.label.state.placeholder'
         ))
         
         ->add('organizations', CollectionType::class, array(
@@ -47,18 +48,7 @@ class IdentityType extends AbstractType
             'prototype' => true
         ));
     }
-    
-    /**
-     * {@inheritDoc}
-     * @see \Symfony\Component\Form\AbstractType::configureOptions()
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'is_new' => false
-        ));
-    }
-    
+
     /**
      * {@inheritDoc}
      * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()

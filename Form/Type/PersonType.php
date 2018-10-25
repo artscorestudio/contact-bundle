@@ -38,16 +38,6 @@ class PersonType extends AbstractType
     }
 
     /**
-     * 
-     * {@inheritDoc}
-     * @see \Symfony\Component\Form\AbstractType::getParent()
-     */
-    public function getParent()
-    {
-        return IdentityType::class;
-    }
-    
-    /**
      * {@inheritDoc}
      * @see \Symfony\Component\Form\AbstractType::configureOptions()
      */
@@ -56,6 +46,16 @@ class PersonType extends AbstractType
         $resolver->setDefaults(array(
             'is_new' => false
         ));
+    }
+    
+    /**
+     *
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getParent()
+     */
+    public function getParent()
+    {
+        return IdentityType::class;
     }
     
     /**

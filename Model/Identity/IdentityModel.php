@@ -10,7 +10,6 @@
 namespace ASF\ContactBundle\Model\Identity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use ASF\ContactBundle\Validator\Constraints as ContactAssert;
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,7 +27,6 @@ use ASF\ContactBundle\Model\ContactDevice\ContactDeviceModel;
  * @ORM\DiscriminatorMap({"Identity"="Identity", "Person"="Person", "Organization"="Organization"})
  * @ORM\HasLifecycleCallbacks
  * 
- * @ContactAssert\IdentityAlreadyExists
  */
 abstract class IdentityModel implements IdentityInterface
 {
@@ -55,6 +53,7 @@ abstract class IdentityModel implements IdentityInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      * @GRID\Column(visible=false)
      * 
      * @var number
@@ -62,8 +61,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $id;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.identity.name", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -71,9 +70,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $name;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Choice(callback = "getStates")
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.identity.state", filter="select",  selectFrom="values", values={
      *     IdentityModel::STATE_ENABLED = "enabled",
      *     IdentityModel::STATE_DISABLED = "disabled",
@@ -84,8 +82,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $state;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string", nullable=true)
+     * 
      * @GRID\Column(title="asf.contact.identity.email_canonical", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -94,7 +92,7 @@ abstract class IdentityModel implements IdentityInterface
     
     /**
      * @ORM\OneToMany(targetEntity="IdentityOrganization", mappedBy="member", cascade={"persist"})
-     * @ORM\JoinColumn(name="member_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="member_id", referencedColumnName="id", nullable=true)
      * 
      * @var ArrayCollection
      */
@@ -111,7 +109,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $contactDevices;
     
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime")
+     * 
      * @GRID\Column(visible=false)
      *
      * @var \DateTime
@@ -119,7 +118,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $createdAt;
     
     /**
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="datetime")
+     * 
      * @GRID\Column(visible=false)
      *
      * @var \DateTime
@@ -127,9 +127,8 @@ abstract class IdentityModel implements IdentityInterface
     protected $updatedAt;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Choice(callback = "getTypes")
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.identity.type", filter="select",  selectFrom="values", values={
      *     IdentityModel::TYPE_PERSON = "Person",
      *     IdentityModel::TYPE_ORGANIZATION = "Organization"
@@ -146,6 +145,8 @@ abstract class IdentityModel implements IdentityInterface
     
     public function __construct()
     {
+        $this->state = self::STATE_DISABLED;
+        
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
         
@@ -389,13 +390,16 @@ abstract class IdentityModel implements IdentityInterface
     }
     
     /**
+     * @ORM\PrePersist
+     * 
      * Update fields before persist
      */
     public function onPrePersist()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
-        if ( is_array($this->contactDevices) ) {
+        
+        if ( $this->contactDevices->count() ) {
             foreach($this->contactDevices as $contact_device) {
                 if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
                     $this->emailCanonical = $contact_device->getContactDevice()->getValue();
@@ -405,12 +409,23 @@ abstract class IdentityModel implements IdentityInterface
     }
     
     /**
+     * ORM\PreUpdate
+     * 
      * Update fields before update
      */
     public function onPreUpdate()
     {
         $this->updatedAt = new \DateTime();
-        if ( is_array($this->contactDevices) ) {
+        
+        $this->onPrePersistPreUpdate();
+    }
+    
+    /**
+     * @return void
+     */
+    protected function onPrePersistPreUpdate()
+    {
+        if ( $this->contactDevices->count() ) {
             foreach($this->contactDevices as $contact_device) {
                 if ( $contact_device->getContactDevice()->getType() == ContactDeviceModel::TYPE_EMAIL && $contact_device->getIsMain() == true ) {
                     $this->emailCanonical = $contact_device->getContactDevice()->getValue();

@@ -54,6 +54,10 @@
                 <source>asf.contact.form.label.state</source>
                 <target>État</target>
             </trans-unit>
+            <trans-unit id="asf.contact.form.label.state.placeholder">
+                <source>asf.contact.form.label.state.placeholder</source>
+                <target>Veuillez sélectionner un état</target>
+            </trans-unit>
             <trans-unit id="asf.contact.form.label.organizations_list">
                 <source>asf.contact.form.label.organizations_list</source>
                 <target>Organisation</target>
@@ -146,9 +150,13 @@
                 <source>asf.contact.form.contact_device.label.type.phone</source>
                 <target>Téléphone</target>
             </trans-unit>
-            <trans-unit id="asf.contact.form.contact_device.label.type.website">
-                <source>asf.contact.form.contact_device.label.type.website</source>
-                <target>Site Internet</target>
+            <trans-unit id="asf.contact.form.contact_device.label.email">
+                <source>asf.contact.form.contact_device.label.email</source>
+                <target>E-mail</target>
+            </trans-unit>
+            <trans-unit id="asf.contact.form.contact_device.label.phone">
+                <source>asf.contact.form.contact_device.label.phone</source>
+                <target>Téléphone</target>
             </trans-unit>
             
             <!-- SEARCH IDENTITY FORM -->

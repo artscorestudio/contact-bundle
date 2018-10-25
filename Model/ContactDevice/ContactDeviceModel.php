@@ -58,6 +58,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      * @GRID\Column(visible=false)
      * 
      * @var number
@@ -66,7 +67,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.contact_device.label", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -74,8 +75,8 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     protected $label;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.contact_device.value", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -90,9 +91,8 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     protected $identities;
     
     /**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
-     * @Assert\Choice(callback = "getTypes")
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.contact_device.type", filter="select",  selectFrom="values", values={
      *     ContactDeviceModel::TYPE_EMAIL = "email_address",
      *     ContactDeviceModel::TYPE_PHONE = "phone_number",
@@ -209,7 +209,7 @@ abstract class ContactDeviceModel implements ContactDeviceInterface
     /**
      * @return array
      */
-    public function getTypes()
+    public static function getTypes()
     {
         return array(
             self::TYPE_EMAIL,

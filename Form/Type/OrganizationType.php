@@ -28,22 +28,9 @@ class OrganizationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name', TextType::class, array(
-            'label' => 'asf.contact.form.label.identity_name'
-        ));
+        $builder->add('name', TextType::class, array('label' => 'asf.contact.form.label.identity_name'));
     }
 
-    /**
-     * {@inheritDoc}
-     * @see \Symfony\Component\Form\AbstractType::configureOptions()
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            'is_new' => false
-        ));
-    }
-    
     /**
      *
      * {@inheritDoc}

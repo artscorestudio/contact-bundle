@@ -29,6 +29,7 @@ abstract class AddressModel implements AddressInterface
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * 
      * @GRID\Column(visible=false)
      * 
      * @var number
@@ -36,8 +37,8 @@ abstract class AddressModel implements AddressInterface
 	protected $id;
 	
 	/**
-     * @ORM\Column(type="string", nullable=false)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="string")
+     * 
      * @GRID\Column(title="asf.contact.address.line1", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -46,7 +47,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.address.line2", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -55,7 +56,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.address.line3", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -64,7 +65,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.address.zip_code", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -73,7 +74,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.address.city", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -82,7 +83,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\ManyToOne(targetEntity="Province", cascade={"persist"})
-     * @ORM\JoinColumn(name="province_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="province_id", referencedColumnName="id", nullable=true)
      * 
 	 * @var \ASF\ContactBundle\Model\Address\ProvinceInterface
 	 */
@@ -90,7 +91,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\ManyToOne(targetEntity="Region", cascade={"persist"})
-     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id", nullable=true)
      * 
 	 * @var \ASF\ContactBundle\Model\Address\RegionInterface
 	 */
@@ -98,7 +99,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
      * @ORM\Column(type="string", nullable=true)
-     * @Assert\NotBlank()
+     * 
      * @GRID\Column(title="asf.contact.address.country", defaultOperator="like", operatorsVisible=false)
      * 
      * @var string
@@ -107,6 +108,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @ORM\Column(type="float", nullable=true)
+	 * 
 	 * @GRID\Column(title="asf.contact.address.latitude", defaultOperator="like", operatorsVisible=false)
 	 * 
 	 * @var float
@@ -115,6 +117,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @ORM\Column(type="float", nullable=true)
+	 * 
 	 * @GRID\Column(title="asf.contact.address.longitude", defaultOperator="like", operatorsVisible=false)
 	 * 
 	 * @var float
@@ -151,7 +154,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $line1
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setLine1($line1)
 	{
@@ -169,7 +172,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $line2
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setLine2($line2)
 	{
@@ -187,7 +190,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $line3
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setLine3($line3)
 	{
@@ -205,7 +208,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $zip_code
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setZipCode($zip_code)
 	{
@@ -223,7 +226,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $city
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setCity($city)
 	{
@@ -241,7 +244,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $city
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setProvince($province)
 	{
@@ -250,7 +253,7 @@ abstract class AddressModel implements AddressInterface
 	}
 	
 	/**
-	 * @return \ASF\ContactBundle\Entity\Region
+	 * @return \ASF\ContactBundle\Model\Address\RegionInterface
 	 */
 	public function getRegion()
 	{
@@ -258,8 +261,8 @@ abstract class AddressModel implements AddressInterface
 	}
 	
 	/**
-	 * @param \ASF\ContactBundle\Entity\Region $region
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @param \ASF\ContactBundle\Model\Address\RegionInterface $region
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setRegion($region)
 	{
@@ -277,7 +280,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param string $country
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setCountry($country)
 	{
@@ -295,7 +298,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param float $latitude
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setLatitude($latitude)
 	{
@@ -313,7 +316,7 @@ abstract class AddressModel implements AddressInterface
 	
 	/**
 	 * @param float $longitude
-	 * @return \ASF\ContactBundle\Model\Address\Address
+	 * @return \ASF\ContactBundle\Model\Address\AddressInterface
 	 */
 	public function setLongitude($longitude)
 	{
