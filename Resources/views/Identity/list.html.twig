@@ -1,17 +1,13 @@
 {% extends 'ASFContactBundle::layout.html.twig'  %}
 
-{% trans_default_domain 'asf_contact' %}
-
-{% block title %}{{ 'Contacts Manager'|trans }}{% endblock %}
-
 {% block asf_contact_content %}
 
-    <h1>{{ 'Contacts Manager'|trans }}</h1>
+    <h1>{{ 'asf.contact.title.contact_manager'|trans }}</h1>
 
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ 'Add new contact'|trans }} <span class="caret"></span></button>
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">{{ 'asf.contact.btn.add_new_contact'|trans }} <span class="caret"></span></button>
     <ul class="dropdown-menu" role="menu">
-    	<li><a href="{{ path('asf_contact_identity_add', {type:'person'}) }}" title="{{ 'Add a person'|trans }}">{{ 'Add a person'|trans }}</a></li>
-    	<li><a href="{{ path('asf_contact_identity_add', {type:'organisation'}) }}" title="{{ 'Add an organization'|trans }}">{{ 'Add an organization'|trans }}</a></li>
+    	<li><a href="{{ path('asf_contact_identity_add', {type:'person'}) }}" title="{{ 'Add a person'|trans }}">{{ 'asf.contact.btn.add_a_person'|trans }}</a></li>
+    	<li><a href="{{ path('asf_contact_identity_add', {type:'organisation'}) }}" title="{{ 'Add an organization'|trans }}">{{ 'asf.contact.btn.add_an_organization'|trans }}</a></li>
     </ul>
 
     <div class="row">

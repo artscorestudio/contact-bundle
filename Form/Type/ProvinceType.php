@@ -11,8 +11,6 @@ namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
 
@@ -24,51 +22,60 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProvinceType extends AbstractType
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $provinceManager;
-	
-	/**
-	 * @param DefaultManagerInterface $provinceManager
-	 */
-	public function __construct(DefaultManagerInterface $provinceManager)
-	{
-		$this->provinceManager = $provinceManager;
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-	    $resolver->setDefaults(array(
-	        'label' => 'Province',
-			'translator_domain' => 'asf_contact',
-			'empty_value' => 'Please choice a province',
-			'class' => $this->provinceManager->getClassName(),
-			'query_builder' => function(EntityRepository $er) {
-				return $er->createQueryBuilder('p')
-					->orderBy('p.code', 'ASC');
-			}
-	    ));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'province_type';
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\AbstractType::getParent()
-	 */
-	public function getParent()
-	{
-		return EntityType::class;
-	}
+    /**
+     * @var string
+     */
+    protected $entityClassName;
+    
+    /**
+     * @param string $entityClassName
+     */
+    public function __construct($entityClassName)
+    {
+        $this->entityClassName = $entityClassName;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'label' => 'asf.contact.form.address.province',
+            'empty_value' => 'asf.contact.form.address.province.placeholder',
+            'class' => $this->entityClassName,
+            'choice_label' => 'name',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('p')
+                    ->orderBy('p.code', 'ASC');
+            }
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'province_type';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Symfony\Component\Form\AbstractType::getParent()
+     */
+    public function getParent()
+    {
+        return EntityType::class;
+    }
 }

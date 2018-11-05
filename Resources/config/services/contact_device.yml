@@ -1,0 +1,25 @@
+services:
+    # ContactDevice Form Factory
+    asf_contact.form.factory.contact_device:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.contact_device.form.name%", "%asf_contact.contact_device.form.type%", "%asf_contact.contact_device.entity%"]
+        
+    # IdentityContactDevice Form Factory
+    asf_contact.form.factory.identity_contact_device:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.identity_contact_device.form.name%", "%asf_contact.identity_contact_device.form.type%", "%asf_contact.identity_contact_device.entity%"]
+        
+    # EmailAddress Form Factory
+    asf_contact.form.factory.email_address:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.email_address.form.name%", "%asf_contact.email_address.form.type%", "%asf_contact.email_address.entity%"]
+        
+    # WebsiteAddress Form Factory
+    asf_contact.form.factory.website_address:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.website_address.form.name%", "%asf_contact.website_address.form.type%", "%asf_contact.website_address.entity%"]
+        
+    # PhoneNumber Form Factory
+    asf_contact.form.factory.phone_number:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.phone_number.form.name%", "%asf_contact.phone_number.form.type%", "%asf_contact.phone_number.entity%"]

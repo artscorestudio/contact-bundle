@@ -12,6 +12,9 @@ namespace ASF\ContactBundle\Form\DataTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use ASF\ContactBundle\Utils\Manager\ContactManager;
+use ASF\ContactBundle\Model\Identity\IdentityModel;
 
 /**
  * Transform a string to an identity entity
@@ -21,54 +24,69 @@ use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
  */
 class StringToIdentityTransformer implements DataTransformerInterface
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $identityManager;
-	
-	/**
-	 * @var string
-	 */
-	protected $type;
-	
-	/**
-	 * @param DefaultManagerInterface $identityManager
-	 * @param null|string             $type
-	 */
-	public function __construct(DefaultManagerInterface $identityManager, $type = null)
-	{
-		$this->identityManager = $identityManager;
-		$this->type = $type;
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\DataTransformerInterface::transform()
-	 */
-	public function transform($identity)
-	{
-		if ( is_null($identity) )
-			return '';
-		
-		return $identity->getName();
-	}
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
+    
+    /**
+     * @var ContactManager
+     */
+    protected $contactManager;
+    
+    /**
+     * @var string
+     */
+    protected $identityClassName;
+    
+    /**
+     * @var string
+     */
+    protected $type;
+    
+    /**
+     * @param EntityManagerInterface $em
+     * @param ContactManager         $contactManager
+     * @param string                 $identityClassName
+     * @param string                 $type
+     */
+    public function __construct(EntityManagerInterface $em, ContactManager $contactManager, $identityClassName, $type)
+    {
+        $this->em = $em;
+        $this->contactManager = $contactManager;
+        $this->identityClassName = $identityClassName;
+        $this->type = $type;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Symfony\Component\Form\DataTransformerInterface::transform()
+     */
+    public function transform($identity)
+    {
+        if ( is_null($identity) )
+            return '';
+        
+        return $identity->getName();
+    }
 
-	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\DataTransformerInterface::reverseTransform()
-	 */
-	public function reverseTransform($string)
-	{
-	    $criterias = array('name' => $string);
-	    if ( !is_null($this->type) ) {
-	        $criterias['type'] = $this->type;
-	    }
-	    
-		$identity = $this->identityManager->getRepository()->findOneBy($criterias);
-		if ( is_null($identity) ) {
-			$identity = $this->identityManager->createInstance();
-			$identity->setName($string);
-		}
-		return $identity;
-	}
+    /**
+     * (non-PHPdoc)
+     * @see \Symfony\Component\Form\DataTransformerInterface::reverseTransform()
+     */
+    public function reverseTransform($string)
+    {
+        $criterias = array('name' => $string, 'type' => $this->type);
+        
+        $identity = $this->em->getRepository($this->identityClassName)->findOneBy($criterias);
+        if ( is_null($identity) ) {
+            if ( $this->type === IdentityModel::TYPE_ORGANIZATION ) {
+                $identity = $this->contactManager->createOrganizationInstance();
+            } else {
+                $identity = $this->contactManager->createPersonInstance();
+            }
+            $identity->setName($string);
+        }
+        return $identity;
+    }
 }

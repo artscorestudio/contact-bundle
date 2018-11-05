@@ -1,4 +1,0 @@
-# Homepage
-contacts_text: You can create, update or delete contacts from the <a href="%url%" title="Contacts list">contacts list</a>.
-addresses_text: If your application administrator set it to true, you can also manage a list of addresses for your contacts. <a href="%url%" title="ASFContactBundle Documentation">Check the documentation for further informations</a>.
-contact_devices_text: If your application administrator set it to true, you can also manage contact devices (like phone number, email, website address, etc.). <a href="%url%" title="ASFContactBundle Documentation">Check the documentation for further informations</a>.

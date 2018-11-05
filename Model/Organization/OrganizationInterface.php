@@ -19,20 +19,20 @@ use ASF\ContactBundle\Model\Identity\IdentityInterface;
  */
 interface OrganizationInterface extends IdentityInterface
 {
-	/**
-	 * @return \Doctrine\Common\Collections\ArrayCollection
-	 */
-	public function getMembers();
-	
-	/**
-	 * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
-	 * @return \ASF\ContactBundle\Model\Identity\OrganizationInterface
-	 */
-	public function addMember($member);
-	
-	/**
-	 * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
-	 * @return \ASF\ContactBundle\Model\Identity\OrganizationInterface
-	 */
-	public function removeMember($member);
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getMembers();
+    
+    /**
+     * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
+     * @return \ASF\ContactBundle\Model\Organization\OrganizationInterface
+     */
+    public function addMember($member);
+    
+    /**
+     * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
+     * @return \ASF\ContactBundle\Model\Organization\OrganizationInterface
+     */
+    public function removeMember($member);
 }

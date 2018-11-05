@@ -7,14 +7,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Region Form Type
@@ -24,70 +24,60 @@ use Doctrine\ORM\EntityRepository;
  */
 class RegionType extends AbstractType
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $regionManager;
-	
-	/**
-	 * @param DefaultManagerInterface $regionManager
-	 */
-	public function __construct(DefaultManagerInterface $regionManager)
-	{
-		$this->regionManager = $regionManager;
-	}
-
-	/**
-	 * @param OptionsResolverInterface $resolver
-	 */
-	public function setDefaultOptions(OptionsResolverInterface $resolver)
-	{
-		$resolver->setDefaults(array(
-			'label' => 'Region / State',
-			'translator_domain' => 'asf_contact',
-			'empty_value' => 'Please choice a Region / State',
-			'class' => $this->regionManager->getClassName(),
-			'property' => 'name',
-			'query_builder' => function(EntityRepository $er) {
-				return $er->createQueryBuilder('p')
-					->orderBy('p.name', 'ASC');
-			}
-		));
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-	    $resolver->setDefaults(array(
-	        'label' => 'Region / State',
-			'translator_domain' => 'asf_contact',
-			'empty_value' => 'Please choice a Region / State',
-			'class' => $this->regionManager->getClassName(),
-			'property' => 'name',
-			'query_builder' => function(EntityRepository $er) {
-				return $er->createQueryBuilder('p')
-					->orderBy('p.name', 'ASC');
-			}
-	    ));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'region_type';
-	}
-	
-	/**
-	 * (non-PHPdoc)
-	 * @see \Symfony\Component\Form\AbstractType::getParent()
-	 */
-	public function getParent()
-	{
-		return EntityType::class;
-	}
+    /**
+     * @var string
+     */
+    protected $entityClassName;
+    
+    /**
+     * @param EntityManagerInterface $regionManager
+     */
+    public function __construct($entityClassName)
+    {
+        $this->entityClassName = $entityClassName;
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'label' => 'asf.contact.form.address.region',
+            'empty_value' => 'asf.contact.form.address.region.placeholder',
+            'class' => $this->entityClassName,
+            'choice_label' => 'name',
+            'query_builder' => function(EntityRepository $er) {
+                return $er->createQueryBuilder('p')
+                    ->orderBy('p.name', 'ASC');
+            }
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'region_type';
+    }
+    
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Symfony\Component\Form\AbstractType::getParent()
+     */
+    public function getParent()
+    {
+        return EntityType::class;
+    }
 }

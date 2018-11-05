@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Phone number Form Type
@@ -23,45 +24,55 @@ use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
  */
 class PhoneNumberType extends AbstractType
 {
-	/**
-	 * @var DefaultManagerInterface
-	 */
-	protected $phoneNumberManager;
-	
-	/**
-	 * @param DefaultManagerInterface $phoneNumberManager
-	 */
-	public function __construct(DefaultManagerInterface $phoneNumberManager)
-	{
-		$this->phoneNumberManager = $phoneNumberManager;
-	}
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $phoneNumberManager;
+    
+    /**
+     * @param EntityManagerInterface $phoneNumberManager
+     */
+    public function __construct(EntityManagerInterface $phoneNumberManager)
+    {
+        $this->phoneNumberManager = $phoneNumberManager;
+    }
 
-	/**
-	 * @param FormBuilderInterface $builder
-	 * @param array $options
-	 */
-	public function buildForm(FormBuilderInterface $builder, array $options)
-	{
-		
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 * @see \Symfony\Component\Form\AbstractType::configureOptions()
-	 */
-	public function configureOptions(OptionsResolver $resolver)
-	{
-		$resolver->setDefaults(array(
-			'data_class' => $this->phoneNumberManager->getClassName(),
-			'translator_domain' => 'asf_contact'
-		));
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getName()
-	{
-		return 'phone_number_type';
-	}
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => $this->phoneNumberManager->getClassName(),
+            'translator_domain' => 'asf_contact'
+        ));
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getBlockPrefix()
+     */
+    public function getBlockPrefix()
+    {
+        return 'phone_number_type';
+    }
+    
+    /**
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::getName()
+     */
+    public function getName()
+    {
+        return $this->getBlockPrefix();
+    }
 }

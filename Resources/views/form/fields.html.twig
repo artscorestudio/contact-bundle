@@ -1,0 +1,102 @@
+{# --------------------------------- Search Identity Form Type ---------------------------------
+{% block search_identity_widget %}
+{% spaceless %}
+    {{ block('choice_widget') }}
+    <script type="text/javascript">
+    if ( "undefined" !== typeof jQuery ) {
+        (function($, window, document) {
+            $(function() {
+                $('#{{ form.vars.id }}').select2();
+            });
+        }(window.jQuery, window, document));
+    }
+    </script>
+{% endspaceless %}
+{% endblock %}
+
+--------------------------------- Organization Form Type ---------------------------------
+{% block _organization_type_widget %}
+{% spaceless %}
+
+    <div class="row">
+        <div class="col-xs-8">
+            {{ form_row(form.name) }}
+        </div>
+        
+        <div class="col-xs-2">
+            {{ form_row(form.identity.state) }}
+        </div>
+    </div>
+
+    <div class="row">
+        {% if form.contactDevices is defined %}
+        <div class="col-xs-6">
+            {{ form_row(form.contactDevices) }}
+        </div>
+        {% endif %}
+        {% if form.identity.organizations is defined %}
+        <div class="col-xs-6">
+            {{ form_row(form.identity.organizations) }}
+        </div>
+        {% endif %}
+    </div>
+    
+    {% if form.addresses is defined %}
+    <div class="row">
+        <div class="col-xs-12">
+            {{ form_row(form.addresses) }}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-sm-12">
+            <input type="submit" value="{{ 'asf.contact.btn.save'|trans }}" class="btn btn-primary" />
+        </div>
+    </div>
+    
+{% endspaceless %}
+{% endblock %}
+ #}
+ 
+{# --------------------------------- ContactDevice Form Type --------------------------------- #}
+{% block contact_device_type_widget %}
+<div class="row">
+    <div class="col-sm-4">
+        {{ form_row(form.type) }}
+    </div>
+    {% if form.label is defined %}
+        <div class="col-sm-4">
+            {{ form_row(form.label) }}
+        </div>
+    {% endif %}
+    <div class="col-sm-4">
+        {{ form_row(form.value) }}
+    </div>
+</div>
+{% endblock %}
+
+{# -------------------------- Addresses Form Type ------------------------------ #}
+{% block address_type_widget %}
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_row(form.line1) }}
+        {{ form_row(form.line2) }}
+        {{ form_row(form.line3) }}
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_row(form.zipCode) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.city) }}
+            </div>
+        </div>
+    </div>
+    {% if form.geoloc is defined %}
+        <div class="col-sm-6">
+            {{ form_errors(form.geoloc) }}
+            {{ form_widget(form.geoloc) }}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

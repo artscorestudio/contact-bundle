@@ -1,0 +1,39 @@
+services:
+    # Address Form Factory
+    asf_contact.form.factory.address:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.address.form.name%", "%asf_contact.address.form.type%", "%asf_contact.address.entity%"]
+        
+    # IdentityAddress Form Factory
+    asf_contact.form.factory.identity_address:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.identity_address.form.name%", "%asf_contact.identity_address.form.type%", "%asf_contact.identity_address.entity%"]
+        
+    # Province Form Factory
+    asf_contact.form.factory.province:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.province.form.name%", "%asf_contact.province.form.type%", "%asf_contact.province.entity%"]
+        
+    asf_contact.form.type.province:
+        class: ASF\ContactBundle\Form\Type\ProvinceType
+        arguments: ["%asf_contact.province.entity%"]
+        tags:
+            - { name: form.type, alias: province_type }
+            
+    # Region Form Factory
+    asf_contact.form.factory.region:
+        class: ASF\CommerceBundle\Form\Factory\FormFactory
+        arguments: ["@form.factory", "%asf_contact.region.form.name%", "%asf_contact.region.form.type%", "%asf_contact.region.entity%"]
+        
+    asf_contact.form.type.region:
+        class: ASF\ContactBundle\Form\Type\RegionType
+        arguments: ["%asf_contact.region.entity%"]
+        tags:
+            - { name: form.type, alias: region_type }
+            
+    # Geoloc Form
+    asf_contact.form.type.geoloc:
+        class: ASF\ContactBundle\Form\Type\GeolocType
+        arguments: ["@request_stack", "%asf_contact.address.entity%"]
+        tags:
+            - { name: form.type, alias: geoloc_type }

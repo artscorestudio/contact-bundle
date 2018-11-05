@@ -1,0 +1,24 @@
+services:
+    # Manager
+    asf_contact.manager:
+        class: ASF\ContactBundle\Utils\Manager\ContactManager
+        arguments: ["@doctrine.orm.default_entity_manager", "@service_container"]
+        
+    # Form Subscribers and Listeners
+    asf_contact.form.identity.subscriber:
+        class: ASF\ContactBundle\Event\IdentityFormSubscriber
+        arguments: ["%asf_contact.enable_address%", "%asf_contact.enable_contact_device%"]
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    # Identity Form Handler
+    asf_contact.form.handler.identity:
+        class: ASF\ContactBundle\Form\Handler\IdentityFormHandler
+        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "%asf_contact.flash_message%", "@translator"]
+        
+    # Validators
+    asf.contact.form.validator.identity_already_exists:
+        arguments: ["@doctrine.orm.default_entity_manager", "%asf_contact.identity.entity%"]
+        class: ASF\ContactBundle\Validator\Constraints\IdentityAlreadyExistsValidator
+        tags:
+            - { name: validator.constraint_validator }
