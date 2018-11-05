@@ -13,10 +13,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Organization Form Type
+ * OrganizationType.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -24,42 +23,22 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class OrganizationType extends AbstractType
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    protected $subscriber;
-    
-    /**
-     * EventSubscriberInterface       $subscriber
-     */
-    public function __construct(EventSubscriberInterface $subscriber)
-    {
-        $this->subscriber = $subscriber;
-    }
-    
-    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('identity', IdentityType::class)
-            ->add('name', TextType::class, array(
-                'label' => 'asf.contact.form.label.identity_name',
-                'required' => true
-            ));
-        
-        $builder->addEventSubscriber($this->subscriber);
+        $builder->add('name', TextType::class, array('label' => 'asf.contact.form.label.identity_name'));
     }
 
     /**
+     *
      * {@inheritDoc}
-     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     * @see \Symfony\Component\Form\AbstractType::getParent()
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver->setDefaults(array(
-            'is_new' => false
-        ));
+        return IdentityType::class;
     }
     
     /**

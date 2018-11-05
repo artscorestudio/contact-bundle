@@ -12,9 +12,9 @@ namespace ASF\ContactBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use ASF\ContactBundle\Utils\Manager\DefaultManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Region Form Type
@@ -30,28 +30,11 @@ class RegionType extends AbstractType
     protected $entityClassName;
     
     /**
-     * @param DefaultManagerInterface $regionManager
+     * @param EntityManagerInterface $regionManager
      */
     public function __construct($entityClassName)
     {
         $this->entityClassName = $entityClassName;
-    }
-
-    /**
-     * @param OptionsResolverInterface $resolver
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
-    {
-        $resolver->setDefaults(array(
-            'label' => 'Region / State',
-            'empty_value' => 'asf.contact.region.choose_a_region',
-            'class' => $this->entityClassName,
-            'property' => 'name',
-            'query_builder' => function(EntityRepository $er) {
-                return $er->createQueryBuilder('p')
-                    ->orderBy('p.name', 'ASC');
-            }
-        ));
     }
     
     /**
@@ -61,10 +44,10 @@ class RegionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'label' => 'Region / State',
-            'empty_value' => 'Please choice a Region / State',
+            'label' => 'asf.contact.form.address.region',
+            'empty_value' => 'asf.contact.form.address.region.placeholder',
             'class' => $this->entityClassName,
-            'property' => 'name',
+            'choice_label' => 'name',
             'query_builder' => function(EntityRepository $er) {
                 return $er->createQueryBuilder('p')
                     ->orderBy('p.name', 'ASC');

@@ -8,10 +8,6 @@ Contact Bundle is a Symfony 2/3 bundle for create and manage contacts in your Sy
 
 This version of the bundle requires :
 * [Symfony 2.8+ LTS / 3+][1]
-* [artscorestudio/core-bundle dev-master][17]
-* [artscorestudio/APYDataGridBundle dev-master][11]
-
-> Warning ! artscorestudio/APYDataGridBundle is a fork from APY/APYDataGridBundle who is not compatible with symfony 3.0. You have to install it before artscoretudio/contact-bundle, as long as [APY/APYDataGridBundle][12] not support symfony 3.
 
 ### Translations
 
@@ -32,14 +28,12 @@ For more information about translations, check [Symfony documentation][2].
 Require the bundle with composer :
 
 ```bash
-$ composer require artscorestudio/contact-bundle "dev-master"
+$ composer require artscorestudio/contact-bundle
 ```
 
 Composer will install the bundle to your project's *vendor/artscorestudio/contact-bundle* directory. It also install dependencies. 
 
 ### Step 2 : Enable the bundle and its dependencies
-
-Check the [artscorestudio/core-bundle][18] installation process and [artscorestudio/APYDataGridBundle][19] installation process for enable the dependencies in your application.
 
 Enable the bundle in the kernel :
 
@@ -63,8 +57,6 @@ If you want to use all the features provided by the bundle, you can configure it
 ```yaml
 # app/config/config.yml
 asf_contact:
-    enable_core_support: true    # Default : false. This is for use bundle in the Artscore Studio Framework (needs ASFCoreBundle)
-    enable_select2_support: true # Default : false. This is for use forms fields based on jQuery plugin select2/select2
     enable_address: true         # Default : false. Enable Address entity
     enable_contact_device: true  # Default : false. Enable ContactDevice entity
 ```
@@ -132,7 +124,7 @@ class Person extends Identity implements PersonInterface {}
 
 Don't forget to define entity for Doctrine ORM, see [Person.orm.xml][14] example file provided by this bundle.
 
-> A Person Entity is composed by a firstname and a lastname and a Document Entity extended by Person entity is composed by a name attribute which cannot be null. Similarly, the type attribute must be defined (Person or Organization). So when you create/update a Person entity don't forget to fill in the name attribute with the firstname and lastname and update the type attribute. [You can do it with preUpdate, prePersist Doctrine Events if you want][20]. 
+> A Person Entity is composed by a firstname and a lastname and an Identity Entity extended by Person entity is composed by a name attribute which cannot be null. Similarly, the type attribute must be defined (Person or Organization). So when you create/update a Person entity don't forget to fill in the name attribute with the firstname and lastname and update the type attribute. [You can do it with preUpdate, prePersist Doctrine Events if you want][20]. 
 
 #### 6.3 Create Organization entity in your bundle
 
@@ -164,24 +156,36 @@ Don't forget to define entity for Doctrine ORM, see [IdentityOrganization.orm.xm
 
 #### 6.4 Update container arguments
 
-All entities are stored in container parameters. This is for avoid to hardcoded entity names in classes. After the creation of your entities, you have to override container parameters. 
+All entities are stored in container parameters. This is for avoid to hardcoded entity names in classes. After the creation of your entities, you have to set container parameters. 
 
-```xml
-<?xml version="1.0" ?>
-
-<container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-	<parameters>
-		<parameter key="asf_contact.identity.entity.class">Acme\ContactBundle\Entity\Identity</parameter>
-		<parameter key="asf_contact.organization.entity.class">Acme\ContactBundle\Entity\Organization</parameter>
-		<parameter key="asf_contact.person.entity.class">Acme\ContactBundle\Entity\Person</parameter>
-		<parameter key="asf_contact.identity_organization.entity.class">Acme\ContactBundle\Entity\IdentityOrganization</parameter>
-
-    </parameters>
-
-</container>
+```yaml
+asf_contact:
+    identity:
+        entity: Acme\ContactBundle\Entity\Identity
+    person:
+        entity: Acme\ContactBundle\Entity\Person
+    organization:
+        entity: Acme\ContactBundle\Entity\Organization
+    identity_organization:
+        entity: Acme\ContactBundle\Entity\IdentityOrganization
+    address:
+        entity: Acme\ContactBundle\Entity\Address
+    identity_address:
+        entity: Acme\ContactBundle\Entity\IdentityAddress
+    region:
+        entity: Acme\ContactBundle\Entity\Region
+    province:
+        entity: Acme\ContactBundle\Entity\Province
+    contact_device:
+        entity: Acme\ContactBundle\Entity\ContactDevice
+    email_address:
+        entity: Acme\ContactBundle\Entity\EmailAddress
+    phone_number:
+        entity: Acme\ContactBundle\Entity\PhoneNumber
+    website_address:
+        entity: Acme\ContactBundle\Entity\WebsiteAddress
+    identity_contact_device:
+        entity: Acme\ContactBundle\Entity\IdentityContactDevice
 ```
 
 #### 6.5 Update your schema
@@ -215,13 +219,11 @@ The following documents are available :
 [8]: repositories.md
 [9]: entity-manager.md
 [10]: crud-system.md
-[11]: https://github.com/artscorestudio/APYDataGridBundle
 [12]: https://github.com/APY/APYDataGridBundle
 [13]: ../config/doctrine-mapping/Identity.orm.xml
 [14]: ../config/doctrine-mapping/Person.orm.xml
 [15]: ../config/doctrine-mapping/Organization.orm.xml
 [16]: ../config/doctrine-mapping/IdentityOrganization.orm.xml
-[17]: https://packagist.org/packages/artscorestudio/core-bundle
 [18]: https://github.com/artscorestudio/core-bundle/blob/master/Resources/doc/index.md
 [19]: https://github.com/artscorestudio/APYDataGridBundle/blob/master/Resources/doc/index.md
 [20]: http://doctrine-orm.readthedocs.org/projects/doctrine-orm/en/latest/reference/events.html

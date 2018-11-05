@@ -14,7 +14,6 @@ The bulk of the documentation is stored in the Resources/docs/index.md file in b
 
 [Read the documentation for master](https://github.com/artscorestudio/contact-bundle/blob/master/Resources/doc/index.md).
 
-
 ## Installation
 
 All the installation instructions are located in the documentation.

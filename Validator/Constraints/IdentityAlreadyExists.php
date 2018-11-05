@@ -16,7 +16,8 @@ use Symfony\Component\Validator\Constraint;
  * Constraints for check if identity already exists based on name attribute
  *
  * @author Nicolas Claverie <info@artscore-studio.fr>
- *
+ * 
+ * @Annotation
  */
 class IdentityAlreadyExists extends Constraint
 {

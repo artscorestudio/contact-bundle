@@ -26,13 +26,13 @@ interface OrganizationInterface extends IdentityInterface
     
     /**
      * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
-     * @return \ASF\ContactBundle\Model\Identity\OrganizationInterface
+     * @return \ASF\ContactBundle\Model\Organization\OrganizationInterface
      */
     public function addMember($member);
     
     /**
      * @param \ASF\ContactBundle\Model\Identity\IdentityInterface $member
-     * @return \ASF\ContactBundle\Model\Identity\OrganizationInterface
+     * @return \ASF\ContactBundle\Model\Organization\OrganizationInterface
      */
     public function removeMember($member);
 }

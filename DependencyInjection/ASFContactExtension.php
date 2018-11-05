@@ -33,6 +33,8 @@ class ASFContactExtension extends Extension implements PrependExtensionInterface
 	    
 	    $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 	    
+	    $container->setParameter('asf_contact.flash_message', $config['flash_message']);
+	    
 	    $this->setIdentityParameters($container, $loader, $config);
 	    $this->setPersonParameters($container, $loader, $config);
 	    $this->setOrganizationParameters($container, $loader, $config);

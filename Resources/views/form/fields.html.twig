@@ -1,4 +1,4 @@
-{# --------------------------------- Search Identity Form Type --------------------------------- #}
+{# --------------------------------- Search Identity Form Type ---------------------------------
 {% block search_identity_widget %}
 {% spaceless %}
     {{ block('choice_widget') }}
@@ -14,7 +14,7 @@
 {% endspaceless %}
 {% endblock %}
 
-{# --------------------------------- Organization Form Type --------------------------------- #}
+--------------------------------- Organization Form Type ---------------------------------
 {% block _organization_type_widget %}
 {% spaceless %}
 
@@ -56,4 +56,47 @@
     </div>
     
 {% endspaceless %}
+{% endblock %}
+ #}
+ 
+{# --------------------------------- ContactDevice Form Type --------------------------------- #}
+{% block contact_device_type_widget %}
+<div class="row">
+    <div class="col-sm-4">
+        {{ form_row(form.type) }}
+    </div>
+    {% if form.label is defined %}
+        <div class="col-sm-4">
+            {{ form_row(form.label) }}
+        </div>
+    {% endif %}
+    <div class="col-sm-4">
+        {{ form_row(form.value) }}
+    </div>
+</div>
+{% endblock %}
+
+{# -------------------------- Addresses Form Type ------------------------------ #}
+{% block address_type_widget %}
+<div class="row">
+    <div class="col-sm-6">
+        {{ form_row(form.line1) }}
+        {{ form_row(form.line2) }}
+        {{ form_row(form.line3) }}
+        <div class="row">
+            <div class="col-sm-6">
+                {{ form_row(form.zipCode) }}
+            </div>
+            <div class="col-sm-6">
+                {{ form_row(form.city) }}
+            </div>
+        </div>
+    </div>
+    {% if form.geoloc is defined %}
+        <div class="col-sm-6">
+            {{ form_errors(form.geoloc) }}
+            {{ form_widget(form.geoloc) }}
+        </div>
+    {% endif %}
+</div>
 {% endblock %}

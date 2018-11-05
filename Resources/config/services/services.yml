@@ -4,40 +4,6 @@ services:
         class: ASF\ContactBundle\Utils\Manager\ContactManager
         arguments: ["@doctrine.orm.default_entity_manager", "@service_container"]
         
-    # Identity Form
-    asf_contact.form.factory.identity:
-        class: ASF\CommerceBundle\Form\Factory\FormFactory
-        arguments: ["@form.factory", "%asf_contact.identity.form.name%", "%asf_contact.identity.form.type%", "%asf_contact.identity.entity%"]
-            
-    # Person Form
-    asf_contact.form.factory.person:
-        class: ASF\ContactBundle\Form\Factory\FormFactory
-        arguments: ["@form.factory", "%asf_contact.person.form.name%", "%asf_contact.person.form.type%", "%asf_contact.person.entity%"]
-            
-    asf_contact.form.type.person:
-        class: ASF\ContactBundle\Form\Type\PersonType
-        arguments: ["@asf_contact.form.identity.subscriber"]
-        tags:
-            - { name: form.type, alias: person_type }
-            
-    # Organization Form
-    asf_contact.form.factory.organization:
-        class: ASF\CommerceBundle\Form\Factory\FormFactory
-        arguments: ["@form.factory", "%asf_contact.organization.form.name%", "%asf_contact.organization.form.type%", "%asf_contact.organization.entity%"]
-            
-    asf_contact.form.type.organization:
-        class: ASF\ContactBundle\Form\Type\OrganizationType
-        arguments: ["@asf_contact.form.identity.subscriber"]
-        tags:
-            - { name: form.type, alias: organization_type }
-            
-    # Identity Organization Form
-    asf_contact.form.type.identity_organization:
-        class: ASF\ContactBundle\Form\Type\IdentityOrganizationType
-        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "%asf_contact.identity.entity%"]
-        tags:
-            - { name: form.type, alias: organization_type }
-            
     # Form Subscribers and Listeners
     asf_contact.form.identity.subscriber:
         class: ASF\ContactBundle\Event\IdentityFormSubscriber
@@ -48,9 +14,9 @@ services:
     # Identity Form Handler
     asf_contact.form.handler.identity:
         class: ASF\ContactBundle\Form\Handler\IdentityFormHandler
-        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "@asf_layout.flash_message", "@translator"]
+        arguments: ["@doctrine.orm.default_entity_manager", "@asf_contact.manager", "%asf_contact.flash_message%", "@translator"]
         
-    # Validtors
+    # Validators
     asf.contact.form.validator.identity_already_exists:
         arguments: ["@doctrine.orm.default_entity_manager", "%asf_contact.identity.entity%"]
         class: ASF\ContactBundle\Validator\Constraints\IdentityAlreadyExistsValidator

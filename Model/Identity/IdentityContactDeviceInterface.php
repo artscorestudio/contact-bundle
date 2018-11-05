@@ -31,12 +31,12 @@ interface IdentityContactDeviceInterface
     public function setIdentity(IdentityInterface $identity);
     
     /**
-     * @return \ASF\ContactBundle\Model\Identity\ContactDeviceInterface
+     * @return \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface
      */
     public function getContactDevice();
     
     /**
-     * @param \ASF\ContactBundle\Model\Identity\ContactDeviceInterface $contactDevice
+     * @param \ASF\ContactBundle\Model\ContactDevice\ContactDeviceInterface $contactDevice
      * @return \ASF\ContactBundle\Model\Identity\IdentityContactDeviceInterface
      */
     public function setContactDevice(ContactDeviceInterface $contactDevice);

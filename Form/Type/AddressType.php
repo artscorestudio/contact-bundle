@@ -12,9 +12,10 @@ namespace ASF\ContactBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Address Form Type
+ * AddressType.
  * 
  * @author Nicolas Claverie <info@artscore-studio.fr>
  *
@@ -28,27 +29,39 @@ class AddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('line1', TextType::class, array(
-            'label' => 'Address 1',
-            'required' => true,
+            'label' => 'asf.contact.form.address.line1',
             'attr' => array('class' => 'suggest-address-input')
         ))
         ->add('line2', TextType::class, array(
-            'label' => 'Address 2',
+            'label' => 'asf.contact.form.address.line2',
             'required' => false
         ))
         ->add('line3', TextType::class, array(
-            'label' => 'Address 3',
+            'label' => 'asf.contact.form.address.line3',
             'required' => false
         ))
         ->add('zipCode', TextType::class, array(
-            'label' => 'Zip code',
-            'required' => true
+            'label' => 'asf.contact.form.address.zipCode',
         ))
         ->add('city', TextType::class, array(
-            'label' => 'City',
-            'required' => true
-        ))
-        ->add('geoloc', GeolocType::class);
+            'label' => 'asf.contact.form.address.city',
+        ));
+        
+        if ( true === $options['geoloc'] ) {
+            $buidler->add('geoloc', GeolocType::class);
+        }
+    }
+    
+    /**
+     * 
+     * {@inheritDoc}
+     * @see \Symfony\Component\Form\AbstractType::configureOptions()
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'geoloc' => false
+        ));
     }
     
     /**

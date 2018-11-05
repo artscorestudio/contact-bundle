@@ -9,6 +9,11 @@
                 <target>Un contact portant ce nom existe déjà.</target>
             </trans-unit>
             
+            <trans-unit id="asf.contact.form.identity.state">
+                <source>asf.contact.form.identity.state</source>
+                <target>Veuillez donner un état à la demande.</target>
+            </trans-unit>
+            
         </body>
     </file>
 </xliff>

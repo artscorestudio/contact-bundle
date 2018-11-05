@@ -41,6 +41,9 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('form_theme')
                     ->defaultValue('ASFContactBundle:form:fields.html.twig')
                 ->end()
+                ->scalarNode('flash_message')
+                    ->defaultValue('@asf_layout.flash_message')
+                ->end()
                 
                 ->append($this->addIdentityParameterNode())
                 ->append($this->addPersonParameterNode())
