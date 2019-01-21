@@ -34,7 +34,8 @@ class IdentityController extends Controller
 {
     /**
      * List all identities
-     *
+     * 
+     * @deprecated This feature is deprecated (see changelog).
      * @return Symfony\Component\HttpFoundation\Response
      */
     public function listAction()
