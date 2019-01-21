@@ -14,8 +14,7 @@
     ],
     "require" : {
         "php" : ">=5.3.9",
-        "symfony/symfony" : "~2.8|~3.0",
-        "artscorestudio/datagrid-bundle" : "^3.0"
+        "symfony/symfony" : "~2.8|~3.0"
     },
     "require-dev" : {
         "hautelook/alice-bundle" : "^1.3",
